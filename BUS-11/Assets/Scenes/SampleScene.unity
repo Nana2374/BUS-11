@@ -1115,10 +1115,12 @@ GameObject:
   - component: {fileID: 1365047851}
   - component: {fileID: 1365047854}
   - component: {fileID: 1365047853}
+  - component: {fileID: 1365047855}
   - component: {fileID: 1365047852}
+  - component: {fileID: 1365047856}
   m_Layer: 0
   m_Name: Bus
-  m_TagString: Untagged
+  m_TagString: Bus
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1132,7 +1134,7 @@ Transform:
   m_GameObject: {fileID: 1365047850}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 17.26, y: 1, z: 1.3}
+  m_LocalPosition: {x: 17.26, y: 0.51, z: 1.3}
   m_LocalScale: {x: 15.044281, y: 1, z: 33.780113}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1211,6 +1213,48 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1365047850}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1365047855
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1365047850}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d4bf4c0ca8ef0c4781f03015d5fb561, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  motorForce: 50
+  turnForce: 50
+  playerDriving: 0
+--- !u!54 &1365047856
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1365047850}
+  serializedVersion: 4
+  m_Mass: 5000
+  m_Drag: 1.5
+  m_AngularDrag: 3
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 1
+  m_Constraints: 80
+  m_CollisionDetection: 1
 --- !u!1 &1523425733
 GameObject:
   m_ObjectHideFlags: 0
@@ -1417,7 +1461,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 25, y: 12.031, z: 25}
+  m_LocalScale: {x: 100, y: 12.031, z: 100}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -1777,7 +1821,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 2107316704}
   speed: 12
-  gravity: -9.81
+  gravity: -20
   jumpHeight: 3
   groundCheck: {fileID: 502460245}
   groundDistance: 0.4
@@ -1798,6 +1842,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   driverSeat: {fileID: 1950354180}
   exitPoint: {fileID: 1648745148}
+  bus: {fileID: 1365047855}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

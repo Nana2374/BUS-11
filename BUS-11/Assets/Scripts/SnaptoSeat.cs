@@ -6,6 +6,7 @@ public class SnaptoSeat : MonoBehaviour
 {
     public Transform driverSeat;
     public Transform exitPoint;
+    public BusController bus;
 
     private PlayerMovement playerMovement;
     private bool playerInRange;
@@ -41,13 +42,20 @@ public class SnaptoSeat : MonoBehaviour
         playerMovement.enabled = false;
 
         // Snap to seat
-        transform.position = driverSeat.position;
+        transform.position = driverSeat.position + new Vector3(0f, 1.5f, 0f);
         transform.rotation = driverSeat.rotation;
         transform.SetParent(driverSeat);
 
         // Rigidbody fix (if needed)
         Rigidbody rb = GetComponent<Rigidbody>();
         if (rb) rb.isKinematic = true;
+
+        Collider col = GetComponent<Collider>();
+        if (col) col.enabled = false;
+
+        // Enable bus driving
+        if (bus != null)
+            bus.playerDriving = true;
 
         isSeated = true;
         Debug.Log("Entered seat");
@@ -64,6 +72,12 @@ public class SnaptoSeat : MonoBehaviour
 
         Rigidbody rb = GetComponent<Rigidbody>();
         if (rb) rb.isKinematic = false;
+
+        Collider col = GetComponent<Collider>();
+        if (col) col.enabled = true;
+
+        if (bus != null)
+            bus.playerDriving = false;
 
         isSeated = false;
         Debug.Log("Exited seat");
