@@ -4,29 +4,58 @@ using UnityEngine;
 
 public class BusController : MonoBehaviour
 {
-    public float motorForce = 150f;
-    public float turnForce = 50f;
+    public WheelCollider frontLeft, frontRight;
+    public WheelCollider rearLeft, rearRight;
 
-    public bool playerDriving; // controlled by seat script
-    private Rigidbody rb;
+    public float motorForce = 6000f;
+    public float steerAngle = 25f;
+    public float brakeForce = 30000f;
+
+    public bool playerDriving;
+
+    Rigidbody rb;
+    float motorInput;
+    float steerInput;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        rb.centerOfMass = new Vector3(0, -1.5f, 0);
+    }
+
+    void Update()
+    {
+        if (!playerDriving) return;
+
+        motorInput = Input.GetAxis("Vertical");
+        steerInput = Input.GetAxis("Horizontal");
     }
 
     void FixedUpdate()
     {
         if (!playerDriving) return;
 
-        float move = Input.GetAxis("Vertical");   // W/S
-        float turn = Input.GetAxis("Horizontal"); // A/D
+        // Boost torque during turns
+        float turnBoost = 1f + (Mathf.Abs(steerInput) * 0.5f); // 50% boost at full turn
 
-        // Forward movement
-        rb.AddForce(transform.forward * move * motorForce, ForceMode.Acceleration);
+        // Rear wheel drive (realistic bus)
+        rearLeft.motorTorque = motorInput * motorForce * turnBoost;
+        rearRight.motorTorque = motorInput * motorForce * turnBoost;
 
-        // Turning
-        Quaternion deltaRotation = Quaternion.Euler(0f, turn * turnForce * Time.fixedDeltaTime, 0f);
-        rb.MoveRotation(rb.rotation * deltaRotation);
+        // Steering front wheels
+        frontLeft.steerAngle = steerInput * steerAngle;
+        frontRight.steerAngle = steerInput * steerAngle;
+
+        // Auto brake when no input
+        if (Mathf.Abs(motorInput) < 0.1f)
+        {
+            rearLeft.brakeTorque = brakeForce;
+            rearRight.brakeTorque = brakeForce;
+        }
+        else
+        {
+            rearLeft.brakeTorque = 0f;
+            rearRight.brakeTorque = 0f;
+        }
     }
 }
