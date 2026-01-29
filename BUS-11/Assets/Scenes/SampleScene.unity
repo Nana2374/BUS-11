@@ -1910,9 +1910,10 @@ MonoBehaviour:
   frontRight: {fileID: 8013648}
   rearLeft: {fileID: 1019617805}
   rearRight: {fileID: 1675833427}
-  motorForce: 50000
-  steerAngle: 50
-  brakeForce: 30000
+  motorForce: 90000
+  steerAngle: 45
+  brakeForce: 50000
+  maxSpeed: 50
   playerDriving: 0
 --- !u!54 &1365047856
 Rigidbody:
