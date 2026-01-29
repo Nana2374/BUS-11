@@ -16,8 +16,8 @@ public class BusController : MonoBehaviour
 
     // Gear System
     public int currentGear = 0; // 0 = Park, 1-4 = Gears
-    public float[] gearRatios = new float[] { 0f, 0.4f, 0.7f, 1.0f, 1.3f }; // Park, Gear1, Gear2, Gear3, Gear4
-    public float[] gearSpeedLimits = new float[] { 0f, 20f, 35f, 50f, 60f }; // Max speed per gear in km/h
+    public float[] gearRatios = new float[] { 0f, 0.3f, 0.8f, 1.1f, 1.3f }; // Park, Gear1, Gear2, Gear3, Gear4
+    public float[] gearSpeedLimits = new float[] { 0f, 20f, 35f, 50f, 70f }; // Max speed per gear in km/h
 
     Rigidbody rb;
     float motorInput;
@@ -27,6 +27,10 @@ public class BusController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         rb.centerOfMass = new Vector3(0, -1.5f, 0);
+
+        // Reduce drag
+        rb.drag = 0.05f;
+        rb.angularDrag = 0.05f;
     }
 
     void Update()
@@ -99,15 +103,51 @@ public class BusController : MonoBehaviour
         }
         else if (motorInput > 0.1f)
         {
-            // Rear wheel drive (realistic bus)
-            rearLeft.motorTorque = motorInput * motorForce * turnBoost;
-        rearRight.motorTorque = motorInput * motorForce * turnBoost;
+            // STRICT SPEED LIMITING
+            if (currentSpeed >= gearSpeedLimit)
+            {
+                // AT OR OVER LIMIT - Cut all power and brake hard
+                rearLeft.motorTorque = 0f;
+                rearRight.motorTorque = 0f;
 
-            // Release brakes
-            rearLeft.brakeTorque = 0f;
-            rearRight.brakeTorque = 0f;
-            frontLeft.brakeTorque = 0f;
-            frontRight.brakeTorque = 0f;
+                // Strong braking to enforce limit
+                float overspeed = currentSpeed - gearSpeedLimit;
+                float brakingForce = brakeForce * Mathf.Clamp(overspeed / 5f, 0.3f, 1f);
+
+                rearLeft.brakeTorque = brakingForce;
+                rearRight.brakeTorque = brakingForce;
+                frontLeft.brakeTorque = brakingForce * 0.5f;
+                frontRight.brakeTorque = brakingForce * 0.5f;
+
+                Debug.Log($"SPEED LIMITED! Current: {currentSpeed:F1} | Limit: {gearSpeedLimit}");
+            }
+            else if (currentSpeed >= gearSpeedLimit * 0.8f)
+            {
+                // APPROACHING LIMIT (80-100%) - Reduce power progressively
+                float proximityToLimit = (currentSpeed - (gearSpeedLimit * 0.8f)) / (gearSpeedLimit * 0.2f);
+                float powerReduction = 1f - (proximityToLimit * 0.7f); // Reduce up to 70%
+
+                rearLeft.motorTorque = motorInput * gearModifiedForce * turnBoost * powerReduction;
+                rearRight.motorTorque = motorInput * gearModifiedForce * turnBoost * powerReduction;
+
+                // Release brakes
+                rearLeft.brakeTorque = 0f;
+                rearRight.brakeTorque = 0f;
+                frontLeft.brakeTorque = 0f;
+                frontRight.brakeTorque = 0f;
+            }
+            else
+            {
+                // UNDER 80% OF LIMIT - Full power
+                rearLeft.motorTorque = motorInput * gearModifiedForce * turnBoost;
+                rearRight.motorTorque = motorInput * gearModifiedForce * turnBoost;
+
+                // Release brakes
+                rearLeft.brakeTorque = 0f;
+                rearRight.brakeTorque = 0f;
+                frontLeft.brakeTorque = 0f;
+                frontRight.brakeTorque = 0f;
+            }
         }
         else
         {
@@ -189,11 +229,17 @@ public class BusController : MonoBehaviour
             GUI.Label(new Rect(10, 40, 200, 30), "Speed: " + speed.ToString("F0") + " km/h",
                 new GUIStyle() { fontSize = 20, normal = new GUIStyleState() { textColor = Color.white } });
 
-            // Show speed limit for current gear
+            // Show speed limit for current gear with color coding
             if (currentGear > 0)
             {
-                GUI.Label(new Rect(10, 70, 200, 30), "Limit: " + gearSpeedLimits[currentGear] + " km/h",
-                    new GUIStyle() { fontSize = 18, normal = new GUIStyleState() { textColor = Color.yellow } });
+                float limit = gearSpeedLimits[currentGear];
+                Color limitColor = Color.yellow;
+
+                if (speed >= limit) limitColor = Color.red;
+                else if (speed >= limit * 0.8f) limitColor = new Color(1f, 0.5f, 0f); // Orange
+
+                GUI.Label(new Rect(10, 70, 200, 30), $"Limit: {limit} km/h",
+                    new GUIStyle() { fontSize = 18, normal = new GUIStyleState() { textColor = limitColor } });
             }
         }
     }
