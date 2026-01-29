@@ -1798,7 +1798,7 @@ GameObject:
   - component: {fileID: 1365047855}
   - component: {fileID: 1365047852}
   - component: {fileID: 1365047856}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Bus
   m_TagString: Bus
   m_Icon: {fileID: 0}
@@ -1915,6 +1915,19 @@ MonoBehaviour:
   brakeForce: 50000
   maxSpeed: 50
   playerDriving: 0
+  currentGear: 0
+  gearRatios:
+  - 0
+  - 0.4
+  - 0.7
+  - 1
+  - 1.3
+  gearSpeedLimits:
+  - 0
+  - 20
+  - 35
+  - 50
+  - 60
 --- !u!54 &1365047856
 Rigidbody:
   m_ObjectHideFlags: 0
