@@ -1118,7 +1118,7 @@ GameObject:
   - component: {fileID: 1365047855}
   - component: {fileID: 1365047852}
   - component: {fileID: 1365047856}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Bus
   m_TagString: Bus
   m_Icon: {fileID: 0}
@@ -1475,7 +1475,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1648745148}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: exitPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1546,7 +1546,7 @@ GameObject:
   - component: {fileID: 1950354183}
   - component: {fileID: 1950354182}
   - component: {fileID: 1950354181}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Driver Seat
   m_TagString: DriverSeat
   m_Icon: {fileID: 0}
