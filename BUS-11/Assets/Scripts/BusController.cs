@@ -7,17 +7,19 @@ public class BusController : MonoBehaviour
     public WheelCollider frontLeft, frontRight;
     public WheelCollider rearLeft, rearRight;
 
-    public float motorForce = 6000f;
-    public float steerAngle = 25f;
-    public float brakeForce = 30000f;
+    public float motorForce = 80000f;
+    public float steerAngle = 45f;
+    public float brakeForce = 50000f;
     public float maxSpeed = 50f; // Adjust to your top speed
 
     public bool playerDriving;
 
     // Gear System
-    public int currentGear = 0; // 0 = Park, 1-4 = Gears
-    public float[] gearRatios = new float[] { 0f, 0.3f, 0.8f, 1.1f, 1.3f }; // Park, Gear1, Gear2, Gear3, Gear4
-    public float[] gearSpeedLimits = new float[] { 0f, 20f, 35f, 50f, 70f }; // Max speed per gear in km/h
+    public int currentGear = 0; // -1 = Reverse, 0 = Park, 1-4 = Gears
+    public float reverseRatio = 0.5f;
+    public float[] gearRatios = new float[] { 0f, 0.3f, 0.7f, 1f, 1.3f }; // Park, Gear1, Gear2, Gear3, Gear4
+    public float reverseSpeedLimit = 40f;
+    public float[] gearSpeedLimits = new float[] { 0f, 20f, 35f, 50f, 70f }; // Park, Gear1, Gear2, Gear3, Gear4
 
     Rigidbody rb;
     float motorInput;
@@ -53,6 +55,10 @@ public class BusController : MonoBehaviour
         {
             ParkGear();
         }
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            ReverseGear();
+        }
     }
 
     void FixedUpdate()
@@ -73,20 +79,24 @@ public class BusController : MonoBehaviour
 
         // Get current speed in km/h
         float currentSpeed = rb.velocity.magnitude * 3.6f;
-        float gearSpeedLimit = gearSpeedLimits[currentGear];
 
-        // Calculate gear-modified motor force
-        float gearModifiedForce = motorForce * gearRatios[currentGear];
+        // Get gear speed limit and ratio based on current gear
+        float gearSpeedLimit;
+        float gearModifiedForce;
 
-        // Reduce power as we approach speed limit
-        float speedLimitFactor = 1f;
-        if (currentSpeed >= gearSpeedLimit * 0.9f) // Start reducing at 90% of limit
+        if (currentGear == -1) // Reverse
         {
-            speedLimitFactor = Mathf.Clamp01(1f - ((currentSpeed - gearSpeedLimit * 0.9f) / (gearSpeedLimit * 0.1f)));
+            gearSpeedLimit = reverseSpeedLimit;
+            gearModifiedForce = -motorForce * reverseRatio; // Negative for reverse
+        }
+        else // Forward gears 1-4
+        {
+            gearSpeedLimit = gearSpeedLimits[currentGear]; // Direct indexing (Gear 1 = index 1, etc.)
+            gearModifiedForce = motorForce * gearRatios[currentGear];
         }
 
         // Boost torque during turns
-        float turnBoost = 1f + (Mathf.Abs(steerInput) * 0.6f); // 50% boost at full turn
+        float turnBoost = 1f + (Mathf.Abs(steerInput) * 0.6f);
 
         // Check if braking (S key / down arrow)
         bool isBraking = motorInput < 0;
@@ -119,7 +129,7 @@ public class BusController : MonoBehaviour
                 frontLeft.brakeTorque = brakingForce * 0.5f;
                 frontRight.brakeTorque = brakingForce * 0.5f;
 
-                Debug.Log($"SPEED LIMITED! Current: {currentSpeed:F1} | Limit: {gearSpeedLimit}");
+                //Debug.Log($"SPEED LIMITED! Current: {currentSpeed:F1} | Limit: {gearSpeedLimit}");
             }
             else if (currentSpeed >= gearSpeedLimit * 0.8f)
             {
@@ -216,23 +226,29 @@ public class BusController : MonoBehaviour
         Debug.Log("Shifted to PARK");
     }
 
+    void ReverseGear()
+    {
+        currentGear = -1;
+        Debug.Log("Shifted to REVERSE (Max: 40 km/h)");
+    }
+
     // Optional: Display current gear on screen
     void OnGUI()
     {
         if (playerDriving)
         {
-            string gearDisplay = currentGear == 0 ? "P" : currentGear.ToString();
+            string gearDisplay = currentGear == -1 ? "R" : (currentGear == 0 ? "P" : currentGear.ToString());
             GUI.Label(new Rect(10, 10, 200, 30), "Gear: " + gearDisplay,
                 new GUIStyle() { fontSize = 24, normal = new GUIStyleState() { textColor = Color.white } });
 
-            float speed = rb.velocity.magnitude * 3.6f; // Convert to km/h
+            float speed = rb.velocity.magnitude * 3.6f;
             GUI.Label(new Rect(10, 40, 200, 30), "Speed: " + speed.ToString("F0") + " km/h",
                 new GUIStyle() { fontSize = 20, normal = new GUIStyleState() { textColor = Color.white } });
 
             // Show speed limit for current gear with color coding
-            if (currentGear > 0)
+            if (currentGear != 0)
             {
-                float limit = gearSpeedLimits[currentGear];
+                float limit = currentGear == -1 ? reverseSpeedLimit : gearSpeedLimits[currentGear];
                 Color limitColor = Color.yellow;
 
                 if (speed >= limit) limitColor = Color.red;
