@@ -24,6 +24,8 @@ public class BusController : MonoBehaviour
     Rigidbody rb;
     float motorInput;
     float steerInput;
+    float engineBrakeAmount = 0f;
+    float currentBrakeAmount = 0f;
 
     void Start()
     {
@@ -31,8 +33,8 @@ public class BusController : MonoBehaviour
         rb.centerOfMass = new Vector3(0, -1.5f, 0);
 
         // Reduce drag
-        rb.drag = 0.05f;
-        rb.angularDrag = 0.05f;
+        rb.drag = 0.5f;
+        rb.angularDrag = 0.5f;
     }
 
     void Update()
@@ -70,15 +72,21 @@ public class BusController : MonoBehaviour
         {
             rearLeft.motorTorque = 0f;
             rearRight.motorTorque = 0f;
-            rearLeft.brakeTorque = brakeForce;
-            rearRight.brakeTorque = brakeForce;
-            frontLeft.brakeTorque = brakeForce;
-            frontRight.brakeTorque = brakeForce;
+            rearLeft.brakeTorque = brakeForce * 0.5f; // Softer park brake
+            rearRight.brakeTorque = brakeForce * 0.5f;
+            frontLeft.brakeTorque = brakeForce * 0.5f;
+            frontRight.brakeTorque = brakeForce * 0.5f;
             return;
+        }
+        // Reset engine brake when pressing W or S
+        if (Mathf.Abs(motorInput) > 0.1f)
+        {
+            engineBrakeAmount = 0f;
         }
 
         // Get current speed in km/h
-        float currentSpeed = rb.velocity.magnitude * 3.6f;
+        float signedSpeed = Vector3.Dot(rb.velocity, transform.forward) * 3.6f;
+        float currentSpeed = Mathf.Abs(signedSpeed);
 
         // Get gear speed limit and ratio based on current gear
         float gearSpeedLimit;
@@ -87,85 +95,141 @@ public class BusController : MonoBehaviour
         if (currentGear == -1) // Reverse
         {
             gearSpeedLimit = reverseSpeedLimit;
-            gearModifiedForce = -motorForce * reverseRatio; // Negative for reverse
+            gearModifiedForce = motorForce * reverseRatio;
         }
         else // Forward gears 1-4
         {
-            gearSpeedLimit = gearSpeedLimits[currentGear]; // Direct indexing (Gear 1 = index 1, etc.)
+            gearSpeedLimit = gearSpeedLimits[currentGear];
             gearModifiedForce = motorForce * gearRatios[currentGear];
         }
 
         // Boost torque during turns
-        float turnBoost = 1f + (Mathf.Abs(steerInput) * 0.6f);
+        float turnBoost = 1f + (Mathf.Abs(steerInput) * 0.4f);
+
+        // Gradual brake based on how long S is held
+        // Higher = slower increase, Lower = faster increase
+        float brakeSmoothing = 1f;
 
         // Check if braking (S key / down arrow)
         bool isBraking = motorInput < 0;
 
-        if (isBraking)
+        // Smoothly calculate brake amount (0 to 1)
+        float targetBrakeAmount = isBraking ? 1f : 0f;
+        currentBrakeAmount = Mathf.MoveTowards(currentBrakeAmount, targetBrakeAmount, brakeSmoothing * Time.fixedDeltaTime);
+
+        // Calculate the actual brake torque
+        float currentBrakeTorque = brakeForce * currentBrakeAmount;
+
+        if (currentGear == -1) // REVERSE GEAR LOGIC
         {
-            // Apply brakes when pressing S
-            rearLeft.motorTorque = 0f;
-            rearRight.motorTorque = 0f;
-            rearLeft.brakeTorque = brakeForce;
-            rearRight.brakeTorque = brakeForce;
-            frontLeft.brakeTorque = brakeForce;
-            frontRight.brakeTorque = brakeForce;
-        }
-        else if (motorInput > 0.1f)
-        {
-            // STRICT SPEED LIMITING
-            if (currentSpeed >= gearSpeedLimit)
+            if (isBraking)
             {
-                // AT OR OVER LIMIT - Cut all power and brake hard
                 rearLeft.motorTorque = 0f;
                 rearRight.motorTorque = 0f;
-
-                // Strong braking to enforce limit
-                float overspeed = currentSpeed - gearSpeedLimit;
-                float brakingForce = brakeForce * Mathf.Clamp(overspeed / 5f, 0.3f, 1f);
-
-                rearLeft.brakeTorque = brakingForce;
-                rearRight.brakeTorque = brakingForce;
-                frontLeft.brakeTorque = brakingForce * 0.5f;
-                frontRight.brakeTorque = brakingForce * 0.5f;
-
-                //Debug.Log($"SPEED LIMITED! Current: {currentSpeed:F1} | Limit: {gearSpeedLimit}");
+                //rearLeft.brakeTorque = currentBrakeTorque;
+                //rearRight.brakeTorque = currentBrakeTorque;
+                frontLeft.brakeTorque = currentBrakeTorque * 0.001f;
+                frontRight.brakeTorque = currentBrakeTorque * 0.001f;
             }
-            else if (currentSpeed >= gearSpeedLimit * 0.8f)
+            else if (motorInput > 0.1f) // W key pressed
             {
-                // APPROACHING LIMIT (80-100%) - Reduce power progressively
-                float proximityToLimit = (currentSpeed - (gearSpeedLimit * 0.8f)) / (gearSpeedLimit * 0.2f);
-                float powerReduction = 1f - (proximityToLimit * 0.7f); // Reduce up to 70%
-
-                rearLeft.motorTorque = motorInput * gearModifiedForce * turnBoost * powerReduction;
-                rearRight.motorTorque = motorInput * gearModifiedForce * turnBoost * powerReduction;
-
-                // Release brakes
-                rearLeft.brakeTorque = 0f;
-                rearRight.brakeTorque = 0f;
-                frontLeft.brakeTorque = 0f;
-                frontRight.brakeTorque = 0f;
+                if (currentSpeed >= gearSpeedLimit)
+                {
+                    rearLeft.motorTorque = 0f;
+                    rearRight.motorTorque = 0f;
+                    rearLeft.brakeTorque = brakeForce * 0.1f; // Very light brake at limit
+                    rearRight.brakeTorque = brakeForce * 0.1f;
+                    frontLeft.brakeTorque = brakeForce * 0.1f;
+                    frontRight.brakeTorque = brakeForce * 0.1f;
+                }
+                else
+                {
+                    rearLeft.motorTorque = -motorInput * gearModifiedForce * turnBoost;
+                    rearRight.motorTorque = -motorInput * gearModifiedForce * turnBoost;
+                    rearLeft.brakeTorque = 0f;
+                    rearRight.brakeTorque = 0f;
+                    frontLeft.brakeTorque = 0f;
+                    frontRight.brakeTorque = 0f;
+                }
             }
             else
             {
-                // UNDER 80% OF LIMIT - Full power
-                rearLeft.motorTorque = motorInput * gearModifiedForce * turnBoost;
-                rearRight.motorTorque = motorInput * gearModifiedForce * turnBoost;
+                // No input - gradual engine brake
+                rearLeft.motorTorque = 0f;
+                rearRight.motorTorque = 0f;
 
-                // Release brakes
-                rearLeft.brakeTorque = 0f;
-                rearRight.brakeTorque = 0f;
-                frontLeft.brakeTorque = 0f;
-                frontRight.brakeTorque = 0f;
+                // Smoothly increase engine brake over time
+                //engineBrakeAmount = Mathf.MoveTowards(engineBrakeAmount, brakeForce * 0.15f, 500f * Time.fixedDeltaTime);
+
+                //rearLeft.brakeTorque = engineBrakeAmount;
+                //rearRight.brakeTorque = engineBrakeAmount;
+                //frontLeft.brakeTorque = engineBrakeAmount * 0.00001f;
+                //frontRight.brakeTorque = engineBrakeAmount * 0.00001f;
             }
         }
-        else
+        else // FORWARD GEAR LOGIC
         {
-            // No input - gentle auto-brake
-            rearLeft.motorTorque = 0f;
-            rearRight.motorTorque = 0f;
-            rearLeft.brakeTorque = brakeForce * 0.3f;
-            rearRight.brakeTorque = brakeForce * 0.3f;
+            if (isBraking)
+            {
+                rearLeft.motorTorque = 0f;
+                rearRight.motorTorque = 0f;
+                // Gradual braking - rear takes 60%, front takes 40% (realistic bus braking)
+                //rearLeft.brakeTorque = currentBrakeTorque * 0.006f;
+                //rearRight.brakeTorque = currentBrakeTorque * 0.006f;
+                frontLeft.brakeTorque = currentBrakeTorque * 0.004f;
+                frontRight.brakeTorque = currentBrakeTorque * 0.004f;
+            }
+            else if (motorInput > 0.1f)
+            {
+                // STRICT SPEED LIMITING
+                if (currentSpeed >= gearSpeedLimit)
+                {
+                    rearLeft.motorTorque = 0f;
+                    rearRight.motorTorque = 0f;
+
+                    float overspeed = currentSpeed - gearSpeedLimit;
+                    // Gentler speed limit braking
+                    float brakingForce = brakeForce * Mathf.Clamp(overspeed / 10f, 0.1f, 0.5f);
+
+                    rearLeft.brakeTorque = brakingForce;
+                    rearRight.brakeTorque = brakingForce;
+                    frontLeft.brakeTorque = brakingForce * 0.5f;
+                    frontRight.brakeTorque = brakingForce * 0.5f;
+                }
+                else if (currentSpeed >= gearSpeedLimit * 0.8f)
+                {
+                    float proximityToLimit = (currentSpeed - (gearSpeedLimit * 0.8f)) / (gearSpeedLimit * 0.2f);
+                    float powerReduction = 1f - (proximityToLimit * 0.7f);
+
+                    rearLeft.motorTorque = motorInput * gearModifiedForce * turnBoost * powerReduction;
+                    rearRight.motorTorque = motorInput * gearModifiedForce * turnBoost * powerReduction;
+
+                    rearLeft.brakeTorque = 0f;
+                    rearRight.brakeTorque = 0f;
+                    frontLeft.brakeTorque = 0f;
+                    frontRight.brakeTorque = 0f;
+                }
+                else
+                {
+                    rearLeft.motorTorque = motorInput * gearModifiedForce * turnBoost;
+                    rearRight.motorTorque = motorInput * gearModifiedForce * turnBoost;
+
+                    rearLeft.brakeTorque = 0f;
+                    rearRight.brakeTorque = 0f;
+                    frontLeft.brakeTorque = 0f;
+                    frontRight.brakeTorque = 0f;
+                }
+            }
+            else
+            {
+                // No input - very gentle auto-brake (heavy bus rolls slowly)
+                rearLeft.motorTorque = 0f;
+                rearRight.motorTorque = 0f;
+                rearLeft.brakeTorque = brakeForce * 0f;
+                rearRight.brakeTorque = brakeForce * 0f;
+                //frontLeft.brakeTorque = brakeForce * 0.00001f;
+                //frontRight.brakeTorque = brakeForce * 0.00001f;
+            }
         }
 
         // Calculate speed-based steering
@@ -180,18 +244,6 @@ public class BusController : MonoBehaviour
         // Rear wheels steer opposite (slight angle)
         rearLeft.steerAngle = -steerInput * (steerAngle * 0.3f);
         rearRight.steerAngle = -steerInput * (steerAngle * 0.3f);
-
-        // Auto brake when no input
-        if (Mathf.Abs(motorInput) < 0.1f)
-        {
-            rearLeft.brakeTorque = brakeForce;
-            rearRight.brakeTorque = brakeForce;
-        }
-        else
-        {
-            rearLeft.brakeTorque = 0f;
-            rearRight.brakeTorque = 0f;
-        }
     }
 
     void UpShift()
