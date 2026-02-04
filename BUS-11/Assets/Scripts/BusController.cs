@@ -250,8 +250,27 @@ public class BusController : MonoBehaviour
     {
         if (currentGear < 4)
         {
-            currentGear++;
-            Debug.Log("Shifted UP to Gear: " + currentGear);
+            // Get current speed
+            float currentSpeed = rb.velocity.magnitude * 3.6f;
+            float currentGearLimit = gearSpeedLimits[currentGear];
+
+            // Check if we're at least 80% of current gear's speed limit before allowing upshift
+            float minSpeedToShift = currentGearLimit * 0.8f;
+
+            if (currentGear == 0) // Special case for Park -> Gear 1
+            {
+                currentGear++;
+                Debug.Log("Shifted UP to Gear: " + currentGear);
+            }
+            else if (currentSpeed >= minSpeedToShift)
+            {
+                currentGear++;
+                Debug.Log($"Shifted UP to Gear: {currentGear} (Speed: {currentSpeed:F0} km/h)");
+            }
+            else
+            {
+                Debug.Log($"Cannot upshift! Reach {minSpeedToShift:F0} km/h first. Current: {currentSpeed:F0} km/h");
+            }
         }
         else
         {
