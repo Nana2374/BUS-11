@@ -72,10 +72,10 @@ public class BusController : MonoBehaviour
         {
             rearLeft.motorTorque = 0f;
             rearRight.motorTorque = 0f;
-            rearLeft.brakeTorque = brakeForce * 0.5f; // Softer park brake
-            rearRight.brakeTorque = brakeForce * 0.5f;
-            frontLeft.brakeTorque = brakeForce * 0.5f;
-            frontRight.brakeTorque = brakeForce * 0.5f;
+            rearLeft.brakeTorque = brakeForce * 10f; // Softer park brake
+            rearRight.brakeTorque = brakeForce * 10f;
+            frontLeft.brakeTorque = brakeForce * 10f;
+            frontRight.brakeTorque = brakeForce * 10f;
             return;
         }
         // Reset engine brake when pressing W or S

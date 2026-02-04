@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PassengerController : MonoBehaviour
+public class PassengerController : MonoBehaviour, IInteractable
 {
     [Header("Settings")]
     public float pickupRadius = 10f;       // How close the bus needs to be to the passenger
@@ -16,15 +16,19 @@ public class PassengerController : MonoBehaviour
     private BusController busController;
     private Rigidbody busRigidbody;
     private Transform busTransform;
+    private BusSeatManager seatManager;
 
     private enum PassengerState
     {
         Waiting,        // Standing at bus stop, waiting for bus
-        Walking,        // Walking towards bus entry point
-        Boarded         // Inside the bus
+        WalkingToEntry,        // Walking towards bus entry point
+        AtEntry,        // Standing at entry, waiting to be clicked
+        WalkingToSeat,  // Walking to find a seat
+        Seated          // Sitting in a seat
     }
 
     private PassengerState currentState = PassengerState.Waiting;
+    private Transform targetSeat;
 
     void Start()
     {
@@ -49,6 +53,13 @@ public class PassengerController : MonoBehaviour
         {
             Debug.LogError("Bus not found! Make sure your bus GameObject is named 'Bus'.");
         }
+
+        seatManager = FindObjectOfType<BusSeatManager>();
+
+        if (seatManager == null)
+        {
+            Debug.LogError("No BusSeatManager found in scene!");
+        }
     }
 
     void Update()
@@ -59,12 +70,20 @@ public class PassengerController : MonoBehaviour
                 CheckForBus();
                 break;
 
-            case PassengerState.Walking:
+            case PassengerState.WalkingToEntry:
                 CheckIfReachedEntry();
                 break;
 
-            case PassengerState.Boarded:
-                // Do nothing, passenger is on the bus
+            case PassengerState.AtEntry:
+                // Waiting for player to click
+                break;
+
+            case PassengerState.WalkingToSeat:
+                CheckIfReachedSeat();
+                break;
+
+            case PassengerState.Seated:
+                // Sitting down
                 break;
         }
     }
@@ -81,7 +100,7 @@ public class PassengerController : MonoBehaviour
             busSpeed <= busStopSpeed &&
             busController.currentGear == 0) // Must be in Park (gear 0)
         {
-            currentState = PassengerState.Walking;
+            currentState = PassengerState.WalkingToEntry;
             agent.SetDestination(entryPoint.position);
             Debug.Log("Bus is in Park! Walking to entry point.");
         }
@@ -95,13 +114,13 @@ public class PassengerController : MonoBehaviour
         // Check if reached the entry point
         if (agent.remainingDistance <= agent.stoppingDistance + 0.1f)
         {
-            Board();
+            ReachEntry();
         }
     }
 
-    void Board()
+    void ReachEntry()
     {
-        currentState = PassengerState.Boarded;
+        currentState = PassengerState.AtEntry;
         agent.enabled = false; // Stop NavMesh agent
 
         // Snap passenger to entry point
@@ -112,5 +131,67 @@ public class PassengerController : MonoBehaviour
         transform.SetParent(entryPoint.transform.parent);
 
         Debug.Log("Passenger boarded the bus!");
+    }
+
+    // Called when player clicks on the passenger (implements IInteractable)
+    public void Interact()
+    {
+        if (currentState == PassengerState.AtEntry)
+        {
+            FindAndWalkToSeat();
+
+            Debug.Log("Passenger clicked!");
+        }
+        else
+        {
+            Debug.Log("Passenger is not ready to sit yet!");
+        }
+    }
+
+    void FindAndWalkToSeat()
+    {
+        if (seatManager == null)
+        {
+            Debug.LogError("SeatManager missing!");
+            return;
+        }
+
+        targetSeat = seatManager.GetAvailableSeat();
+
+        if (targetSeat == null)
+        {
+            Debug.Log("No available seats!");
+            return;
+        }
+
+        seatManager.OccupySeat(targetSeat);
+
+        currentState = PassengerState.WalkingToSeat;
+        agent.enabled = true;
+        agent.SetDestination(targetSeat.position);
+
+        Debug.Log("Walking to seat: " + targetSeat.name);
+    }
+
+    void CheckIfReachedSeat()
+    {
+        if (agent.pathPending) return;
+
+        if (agent.remainingDistance <= agent.stoppingDistance + 0.1f)
+        {
+            SitDown();
+        }
+    }
+
+    void SitDown()
+    {
+        currentState = PassengerState.Seated;
+        agent.enabled = false;
+
+        // Snap to seat position and rotation
+        transform.position = targetSeat.position;
+        transform.rotation = targetSeat.rotation;
+
+        Debug.Log("Passenger is now seated!");
     }
 }
