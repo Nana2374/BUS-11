@@ -10,8 +10,6 @@ public class CameraInteraction : MonoBehaviour
 
     [Header("UI")]
     public bool showCrosshair = true;          // Show a crosshair in center
-    private Texture2D crosshairTexture;
-    private GUIStyle labelStyle;
 
     [Header("Highlight")]
     public bool enableHighlight = true;
@@ -23,6 +21,7 @@ public class CameraInteraction : MonoBehaviour
     private GameObject lastLookTarget;         // Previously looked at object
     private Material[] originalMaterials;      // Store original materials
     private Renderer targetRenderer;
+    private Texture2D whiteTexture;
 
     void Start()
     {
@@ -32,16 +31,10 @@ public class CameraInteraction : MonoBehaviour
             Debug.LogError("CameraInteraction must be attached to a Camera!");
         }
 
-        crosshairTexture = new Texture2D(1, 1);
-        crosshairTexture.SetPixel(0, 0, Color.white);
-        crosshairTexture.Apply();
-
-        labelStyle = new GUIStyle
-        {
-            fontSize = 16,
-            alignment = TextAnchor.MiddleCenter,
-            normal = new GUIStyleState { textColor = Color.white }
-        };
+        // Create a simple white texture
+        whiteTexture = new Texture2D(1, 1);
+        whiteTexture.SetPixel(0, 0, Color.white);
+        whiteTexture.Apply();
     }
 
     void Update()
@@ -60,7 +53,7 @@ public class CameraInteraction : MonoBehaviour
         Ray ray = new Ray(cam.transform.position, cam.transform.forward);
         RaycastHit hit;
 
-        // Visualize ray
+        // Visualize ray in Scene view
         Debug.DrawRay(
             ray.origin,
             ray.direction * interactionRange,
@@ -125,8 +118,7 @@ public class CameraInteraction : MonoBehaviour
 
     void InteractWith(GameObject obj)
     {
-        IInteractable interactable =
-            obj.GetComponentInParent<IInteractable>();
+        IInteractable interactable = obj.GetComponentInParent<IInteractable>();
 
         if (interactable != null)
         {
@@ -135,38 +127,41 @@ public class CameraInteraction : MonoBehaviour
         }
     }
 
-    // Draw crosshair in center of screen
     void OnGUI()
     {
         if (!showCrosshair) return;
-        if (Event.current.type != EventType.Repaint) return;
 
         float centerX = Screen.width / 2f;
         float centerY = Screen.height / 2f;
 
-        // Update crosshair color
-        crosshairTexture.SetPixel(
-            0, 0,
-            currentLookTarget != null ? Color.green : Color.white
-        );
-        crosshairTexture.Apply();
+        // Set color based on target
+        GUI.color = currentLookTarget != null ? Color.green : Color.white;
 
-        GUI.DrawTexture(new Rect(centerX - 10f, centerY - 1f, 20f, 2f), crosshairTexture);
-        GUI.DrawTexture(new Rect(centerX - 1f, centerY - 10f, 2f, 20f), crosshairTexture);
+        // Draw horizontal line
+        GUI.DrawTexture(new Rect(centerX - 10f, centerY - 1f, 20f, 2f), whiteTexture);
 
+        // Draw vertical line
+        GUI.DrawTexture(new Rect(centerX - 1f, centerY - 10f, 2f, 20f), whiteTexture);
+
+        // Reset color and draw label
         if (currentLookTarget != null)
         {
+            GUI.color = Color.white;
+            GUIStyle style = new GUIStyle();
+            style.fontSize = 16;
+            style.alignment = TextAnchor.MiddleCenter;
+            style.normal.textColor = Color.white;
+
             GUI.Label(
                 new Rect(centerX - 100f, centerY + 30f, 200f, 30f),
                 "[Click] " + currentLookTarget.name,
-                labelStyle
+                style
             );
         }
     }
 
     void OnDestroy()
     {
-        // Clean up on destroy
         RemoveHighlight();
     }
 
