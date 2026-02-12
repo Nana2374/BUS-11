@@ -17,9 +17,9 @@ public class BusController : MonoBehaviour
     // Gear System
     public int currentGear = 0; // -1 = Reverse, 0 = Park, 1-4 = Gears
     public float reverseRatio = 0.5f;
-    public float[] gearRatios = new float[] { 0f, 0.3f, 0.7f, 1f, 1.3f }; // Park, Gear1, Gear2, Gear3, Gear4
+    public float[] gearRatios = new float[] { 0f, 0.3f, 0.7f, 1f }; // Park, Gear1, Gear2, Gear3
     public float reverseSpeedLimit = 40f;
-    public float[] gearSpeedLimits = new float[] { 0f, 20f, 35f, 50f, 70f }; // Park, Gear1, Gear2, Gear3, Gear4
+    public float[] gearSpeedLimits = new float[] { 0f, 20f, 45f, 70f }; // Park, Gear1, Gear2, Gear3
 
     Rigidbody rb;
     float motorInput;
@@ -234,16 +234,16 @@ public class BusController : MonoBehaviour
 
         // Calculate speed-based steering
         float speed = rb.velocity.magnitude;
-        float steerMultiplier = Mathf.Clamp(1f - (speed / maxSpeed) * 0.5f, 0.5f, 1f);
+        //float steerMultiplier = Mathf.Clamp(1f - (speed / maxSpeed) * 0.5f, 0.5f, 1f);
 
-        float currentSteerAngle = steerInput * steerAngle * steerMultiplier;
+        float currentSteerAngle = steerInput * steerAngle; //* steerMultiplier;
 
         frontLeft.steerAngle = currentSteerAngle;
         frontRight.steerAngle = currentSteerAngle;
 
         // Rear wheels steer opposite (slight angle)
-        rearLeft.steerAngle = -steerInput * (steerAngle * 0.3f);
-        rearRight.steerAngle = -steerInput * (steerAngle * 0.3f);
+        //rearLeft.steerAngle = -steerInput * (steerAngle * 0.3f);
+        //rearRight.steerAngle = -steerInput * (steerAngle * 0.3f);
     }
 
     void UpShift()
