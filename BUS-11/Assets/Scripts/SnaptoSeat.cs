@@ -42,7 +42,7 @@ public class SnaptoSeat : MonoBehaviour
         playerMovement.enabled = false;
 
         // Snap to seat
-        transform.position = driverSeat.position + new Vector3(0f, 0.8f, 0f);
+        transform.position = driverSeat.position + new Vector3(0f, 0.3f, 0f);
         transform.rotation = driverSeat.rotation;
         transform.SetParent(driverSeat);
 

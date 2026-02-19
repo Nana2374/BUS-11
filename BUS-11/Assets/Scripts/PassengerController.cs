@@ -13,10 +13,10 @@ public class PassengerController : MonoBehaviour, IInteractable
     public Transform entryPoint;           // The PassengerEntry point on the bus (drag in Inspector)
 
     private UnityEngine.AI.NavMeshAgent agent;
-    private BusController busController;
-    private Rigidbody busRigidbody;
-    private Transform busTransform;
-    private BusSeatManager seatManager;
+    public BusController busController;
+    public Rigidbody busRigidbody;
+    public Transform busTransform;
+    public BusSeatManager seatManager;
 
     private enum PassengerState
     {
