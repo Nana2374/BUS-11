@@ -34,7 +34,7 @@ public class BusController : MonoBehaviour
 
         // Reduce drag
         rb.drag = 0.5f;
-        rb.angularDrag = 0.5f;
+        rb.angularDrag = 3f;
     }
 
     void Update()
@@ -76,8 +76,20 @@ public class BusController : MonoBehaviour
             rearRight.brakeTorque = brakeForce * 10f;
             frontLeft.brakeTorque = brakeForce * 10f;
             frontRight.brakeTorque = brakeForce * 10f;
+
+            // Completely freeze the bus in Park
+            rb.constraints = RigidbodyConstraints.FreezePosition |
+                            RigidbodyConstraints.FreezeRotationX |
+                            RigidbodyConstraints.FreezeRotationY |
+                            RigidbodyConstraints.FreezeRotationZ;
             return;
         }
+        else
+        {
+            // Unfreeze everything when not in Park
+            rb.constraints = RigidbodyConstraints.None;
+        }
+
         // Reset engine brake when pressing W or S
         if (Mathf.Abs(motorInput) > 0.1f)
         {

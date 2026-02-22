@@ -14,6 +14,7 @@ public class PassengerController : MonoBehaviour, IInteractable
 
     private UnityEngine.AI.NavMeshAgent agent;
     public BusController busController;
+    public BusDoors busDoors;
     public Rigidbody busRigidbody;
     public Transform busTransform;
     public BusSeatManager seatManager;
@@ -98,7 +99,8 @@ public class PassengerController : MonoBehaviour, IInteractable
         // Check if bus is close enough AND slow enough (stopped) AND in Park gear
         if (distanceToBus <= pickupRadius &&
             busSpeed <= busStopSpeed &&
-            busController.currentGear == 0) // Must be in Park (gear 0)
+            busController.currentGear == 0 && // Must be in Park (gear 0)
+            busDoors.isOpen == true) //Bus doors must be open
         {
             currentState = PassengerState.WalkingToEntry;
             agent.SetDestination(entryPoint.position);

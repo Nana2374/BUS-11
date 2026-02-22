@@ -152,11 +152,11 @@ public class CameraInteraction : MonoBehaviour
             style.alignment = TextAnchor.MiddleCenter;
             style.normal.textColor = Color.white;
 
-            GUI.Label(
+            /*GUI.Label(
                 new Rect(centerX - 100f, centerY + 30f, 200f, 30f),
                 "[Click] " + currentLookTarget.name,
                 style
-            );
+            );*/
         }
     }
 

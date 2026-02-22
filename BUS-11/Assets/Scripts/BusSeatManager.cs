@@ -26,16 +26,26 @@ public class BusSeatManager : MonoBehaviour
     // Find the first available seat
     public Transform GetAvailableSeat()
     {
+        // Create a list of available seats
+        System.Collections.Generic.List<Transform> availableSeats = new System.Collections.Generic.List<Transform>();
+
         foreach (Transform seat in seats)
         {
             if (seat != null && !seatOccupancy[seat])
             {
-                return seat;
+                availableSeats.Add(seat);
             }
         }
 
-        Debug.Log("No available seats!");
-        return null;
+        if (availableSeats.Count == 0)
+        {
+            Debug.Log("No available seats!");
+            return null;
+        }
+
+        // Pick a random seat from available ones
+        int randomIndex = Random.Range(0, availableSeats.Count);
+        return availableSeats[randomIndex];
     }
 
     // Mark a seat as occupied
