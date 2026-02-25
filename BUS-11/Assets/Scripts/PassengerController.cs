@@ -11,6 +11,8 @@ public class PassengerController : MonoBehaviour, IInteractable
 
     [Header("References")]
     public Transform entryPoint;           // The PassengerEntry point on the bus (drag in Inspector)
+    public Transform exitPoint;            // The PassengerExit point on the bus (drag in Inspector)
+
 
     private UnityEngine.AI.NavMeshAgent agent;
     public BusController busController;
@@ -25,7 +27,10 @@ public class PassengerController : MonoBehaviour, IInteractable
         WalkingToEntry,        // Walking towards bus entry point
         AtEntry,        // Standing at entry, waiting to be clicked
         WalkingToSeat,  // Walking to find a seat
-        Seated          // Sitting in a seat
+        Seated,          // Sitting in a seat
+        WalkingToExit,  // Walking towards bus exit point
+        Exited           // Exited the bus and walking away
+
     }
 
     private PassengerState currentState = PassengerState.Waiting;
@@ -84,8 +89,16 @@ public class PassengerController : MonoBehaviour, IInteractable
                 break;
 
             case PassengerState.Seated:
-                // Sitting down
+                CheckForStop();
                 break;
+
+            case PassengerState.WalkingToExit:
+                CheckIfReachedExit();
+                break;
+
+            case PassengerState.Exited:
+                break;
+
         }
     }
 
@@ -195,5 +208,53 @@ public class PassengerController : MonoBehaviour, IInteractable
         transform.rotation = targetSeat.rotation;
 
         Debug.Log("Passenger is now seated!");
+    }
+
+    void CheckForStop()
+    {
+        if (busTransform == null || busRigidbody == null) return;
+
+        float distanceToStop = Vector3.Distance(busTransform.position, exitPoint.position);
+        float busSpeed = busRigidbody.velocity.magnitude * 3.6f; // Convert to km/h
+
+        // Check if bus is close enough AND slow enough (stopped) AND in Park gear
+        if (distanceToStop <= pickupRadius &&
+            busSpeed <= busStopSpeed &&
+            busController.currentGear == 0 && // Must be in Park (gear 0)
+            busDoors.isOpen == true) //Bus doors must be open
+        {
+            currentState = PassengerState.WalkingToExit;
+            agent.enabled = true;
+            agent.SetDestination(exitPoint.position);
+
+            // Unparent from bus so they can walk away
+            transform.SetParent(null);
+
+            Debug.Log(name + " alighting.");
+        }
+
+    }
+
+    void CheckIfReachedExit()
+    {
+        if (agent.pathPending) return;
+
+        // Check if reached the entry point
+        if (agent.remainingDistance <= agent.stoppingDistance + 0.1f)
+        {
+            ReachExit();
+        }
+    }
+
+    void ReachExit()
+    {
+        currentState = PassengerState.Exited;
+        agent.enabled = false; // Stop NavMesh agent
+
+        // Snap passenger to exit point
+        transform.position = exitPoint.position;
+        transform.rotation = exitPoint.rotation;
+
+        Debug.Log("Passenger alighted the bus!");
     }
 }
