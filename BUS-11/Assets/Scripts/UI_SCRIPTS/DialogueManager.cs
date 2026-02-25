@@ -44,6 +44,11 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
+    public bool IsDialogueActive()
+    {
+        return dialogueActive;
+    }
+
     public void StartDialogue(string[] lines)
     {
         dialogueActive = true;
@@ -73,6 +78,13 @@ public class DialogueManager : MonoBehaviour
         }
 
         isTyping = false;
+
+        // If this is the FINAL line
+        if (currentIndex == currentLines.Length - 1)
+        {
+            yield return new WaitForSeconds(2f); // Let it sit...
+            EndDialogue();
+        }
     }
 
     void NextLine()
@@ -80,17 +92,22 @@ public class DialogueManager : MonoBehaviour
         currentIndex++;
 
         if (currentIndex >= currentLines.Length)
-        {
-            EndDialogue();
-            return;
-        }
+            return; // DO NOT close here anymore
 
         ShowLine();
     }
 
     void EndDialogue()
     {
+        StopAllCoroutines();
+
         dialogueActive = false;
+        isTyping = false;
+
         dialoguePanel.SetActive(false);
+        dialogueText.text = "";
+
+        currentLines = null;
+        currentIndex = 0;
     }
 }
