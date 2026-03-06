@@ -137,7 +137,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7161813
 Transform:
   m_ObjectHideFlags: 0
@@ -298,6 +298,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: StraightRoad_L (13)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ea5b1a3fb278ac34690fb36e8f986369,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -404,6 +409,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: StraightRoad_L (13)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ea5b1a3fb278ac34690fb36e8f986369,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -471,12 +481,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 24015575}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.87, y: 22.71, z: 0}
+  m_LocalRotation: {x: -0.074758284, y: 0.70314384, z: 0.70314384, w: 0.074758284}
+  m_LocalPosition: {x: -0.013946533, y: -0, z: 23.226303}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 229424959}
+  m_Father: {fileID: 1828530355}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &24030177
 GameObject:
@@ -766,6 +776,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: StraightRoad_Bus_R
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f33fc1c97c8a3a94e8657c45856a4210,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -996,6 +1011,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: StraightRoad_R (31)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c3a28d4b44030d842a2b078c05a6689f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1101,6 +1121,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: StraightRoad_L (14)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ea5b1a3fb278ac34690fb36e8f986369,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1375,6 +1400,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: StraightRoad_Connector (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f690d798c977da242805a409222ccfd7,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1480,6 +1510,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: StraightRoad_L (16)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ea5b1a3fb278ac34690fb36e8f986369,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1697,6 +1732,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: StraightRoad_L (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ea5b1a3fb278ac34690fb36e8f986369,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1814,6 +1854,10 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: eebe6e26ee8eb0341b67dab7975d6e38,
         type: 3}
       insertIndex: -1
+      addedObject: {fileID: 774544733}
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: eebe6e26ee8eb0341b67dab7975d6e38,
+        type: 3}
+      insertIndex: -1
       addedObject: {fileID: 287727549}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: eebe6e26ee8eb0341b67dab7975d6e38,
@@ -1917,6 +1961,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: StraightRoad_L (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ea5b1a3fb278ac34690fb36e8f986369,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2066,6 +2115,124 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 105023020}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &117852597
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 117852598}
+  - component: {fileID: 117852600}
+  - component: {fileID: 117852599}
+  m_Layer: 0
+  m_Name: Lights (10)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &117852598
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 117852597}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.77356917, y: 0.0016889309, z: -0.0018610123, w: 0.6337069}
+  m_LocalPosition: {x: 36.150085, y: 23.037483, z: -52.147324}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 868726449}
+  m_LocalEulerAnglesHint: {x: 101.35101, y: 0.21499634, z: -0.07400513}
+--- !u!114 &117852599
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 117852597}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Version: 3
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_LightLayerMask: 1
+  m_RenderingLayers: 1
+  m_CustomShadowLayers: 0
+  m_ShadowLayerMask: 1
+  m_ShadowRenderingLayers: 1
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
+  m_SoftShadowQuality: 0
+--- !u!108 &117852600
+Light:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 117852597}
+  m_Enabled: 1
+  serializedVersion: 10
+  m_Type: 0
+  m_Shape: 0
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Intensity: 500
+  m_Range: 100
+  m_SpotAngle: 62.522713
+  m_InnerSpotAngle: 54.32479
+  m_CookieSize: 10
+  m_Shadows:
+    m_Type: 2
+    m_Resolution: -1
+    m_CustomResolution: -1
+    m_Strength: 1
+    m_Bias: 0.05
+    m_NormalBias: 0.4
+    m_NearPlane: 0.2
+    m_CullingMatrixOverride:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+    m_UseCullingMatrixOverride: 0
+  m_Cookie: {fileID: 0}
+  m_DrawHalo: 0
+  m_Flare: {fileID: 0}
+  m_RenderMode: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RenderingLayerMask: 1
+  m_Lightmapping: 4
+  m_LightShadowCasterMode: 0
+  m_AreaSize: {x: 1, y: 1}
+  m_BounceIntensity: 1
+  m_ColorTemperature: 6570
+  m_UseColorTemperature: 0
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_UseBoundingSphereOverride: 0
+  m_UseViewFrustumForShadowCasterCull: 1
+  m_ShadowRadius: 0
+  m_ShadowAngle: 0
 --- !u!1001 &118933953
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2128,6 +2295,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: CurveRoad_L
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 187e7dcb83072bf45a088560f635232d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2438,6 +2610,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: StraightRoad_R (26)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c3a28d4b44030d842a2b078c05a6689f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2882,6 +3059,10 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: eebe6e26ee8eb0341b67dab7975d6e38,
         type: 3}
       insertIndex: -1
+      addedObject: {fileID: 853199367}
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: eebe6e26ee8eb0341b67dab7975d6e38,
+        type: 3}
+      insertIndex: -1
       addedObject: {fileID: 221618369}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: eebe6e26ee8eb0341b67dab7975d6e38,
@@ -2985,6 +3166,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: StraightRoad_R (20)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c3a28d4b44030d842a2b078c05a6689f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3145,6 +3331,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: StraightRoad_L (10)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ea5b1a3fb278ac34690fb36e8f986369,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3282,6 +3473,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: StraightRoad_Bus_R (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f33fc1c97c8a3a94e8657c45856a4210,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3462,7 +3658,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1895748571}
+  m_Father: {fileID: 868726449}
   m_LocalEulerAnglesHint: {x: 51.252, y: 0, z: 0}
 --- !u!114 &168899631
 MonoBehaviour:
@@ -3643,6 +3839,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: StraightRoad_R (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c3a28d4b44030d842a2b078c05a6689f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3748,6 +3949,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: StraightRoad_Bus_R
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f33fc1c97c8a3a94e8657c45856a4210,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3855,6 +4061,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: StraightRoad_L (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ea5b1a3fb278ac34690fb36e8f986369,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3960,6 +4171,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: StraightRoad_L (24)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ea5b1a3fb278ac34690fb36e8f986369,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4405,6 +4621,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: StraightRoad_R (12)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c3a28d4b44030d842a2b078c05a6689f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4771,6 +4992,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: StraightRoad_Connector (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f690d798c977da242805a409222ccfd7,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5025,6 +5251,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: StraightRoad_R (27)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c3a28d4b44030d842a2b078c05a6689f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5454,6 +5685,10 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: eebe6e26ee8eb0341b67dab7975d6e38,
         type: 3}
       insertIndex: -1
+      addedObject: {fileID: 1833345278}
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: eebe6e26ee8eb0341b67dab7975d6e38,
+        type: 3}
+      insertIndex: -1
       addedObject: {fileID: 1939174239}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: eebe6e26ee8eb0341b67dab7975d6e38,
@@ -5652,6 +5887,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: CurveRoad_R
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ee834b2bc5b62c84a935e60a58824caa,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6142,6 +6382,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: StraightRoad_L (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ea5b1a3fb278ac34690fb36e8f986369,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6491,6 +6736,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: CurveRoad_L
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 187e7dcb83072bf45a088560f635232d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6680,6 +6930,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: StraightRoad_R (13)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c3a28d4b44030d842a2b078c05a6689f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6791,6 +7046,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: StraightRoad_R (36)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c3a28d4b44030d842a2b078c05a6689f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: c3a28d4b44030d842a2b078c05a6689f,
         type: 3}
@@ -6955,6 +7215,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: StraightRoad_R (35)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c3a28d4b44030d842a2b078c05a6689f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: c3a28d4b44030d842a2b078c05a6689f,
         type: 3}
@@ -7172,6 +7437,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: StraightRoad_L (18)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ea5b1a3fb278ac34690fb36e8f986369,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7277,6 +7547,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: CurveRoad_R
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ee834b2bc5b62c84a935e60a58824caa,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: ee834b2bc5b62c84a935e60a58824caa,
         type: 3}
@@ -7448,7 +7723,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!108 &410087040
 Light:
   m_ObjectHideFlags: 0
@@ -7612,6 +7887,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: StraightRoad_R (32)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c3a28d4b44030d842a2b078c05a6689f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7718,6 +7998,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: StraightRoad_R (23)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c3a28d4b44030d842a2b078c05a6689f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7823,6 +8108,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: StraightRoad_L (11)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ea5b1a3fb278ac34690fb36e8f986369,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -8289,6 +8579,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: StraightRoad_L (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ea5b1a3fb278ac34690fb36e8f986369,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -8394,6 +8689,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: StraightRoad_R (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c3a28d4b44030d842a2b078c05a6689f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -8501,6 +8801,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: StraightRoad_R (12)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c3a28d4b44030d842a2b078c05a6689f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -8606,6 +8911,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: StraightRoad_R
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c3a28d4b44030d842a2b078c05a6689f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -8722,6 +9032,124 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 482230695}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &486776434
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 486776435}
+  - component: {fileID: 486776437}
+  - component: {fileID: 486776436}
+  m_Layer: 0
+  m_Name: Lights (9)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &486776435
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 486776434}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.77356917, y: 0.0016889309, z: -0.0018610123, w: 0.6337069}
+  m_LocalPosition: {x: 17.570374, y: 23.032745, z: -52.054245}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 868726449}
+  m_LocalEulerAnglesHint: {x: 101.35101, y: 0.21499634, z: -0.07400513}
+--- !u!114 &486776436
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 486776434}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Version: 3
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_LightLayerMask: 1
+  m_RenderingLayers: 1
+  m_CustomShadowLayers: 0
+  m_ShadowLayerMask: 1
+  m_ShadowRenderingLayers: 1
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
+  m_SoftShadowQuality: 0
+--- !u!108 &486776437
+Light:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 486776434}
+  m_Enabled: 1
+  serializedVersion: 10
+  m_Type: 0
+  m_Shape: 0
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Intensity: 500
+  m_Range: 100
+  m_SpotAngle: 62.522713
+  m_InnerSpotAngle: 54.32479
+  m_CookieSize: 10
+  m_Shadows:
+    m_Type: 2
+    m_Resolution: -1
+    m_CustomResolution: -1
+    m_Strength: 1
+    m_Bias: 0.05
+    m_NormalBias: 0.4
+    m_NearPlane: 0.2
+    m_CullingMatrixOverride:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+    m_UseCullingMatrixOverride: 0
+  m_Cookie: {fileID: 0}
+  m_DrawHalo: 0
+  m_Flare: {fileID: 0}
+  m_RenderMode: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RenderingLayerMask: 1
+  m_Lightmapping: 4
+  m_LightShadowCasterMode: 0
+  m_AreaSize: {x: 1, y: 1}
+  m_BounceIntensity: 1
+  m_ColorTemperature: 6570
+  m_UseColorTemperature: 0
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_UseBoundingSphereOverride: 0
+  m_UseViewFrustumForShadowCasterCull: 1
+  m_ShadowRadius: 0
+  m_ShadowAngle: 0
 --- !u!1 &498776176
 GameObject:
   m_ObjectHideFlags: 0
@@ -9099,10 +9527,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 5a8bf6fee64699c4b9b62896c8e42669,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 27abb3694f347be4a81cb819c4a05224, type: 2}
+    - target: {fileID: -5754084199372789682, guid: 5a8bf6fee64699c4b9b62896c8e42669,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 3959308059485820923, guid: 2db31b04c2132ee49b6f24de87da9301,
+        type: 3}
     - target: {fileID: 919132149155446097, guid: 5a8bf6fee64699c4b9b62896c8e42669,
         type: 3}
       propertyPath: m_Name
-      value: human_male_try (1)
+      value: Male_Passenger_2
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 5a8bf6fee64699c4b9b62896c8e42669,
         type: 3}
@@ -9365,6 +9804,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: StraightRoad_R (22)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c3a28d4b44030d842a2b078c05a6689f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -9648,6 +10092,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: StraightRoad_L (12)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ea5b1a3fb278ac34690fb36e8f986369,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -9718,11 +10167,11 @@ Transform:
   m_GameObject: {fileID: 565503984}
   serializedVersion: 2
   m_LocalRotation: {x: 0.5745743, y: -0, z: -0, w: 0.81845254}
-  m_LocalPosition: {x: 0, y: 22.65, z: 3.08}
+  m_LocalPosition: {x: 0, y: 22.650002, z: 3.0800018}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1895748571}
+  m_Father: {fileID: 868726449}
   m_LocalEulerAnglesHint: {x: 70.14, y: 0, z: 0}
 --- !u!114 &565503986
 MonoBehaviour:
@@ -9977,6 +10426,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: StraightRoad_L (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ea5b1a3fb278ac34690fb36e8f986369,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -10187,6 +10641,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: StraightRoad_R (17)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c3a28d4b44030d842a2b078c05a6689f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -10328,6 +10787,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: StraightRoad_R
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c3a28d4b44030d842a2b078c05a6689f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -10582,6 +11046,124 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 618122575}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &622727118
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 622727119}
+  - component: {fileID: 622727121}
+  - component: {fileID: 622727120}
+  m_Layer: 0
+  m_Name: Lights (17)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &622727119
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 622727118}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.4032057, y: -0.58088315, z: -0.4032057, w: 0.58088315}
+  m_LocalPosition: {x: 0.603, y: -0.5469999, z: 0.001}
+  m_LocalScale: {x: 0.008057369, y: 0.018374609, z: 0.019771805}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1719760002}
+  m_LocalEulerAnglesHint: {x: -69.531, y: -90, z: 0}
+--- !u!114 &622727120
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 622727118}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Version: 3
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_LightLayerMask: 1
+  m_RenderingLayers: 1
+  m_CustomShadowLayers: 0
+  m_ShadowLayerMask: 1
+  m_ShadowRenderingLayers: 1
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
+  m_SoftShadowQuality: 0
+--- !u!108 &622727121
+Light:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 622727118}
+  m_Enabled: 1
+  serializedVersion: 10
+  m_Type: 0
+  m_Shape: 0
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Intensity: 100
+  m_Range: 100
+  m_SpotAngle: 62.522713
+  m_InnerSpotAngle: 54.32479
+  m_CookieSize: 10
+  m_Shadows:
+    m_Type: 2
+    m_Resolution: -1
+    m_CustomResolution: -1
+    m_Strength: 1
+    m_Bias: 0.05
+    m_NormalBias: 0.4
+    m_NearPlane: 0.2
+    m_CullingMatrixOverride:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+    m_UseCullingMatrixOverride: 0
+  m_Cookie: {fileID: 0}
+  m_DrawHalo: 0
+  m_Flare: {fileID: 0}
+  m_RenderMode: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RenderingLayerMask: 1
+  m_Lightmapping: 4
+  m_LightShadowCasterMode: 0
+  m_AreaSize: {x: 1, y: 1}
+  m_BounceIntensity: 1
+  m_ColorTemperature: 6570
+  m_UseColorTemperature: 0
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_UseBoundingSphereOverride: 0
+  m_UseViewFrustumForShadowCasterCull: 1
+  m_ShadowRadius: 0
+  m_ShadowAngle: 0
 --- !u!1 &623301680
 GameObject:
   m_ObjectHideFlags: 0
@@ -10676,6 +11258,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: CurveRoad_L
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 187e7dcb83072bf45a088560f635232d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -10782,6 +11369,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: StraightRoad_R (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c3a28d4b44030d842a2b078c05a6689f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -10919,6 +11511,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: StraightRoad_R (24)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c3a28d4b44030d842a2b078c05a6689f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -11143,6 +11740,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: StraightRoad_Connector (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f690d798c977da242805a409222ccfd7,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -11409,6 +12011,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: StraightRoad_R (30)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c3a28d4b44030d842a2b078c05a6689f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -11514,6 +12121,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: StraightRoad_L (11)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ea5b1a3fb278ac34690fb36e8f986369,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -11626,6 +12238,37 @@ MonoBehaviour:
   gear3Position: {fileID: 1042019882}
   moveSpeed: 10
   busController: {fileID: 1216615621}
+--- !u!1 &722966675
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 722966676}
+  m_Layer: 7
+  m_Name: ExitPoint 5 (3)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &722966676
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 722966675}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: -0.7071068}
+  m_LocalPosition: {x: 0, y: -0.882, z: 0.9}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1357712705}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &723137326
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11688,6 +12331,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: StraightRoad_L (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ea5b1a3fb278ac34690fb36e8f986369,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -11987,10 +12635,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 5a8bf6fee64699c4b9b62896c8e42669,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 27abb3694f347be4a81cb819c4a05224, type: 2}
+    - target: {fileID: -5754084199372789682, guid: 5a8bf6fee64699c4b9b62896c8e42669,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 3959308059485820923, guid: 2db31b04c2132ee49b6f24de87da9301,
+        type: 3}
     - target: {fileID: 919132149155446097, guid: 5a8bf6fee64699c4b9b62896c8e42669,
         type: 3}
       propertyPath: m_Name
-      value: human_male_try (2)
+      value: Male_Passenger_3
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 5a8bf6fee64699c4b9b62896c8e42669,
         type: 3}
@@ -12159,6 +12818,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: StraightRoad_Bus_R (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f33fc1c97c8a3a94e8657c45856a4210,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -12330,7 +12994,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 768179654}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Road_GRP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12507,6 +13171,37 @@ Transform:
   - {fileID: 1425856166}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &774544732
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 774544733}
+  m_Layer: 7
+  m_Name: ExitPoint 5 (4)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &774544733
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 774544732}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: -0.7071068}
+  m_LocalPosition: {x: 0, y: -0.882, z: 0.89}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 84727062}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &778224525
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12569,6 +13264,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: StraightRoad_R (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c3a28d4b44030d842a2b078c05a6689f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -12782,6 +13482,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: StraightRoad_L (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ea5b1a3fb278ac34690fb36e8f986369,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -12888,6 +13593,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: StraightRoad_L (13)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ea5b1a3fb278ac34690fb36e8f986369,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -12931,6 +13641,37 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -3985093900151489778, guid: ea5b1a3fb278ac34690fb36e8f986369, type: 3}
+--- !u!1 &805482558
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 805482559}
+  m_Layer: 7
+  m_Name: ExitPoint 5 (5)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &805482559
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 805482558}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.882, z: 0.821}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 948648925}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &807700305
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12993,6 +13734,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: StraightRoad_R (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c3a28d4b44030d842a2b078c05a6689f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -13381,6 +14127,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: StraightRoad_R (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c3a28d4b44030d842a2b078c05a6689f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -13492,6 +14243,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: StraightRoad_L (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ea5b1a3fb278ac34690fb36e8f986369,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -13612,11 +14368,11 @@ Transform:
   m_GameObject: {fileID: 834887626}
   serializedVersion: 2
   m_LocalRotation: {x: 0.5745743, y: -0, z: -0, w: 0.81845254}
-  m_LocalPosition: {x: -18.44, y: 22.65, z: 3.08}
+  m_LocalPosition: {x: -18.440002, y: 22.650002, z: 3.0800018}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1895748571}
+  m_Father: {fileID: 868726449}
   m_LocalEulerAnglesHint: {x: 70.14, y: 0, z: 0}
 --- !u!114 &834887628
 MonoBehaviour:
@@ -13777,6 +14533,124 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 836343164}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &842423946
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 842423947}
+  - component: {fileID: 842423949}
+  - component: {fileID: 842423948}
+  m_Layer: 0
+  m_Name: Lights (6)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &842423947
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 842423946}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.71681017, y: 0.0007999233, z: -0.035830177, w: 0.6963467}
+  m_LocalPosition: {x: 0.009429932, y: 33.126534, z: -58.800003}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 868726449}
+  m_LocalEulerAnglesHint: {x: 86.712, y: -118.807, z: -121.777}
+--- !u!114 &842423948
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 842423946}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Version: 3
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_LightLayerMask: 1
+  m_RenderingLayers: 1
+  m_CustomShadowLayers: 0
+  m_ShadowLayerMask: 1
+  m_ShadowRenderingLayers: 1
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
+  m_SoftShadowQuality: 0
+--- !u!108 &842423949
+Light:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 842423946}
+  m_Enabled: 1
+  serializedVersion: 10
+  m_Type: 0
+  m_Shape: 0
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Intensity: 600
+  m_Range: 100
+  m_SpotAngle: 70
+  m_InnerSpotAngle: 40
+  m_CookieSize: 10
+  m_Shadows:
+    m_Type: 2
+    m_Resolution: -1
+    m_CustomResolution: -1
+    m_Strength: 1
+    m_Bias: 0.05
+    m_NormalBias: 0.4
+    m_NearPlane: 0.2
+    m_CullingMatrixOverride:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+    m_UseCullingMatrixOverride: 0
+  m_Cookie: {fileID: 0}
+  m_DrawHalo: 0
+  m_Flare: {fileID: 0}
+  m_RenderMode: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RenderingLayerMask: 1
+  m_Lightmapping: 4
+  m_LightShadowCasterMode: 0
+  m_AreaSize: {x: 1, y: 1}
+  m_BounceIntensity: 1
+  m_ColorTemperature: 6570
+  m_UseColorTemperature: 0
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_UseBoundingSphereOverride: 0
+  m_UseViewFrustumForShadowCasterCull: 1
+  m_ShadowRadius: 0
+  m_ShadowAngle: 0
 --- !u!1001 &844171729
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13839,6 +14713,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: StraightRoad_L (18)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ea5b1a3fb278ac34690fb36e8f986369,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -13946,6 +14825,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: StraightRoad_R (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c3a28d4b44030d842a2b078c05a6689f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -14051,6 +14935,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: StraightRoad_L (23)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ea5b1a3fb278ac34690fb36e8f986369,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -14163,6 +15052,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: StraightRoad_R (33)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c3a28d4b44030d842a2b078c05a6689f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -14206,6 +15100,80 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -535842427568904759, guid: c3a28d4b44030d842a2b078c05a6689f, type: 3}
+--- !u!1 &853199366
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 853199367}
+  m_Layer: 7
+  m_Name: ExitPoint 5
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &853199367
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 853199366}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.882, z: 0.95}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 146851239}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &868726448
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 868726449}
+  m_Layer: 0
+  m_Name: Bus Interchange Lights
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &868726449
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 868726448}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 565503985}
+  - {fileID: 168899630}
+  - {fileID: 834887627}
+  - {fileID: 1402506574}
+  - {fileID: 1750289871}
+  - {fileID: 1950909095}
+  - {fileID: 842423947}
+  - {fileID: 1617211436}
+  - {fileID: 1427767517}
+  - {fileID: 486776435}
+  - {fileID: 1112672864}
+  - {fileID: 117852598}
+  m_Father: {fileID: 1895748571}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &873351637
 GameObject:
   m_ObjectHideFlags: 0
@@ -14377,7 +15345,7 @@ Transform:
   m_GameObject: {fileID: 876747874}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 19, y: 0.289, z: 330.92}
+  m_LocalPosition: {x: 18.66, y: 0.289, z: 330.92}
   m_LocalScale: {x: 0.4642057, y: 0.4642057, z: 0.4642057}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -14522,6 +15490,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: StraightRoad_L (25)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ea5b1a3fb278ac34690fb36e8f986369,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -14736,6 +15709,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: StraightRoad_L (11)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ea5b1a3fb278ac34690fb36e8f986369,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -14779,6 +15757,124 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 918695771}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &920463973
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 920463974}
+  - component: {fileID: 920463976}
+  - component: {fileID: 920463975}
+  m_Layer: 0
+  m_Name: Lights (14)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &920463974
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 920463973}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.570216, y: -0, z: -0, w: 0.8214949}
+  m_LocalPosition: {x: -0.28566802, y: -0.5469999, z: -0.7400002}
+  m_LocalScale: {x: 0.008057369, y: 0.018374609, z: 0.019771805}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1719760002}
+  m_LocalEulerAnglesHint: {x: -69.531, y: 0, z: 0}
+--- !u!114 &920463975
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 920463973}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Version: 3
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_LightLayerMask: 1
+  m_RenderingLayers: 1
+  m_CustomShadowLayers: 0
+  m_ShadowLayerMask: 1
+  m_ShadowRenderingLayers: 1
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
+  m_SoftShadowQuality: 0
+--- !u!108 &920463976
+Light:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 920463973}
+  m_Enabled: 1
+  serializedVersion: 10
+  m_Type: 0
+  m_Shape: 0
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Intensity: 100
+  m_Range: 100
+  m_SpotAngle: 62.522713
+  m_InnerSpotAngle: 54.32479
+  m_CookieSize: 10
+  m_Shadows:
+    m_Type: 2
+    m_Resolution: -1
+    m_CustomResolution: -1
+    m_Strength: 1
+    m_Bias: 0.05
+    m_NormalBias: 0.4
+    m_NearPlane: 0.2
+    m_CullingMatrixOverride:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+    m_UseCullingMatrixOverride: 0
+  m_Cookie: {fileID: 0}
+  m_DrawHalo: 0
+  m_Flare: {fileID: 0}
+  m_RenderMode: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RenderingLayerMask: 1
+  m_Lightmapping: 4
+  m_LightShadowCasterMode: 0
+  m_AreaSize: {x: 1, y: 1}
+  m_BounceIntensity: 1
+  m_ColorTemperature: 6570
+  m_UseColorTemperature: 0
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_UseBoundingSphereOverride: 0
+  m_UseViewFrustumForShadowCasterCull: 1
+  m_ShadowRadius: 0
+  m_ShadowAngle: 0
 --- !u!1 &926942773
 GameObject:
   m_ObjectHideFlags: 0
@@ -15029,6 +16125,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: StraightRoad_R (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c3a28d4b44030d842a2b078c05a6689f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -15143,6 +16244,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: eebe6e26ee8eb0341b67dab7975d6e38,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 805482559}
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: eebe6e26ee8eb0341b67dab7975d6e38,
         type: 3}
       insertIndex: -1
@@ -15506,6 +16611,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: StraightRoad_Bus_L
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 967158036459a2e42b9451e3c99941a7,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -15719,6 +16829,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: StraightRoad_R (19)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c3a28d4b44030d842a2b078c05a6689f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -15830,6 +16945,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: StraightRoad_R (10)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c3a28d4b44030d842a2b078c05a6689f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -15935,6 +17055,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: StraightRoad_R (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c3a28d4b44030d842a2b078c05a6689f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -16473,6 +17598,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: StraightRoad_L
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ea5b1a3fb278ac34690fb36e8f986369,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -16610,6 +17740,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: StraightRoad_L (21)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ea5b1a3fb278ac34690fb36e8f986369,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -16715,6 +17850,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: StraightRoad_L (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ea5b1a3fb278ac34690fb36e8f986369,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -16822,6 +17962,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: StraightRoad_Connector (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f690d798c977da242805a409222ccfd7,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -16927,6 +18072,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: StraightRoad_L
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ea5b1a3fb278ac34690fb36e8f986369,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -17034,6 +18184,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: StraightRoad_L (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ea5b1a3fb278ac34690fb36e8f986369,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -17140,6 +18295,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: StraightRoad_Connector (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f690d798c977da242805a409222ccfd7,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -17245,6 +18405,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: StraightRoad_Bus_R (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f33fc1c97c8a3a94e8657c45856a4210,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -17698,6 +18863,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: StraightRoad_R (25)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c3a28d4b44030d842a2b078c05a6689f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -17804,6 +18974,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: StraightRoad_L (10)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ea5b1a3fb278ac34690fb36e8f986369,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -17847,6 +19022,124 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1111906607}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1112672863
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1112672864}
+  - component: {fileID: 1112672866}
+  - component: {fileID: 1112672865}
+  m_Layer: 0
+  m_Name: Lights (11)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1112672864
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1112672863}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.77356917, y: 0.0016889309, z: -0.0018610123, w: 0.6337069}
+  m_LocalPosition: {x: -0.29, y: 23.032745, z: -52.054245}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 868726449}
+  m_LocalEulerAnglesHint: {x: 101.35101, y: 0.21499634, z: -0.07400513}
+--- !u!114 &1112672865
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1112672863}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Version: 3
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_LightLayerMask: 1
+  m_RenderingLayers: 1
+  m_CustomShadowLayers: 0
+  m_ShadowLayerMask: 1
+  m_ShadowRenderingLayers: 1
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
+  m_SoftShadowQuality: 0
+--- !u!108 &1112672866
+Light:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1112672863}
+  m_Enabled: 1
+  serializedVersion: 10
+  m_Type: 0
+  m_Shape: 0
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Intensity: 500
+  m_Range: 100
+  m_SpotAngle: 62.522713
+  m_InnerSpotAngle: 54.32479
+  m_CookieSize: 10
+  m_Shadows:
+    m_Type: 2
+    m_Resolution: -1
+    m_CustomResolution: -1
+    m_Strength: 1
+    m_Bias: 0.05
+    m_NormalBias: 0.4
+    m_NearPlane: 0.2
+    m_CullingMatrixOverride:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+    m_UseCullingMatrixOverride: 0
+  m_Cookie: {fileID: 0}
+  m_DrawHalo: 0
+  m_Flare: {fileID: 0}
+  m_RenderMode: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RenderingLayerMask: 1
+  m_Lightmapping: 4
+  m_LightShadowCasterMode: 0
+  m_AreaSize: {x: 1, y: 1}
+  m_BounceIntensity: 1
+  m_ColorTemperature: 6570
+  m_UseColorTemperature: 0
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_UseBoundingSphereOverride: 0
+  m_UseViewFrustumForShadowCasterCull: 1
+  m_ShadowRadius: 0
+  m_ShadowAngle: 0
 --- !u!1 &1126278069
 GameObject:
   m_ObjectHideFlags: 0
@@ -17940,6 +19233,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: StraightRoad_R (18)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c3a28d4b44030d842a2b078c05a6689f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -18417,6 +19715,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: StraightRoad_Connector (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f690d798c977da242805a409222ccfd7,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -18554,6 +19857,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: StraightRoad_L (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ea5b1a3fb278ac34690fb36e8f986369,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -18686,22 +19994,22 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 1828530355}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 5a8bf6fee64699c4b9b62896c8e42669,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -238.66098
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 5a8bf6fee64699c4b9b62896c8e42669,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.17000008
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 5a8bf6fee64699c4b9b62896c8e42669,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 149.8
+      value: 50.28
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 5a8bf6fee64699c4b9b62896c8e42669,
         type: 3}
@@ -18755,15 +20063,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 5a8bf6fee64699c4b9b62896c8e42669,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 24015576}
-    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 5a8bf6fee64699c4b9b62896c8e42669,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1345487460}
+    m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5a8bf6fee64699c4b9b62896c8e42669,
         type: 3}
@@ -18948,6 +20248,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: CurveRoad_L
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 187e7dcb83072bf45a088560f635232d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -19021,6 +20326,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: StraightRoad_R (21)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c3a28d4b44030d842a2b078c05a6689f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -19127,6 +20437,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: StraightRoad_L
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ea5b1a3fb278ac34690fb36e8f986369,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -19267,6 +20582,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: c3a28d4b44030d842a2b078c05a6689f,
         type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c3a28d4b44030d842a2b078c05a6689f,
+        type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
@@ -19313,6 +20633,37 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -535842427568904759, guid: c3a28d4b44030d842a2b078c05a6689f, type: 3}
+--- !u!1 &1214279211
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1214279212}
+  m_Layer: 7
+  m_Name: ExitPoint 5 (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1214279212
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1214279211}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: -0.882, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1440884386}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1216615618 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: b1476580c7b24d04ca7f4c6785bea89c,
@@ -19495,6 +20846,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: CurveRoad_R
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ee834b2bc5b62c84a935e60a58824caa,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -19601,6 +20957,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: StraightRoad_L (22)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ea5b1a3fb278ac34690fb36e8f986369,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -19706,6 +21067,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: StraightRoad_R (16)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c3a28d4b44030d842a2b078c05a6689f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -20094,6 +21460,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: StraightRoad_L (12)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ea5b1a3fb278ac34690fb36e8f986369,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -20199,6 +21570,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: StraightRoad_Bus_R
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f33fc1c97c8a3a94e8657c45856a4210,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -20336,6 +21712,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: StraightRoad_R (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c3a28d4b44030d842a2b078c05a6689f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -20941,6 +22322,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: StraightRoad_L (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ea5b1a3fb278ac34690fb36e8f986369,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -21046,6 +22432,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: StraightRoad_Bus_R (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f33fc1c97c8a3a94e8657c45856a4210,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -21465,8 +22856,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 16.882874, y: 7.355003, z: 1}
-  m_Center: {x: 10.771454, y: 3.1775014, z: 0}
+  m_Size: {x: 20.21358, y: 7.355003, z: 1}
+  m_Center: {x: 12.028581, y: 3.1775017, z: 0.00000034493775}
 --- !u!4 &1345487460
 Transform:
   m_ObjectHideFlags: 0
@@ -21475,12 +22866,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1345487458}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.4456079, y: -0.5490297, z: -0.54902977, w: -0.4456078}
-  m_LocalPosition: {x: -35.69, y: 8.99, z: 0.4300022}
+  m_LocalRotation: {x: -0.000000037252903, y: -0.7087419, z: 0.000000044703484, w: 0.70546794}
+  m_LocalPosition: {x: 33.001877, y: 0.43000126, z: 16.29332}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 229424959}
+  m_Father: {fileID: 1828530355}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1345979265
 GameObject:
@@ -21644,6 +23035,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: StraightRoad_L (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ea5b1a3fb278ac34690fb36e8f986369,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -21827,6 +23223,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: eebe6e26ee8eb0341b67dab7975d6e38,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 722966676}
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: eebe6e26ee8eb0341b67dab7975d6e38,
         type: 3}
       insertIndex: -1
@@ -22162,6 +23562,124 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!1 &1379097666
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1379097667}
+  - component: {fileID: 1379097669}
+  - component: {fileID: 1379097668}
+  m_Layer: 0
+  m_Name: Lights (12)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1379097667
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1379097666}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.570216, y: -0, z: -0, w: 0.8214949}
+  m_LocalPosition: {x: 0.016000029, y: -0.547, z: -0.73999995}
+  m_LocalScale: {x: 0.008057369, y: 0.018374609, z: 0.019771805}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1719760002}
+  m_LocalEulerAnglesHint: {x: -69.531, y: 0, z: 0}
+--- !u!114 &1379097668
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1379097666}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Version: 3
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_LightLayerMask: 1
+  m_RenderingLayers: 1
+  m_CustomShadowLayers: 0
+  m_ShadowLayerMask: 1
+  m_ShadowRenderingLayers: 1
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
+  m_SoftShadowQuality: 0
+--- !u!108 &1379097669
+Light:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1379097666}
+  m_Enabled: 1
+  serializedVersion: 10
+  m_Type: 0
+  m_Shape: 0
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Intensity: 100
+  m_Range: 100
+  m_SpotAngle: 62.522713
+  m_InnerSpotAngle: 54.32479
+  m_CookieSize: 10
+  m_Shadows:
+    m_Type: 2
+    m_Resolution: -1
+    m_CustomResolution: -1
+    m_Strength: 1
+    m_Bias: 0.05
+    m_NormalBias: 0.4
+    m_NearPlane: 0.2
+    m_CullingMatrixOverride:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+    m_UseCullingMatrixOverride: 0
+  m_Cookie: {fileID: 0}
+  m_DrawHalo: 0
+  m_Flare: {fileID: 0}
+  m_RenderMode: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RenderingLayerMask: 1
+  m_Lightmapping: 4
+  m_LightShadowCasterMode: 0
+  m_AreaSize: {x: 1, y: 1}
+  m_BounceIntensity: 1
+  m_ColorTemperature: 6570
+  m_UseColorTemperature: 0
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_UseBoundingSphereOverride: 0
+  m_UseViewFrustumForShadowCasterCull: 1
+  m_ShadowRadius: 0
+  m_ShadowAngle: 0
 --- !u!1 &1402506573
 GameObject:
   m_ObjectHideFlags: 0
@@ -22189,11 +23707,11 @@ Transform:
   m_GameObject: {fileID: 1402506573}
   serializedVersion: 2
   m_LocalRotation: {x: 0.5745743, y: -0, z: -0, w: 0.81845254}
-  m_LocalPosition: {x: -37.44, y: 22.65, z: 3.08}
+  m_LocalPosition: {x: -37.440002, y: 22.650002, z: 3.0800018}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1895748571}
+  m_Father: {fileID: 868726449}
   m_LocalEulerAnglesHint: {x: 70.14, y: 0, z: 0}
 --- !u!114 &1402506575
 MonoBehaviour:
@@ -22376,6 +23894,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: StraightRoad_L (17)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ea5b1a3fb278ac34690fb36e8f986369,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -22514,6 +24037,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: StraightRoad_R (29)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c3a28d4b44030d842a2b078c05a6689f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -22620,6 +24148,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: CurveRoad_R (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ee834b2bc5b62c84a935e60a58824caa,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -22663,6 +24196,124 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 7953932703945631355, guid: ee834b2bc5b62c84a935e60a58824caa, type: 3}
+--- !u!1 &1427767516
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1427767517}
+  - component: {fileID: 1427767519}
+  - component: {fileID: 1427767518}
+  m_Layer: 0
+  m_Name: Lights (8)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1427767517
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1427767516}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.77356917, y: 0.0016889309, z: -0.0018610123, w: 0.6337069}
+  m_LocalPosition: {x: -37.44896, y: 23.018753, z: -51.778}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 868726449}
+  m_LocalEulerAnglesHint: {x: 101.35101, y: 0.21499634, z: -0.07400513}
+--- !u!114 &1427767518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1427767516}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Version: 3
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_LightLayerMask: 1
+  m_RenderingLayers: 1
+  m_CustomShadowLayers: 0
+  m_ShadowLayerMask: 1
+  m_ShadowRenderingLayers: 1
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
+  m_SoftShadowQuality: 0
+--- !u!108 &1427767519
+Light:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1427767516}
+  m_Enabled: 1
+  serializedVersion: 10
+  m_Type: 0
+  m_Shape: 0
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Intensity: 500
+  m_Range: 100
+  m_SpotAngle: 62.522713
+  m_InnerSpotAngle: 54.32479
+  m_CookieSize: 10
+  m_Shadows:
+    m_Type: 2
+    m_Resolution: -1
+    m_CustomResolution: -1
+    m_Strength: 1
+    m_Bias: 0.05
+    m_NormalBias: 0.4
+    m_NearPlane: 0.2
+    m_CullingMatrixOverride:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+    m_UseCullingMatrixOverride: 0
+  m_Cookie: {fileID: 0}
+  m_DrawHalo: 0
+  m_Flare: {fileID: 0}
+  m_RenderMode: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RenderingLayerMask: 1
+  m_Lightmapping: 4
+  m_LightShadowCasterMode: 0
+  m_AreaSize: {x: 1, y: 1}
+  m_BounceIntensity: 1
+  m_ColorTemperature: 6570
+  m_UseColorTemperature: 0
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_UseBoundingSphereOverride: 0
+  m_UseViewFrustumForShadowCasterCull: 1
+  m_ShadowRadius: 0
+  m_ShadowAngle: 0
 --- !u!1001 &1429893802
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -22725,6 +24376,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: StraightRoad_Bus_R (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f33fc1c97c8a3a94e8657c45856a4210,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -22832,6 +24488,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: StraightRoad_Connector
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f690d798c977da242805a409222ccfd7,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -22937,6 +24598,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: StraightRoad_Connector (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f690d798c977da242805a409222ccfd7,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -23055,6 +24721,10 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: eebe6e26ee8eb0341b67dab7975d6e38,
         type: 3}
       insertIndex: -1
+      addedObject: {fileID: 1214279212}
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: eebe6e26ee8eb0341b67dab7975d6e38,
+        type: 3}
+      insertIndex: -1
       addedObject: {fileID: 1843245400}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: eebe6e26ee8eb0341b67dab7975d6e38,
@@ -23158,6 +24828,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: StraightRoad_L (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ea5b1a3fb278ac34690fb36e8f986369,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -23370,6 +25045,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: StraightRoad_Connector (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f690d798c977da242805a409222ccfd7,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -23413,6 +25093,37 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -6992251402305009362, guid: f690d798c977da242805a409222ccfd7, type: 3}
+--- !u!1 &1455557302
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1455557303}
+  m_Layer: 7
+  m_Name: ExitPoint 5 (6)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1455557303
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1455557302}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: -0.7071068}
+  m_LocalPosition: {x: 0, y: -0.882, z: 0.847}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1808793132}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1470859342
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -23475,6 +25186,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: StraightRoad_L (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ea5b1a3fb278ac34690fb36e8f986369,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -23903,6 +25619,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: StraightRoad_R (11)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c3a28d4b44030d842a2b078c05a6689f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -24111,6 +25832,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: StraightRoad_L (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ea5b1a3fb278ac34690fb36e8f986369,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -24216,6 +25942,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: StraightRoad_L (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ea5b1a3fb278ac34690fb36e8f986369,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -24323,6 +26054,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: StraightRoad_Connector (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f690d798c977da242805a409222ccfd7,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -24428,6 +26164,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: StraightRoad_R (15)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c3a28d4b44030d842a2b078c05a6689f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -24674,6 +26415,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: StraightRoad_R (14)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c3a28d4b44030d842a2b078c05a6689f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -24779,6 +26525,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: CurveRoad_L (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 187e7dcb83072bf45a088560f635232d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -24917,6 +26668,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: StraightRoad_Connector (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f690d798c977da242805a409222ccfd7,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -25023,6 +26779,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: StraightRoad_Connector (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f690d798c977da242805a409222ccfd7,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -25128,6 +26889,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: StraightRoad_R (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c3a28d4b44030d842a2b078c05a6689f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -25372,6 +27138,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: StraightRoad_R (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c3a28d4b44030d842a2b078c05a6689f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -25618,6 +27389,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: StraightRoad_R (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c3a28d4b44030d842a2b078c05a6689f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -25723,6 +27499,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: StraightRoad_Connector (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f690d798c977da242805a409222ccfd7,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -25936,6 +27717,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: StraightRoad_R (15)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c3a28d4b44030d842a2b078c05a6689f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -25979,6 +27765,124 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -535842427568904759, guid: c3a28d4b44030d842a2b078c05a6689f, type: 3}
+--- !u!1 &1617211435
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1617211436}
+  - component: {fileID: 1617211438}
+  - component: {fileID: 1617211437}
+  m_Layer: 0
+  m_Name: Lights (7)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1617211436
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1617211435}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.77356917, y: 0.0016889309, z: -0.0018610123, w: 0.6337069}
+  m_LocalPosition: {x: -18.449219, y: 23.023598, z: -51.87343}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 868726449}
+  m_LocalEulerAnglesHint: {x: 101.35101, y: 0.21499634, z: -0.07400513}
+--- !u!114 &1617211437
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1617211435}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Version: 3
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_LightLayerMask: 1
+  m_RenderingLayers: 1
+  m_CustomShadowLayers: 0
+  m_ShadowLayerMask: 1
+  m_ShadowRenderingLayers: 1
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
+  m_SoftShadowQuality: 0
+--- !u!108 &1617211438
+Light:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1617211435}
+  m_Enabled: 1
+  serializedVersion: 10
+  m_Type: 0
+  m_Shape: 0
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Intensity: 500
+  m_Range: 100
+  m_SpotAngle: 62.522713
+  m_InnerSpotAngle: 54.32479
+  m_CookieSize: 10
+  m_Shadows:
+    m_Type: 2
+    m_Resolution: -1
+    m_CustomResolution: -1
+    m_Strength: 1
+    m_Bias: 0.05
+    m_NormalBias: 0.4
+    m_NearPlane: 0.2
+    m_CullingMatrixOverride:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+    m_UseCullingMatrixOverride: 0
+  m_Cookie: {fileID: 0}
+  m_DrawHalo: 0
+  m_Flare: {fileID: 0}
+  m_RenderMode: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RenderingLayerMask: 1
+  m_Lightmapping: 4
+  m_LightShadowCasterMode: 0
+  m_AreaSize: {x: 1, y: 1}
+  m_BounceIntensity: 1
+  m_ColorTemperature: 6570
+  m_UseColorTemperature: 0
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_UseBoundingSphereOverride: 0
+  m_UseViewFrustumForShadowCasterCull: 1
+  m_ShadowRadius: 0
+  m_ShadowAngle: 0
 --- !u!1001 &1620952560
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -26041,6 +27945,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: StraightRoad_R (16)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c3a28d4b44030d842a2b078c05a6689f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -26179,6 +28088,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: StraightRoad_R (28)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c3a28d4b44030d842a2b078c05a6689f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -26284,6 +28198,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: StraightRoad_Connector
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f690d798c977da242805a409222ccfd7,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -26418,6 +28337,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: StraightRoad_Bus_L
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 967158036459a2e42b9451e3c99941a7,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -26598,6 +28522,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: StraightRoad_L (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ea5b1a3fb278ac34690fb36e8f986369,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -26703,6 +28632,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: StraightRoad_L
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ea5b1a3fb278ac34690fb36e8f986369,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -26914,6 +28848,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: StraightRoad_L (16)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ea5b1a3fb278ac34690fb36e8f986369,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -27198,6 +29137,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: StraightRoad_L (14)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ea5b1a3fb278ac34690fb36e8f986369,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -27697,6 +29641,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: StraightRoad_L (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ea5b1a3fb278ac34690fb36e8f986369,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -28055,7 +30004,11 @@ Transform:
   m_LocalPosition: {x: -191, y: 24.8, z: 264}
   m_LocalScale: {x: 124.10999, y: 50, z: 55}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1379097667}
+  - {fileID: 920463974}
+  - {fileID: 2097615577}
+  - {fileID: 622727119}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1728297142
@@ -28120,6 +30073,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: StraightRoad_L (26)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ea5b1a3fb278ac34690fb36e8f986369,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -28459,6 +30417,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: StraightRoad_R (13)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c3a28d4b44030d842a2b078c05a6689f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -28564,6 +30527,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: StraightRoad_R (14)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c3a28d4b44030d842a2b078c05a6689f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -28741,11 +30709,11 @@ Transform:
   m_GameObject: {fileID: 1750289870}
   serializedVersion: 2
   m_LocalRotation: {x: 0.5745743, y: -0, z: -0, w: 0.81845254}
-  m_LocalPosition: {x: 17.58, y: 22.65, z: 3.08}
+  m_LocalPosition: {x: 17.579987, y: 22.650002, z: 3.0800018}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1895748571}
+  m_Father: {fileID: 868726449}
   m_LocalEulerAnglesHint: {x: 70.14, y: 0, z: 0}
 --- !u!114 &1750289872
 MonoBehaviour:
@@ -28894,6 +30862,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: StraightRoad_L (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ea5b1a3fb278ac34690fb36e8f986369,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -29072,6 +31045,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: StraightRoad_R (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c3a28d4b44030d842a2b078c05a6689f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -29186,6 +31164,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: eebe6e26ee8eb0341b67dab7975d6e38,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1455557303}
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: eebe6e26ee8eb0341b67dab7975d6e38,
         type: 3}
       insertIndex: -1
@@ -29612,6 +31594,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: StraightRoad_L (20)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ea5b1a3fb278ac34690fb36e8f986369,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -29718,6 +31705,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: StraightRoad_L (9)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ea5b1a3fb278ac34690fb36e8f986369,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -29761,6 +31753,71 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -3985093900151489778, guid: ea5b1a3fb278ac34690fb36e8f986369, type: 3}
+--- !u!1 &1828530354
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1828530355}
+  m_Layer: 0
+  m_Name: Dead Body Grp
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1828530355
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1828530354}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -180.7, y: 0.17000008, z: 155.35}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1345487460}
+  - {fileID: 24015576}
+  - {fileID: 229424959}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1833345277
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1833345278}
+  m_Layer: 7
+  m_Name: ExitPoint 5 (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1833345278
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1833345277}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.882, z: 0.945}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 282240069}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1842885995
 GameObject:
   m_ObjectHideFlags: 0
@@ -30057,6 +32114,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: StraightRoad_L (15)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ea5b1a3fb278ac34690fb36e8f986369,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -30339,6 +32401,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: StraightRoad_Connector (9)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f690d798c977da242805a409222ccfd7,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -30449,6 +32516,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: StraightRoad_R (34)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c3a28d4b44030d842a2b078c05a6689f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -30592,6 +32664,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: StraightRoad_R (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c3a28d4b44030d842a2b078c05a6689f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -30806,6 +32883,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: c3a28d4b44030d842a2b078c05a6689f,
         type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c3a28d4b44030d842a2b078c05a6689f,
+        type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
@@ -30884,12 +32966,7 @@ Transform:
   - {fileID: 615097749}
   - {fileID: 1884076783}
   - {fileID: 1144397921}
-  - {fileID: 565503985}
-  - {fileID: 168899630}
-  - {fileID: 834887627}
-  - {fileID: 1402506574}
-  - {fileID: 1750289871}
-  - {fileID: 1950909095}
+  - {fileID: 868726449}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1898971228
@@ -30954,6 +33031,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: StraightRoad_R (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c3a28d4b44030d842a2b078c05a6689f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -31031,6 +33113,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: StraightRoad_R (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c3a28d4b44030d842a2b078c05a6689f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -31137,6 +33224,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: StraightRoad_L (10)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ea5b1a3fb278ac34690fb36e8f986369,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -31274,6 +33366,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: StraightRoad_Bus_R
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f33fc1c97c8a3a94e8657c45856a4210,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -31417,6 +33514,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: StraightRoad_R (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c3a28d4b44030d842a2b078c05a6689f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -31522,6 +33624,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: StraightRoad_R (10)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c3a28d4b44030d842a2b078c05a6689f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -31810,6 +33917,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: StraightRoad_L (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ea5b1a3fb278ac34690fb36e8f986369,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -32016,11 +34128,11 @@ Transform:
   m_GameObject: {fileID: 1950909094}
   serializedVersion: 2
   m_LocalRotation: {x: 0.5745743, y: -0, z: -0, w: 0.81845254}
-  m_LocalPosition: {x: 36.16, y: 22.65, z: 3.08}
+  m_LocalPosition: {x: 36.160004, y: 22.650002, z: 3.0800018}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1895748571}
+  m_Father: {fileID: 868726449}
   m_LocalEulerAnglesHint: {x: 70.14, y: 0, z: 0}
 --- !u!114 &1950909096
 MonoBehaviour:
@@ -32275,6 +34387,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: StraightRoad_L (17)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ea5b1a3fb278ac34690fb36e8f986369,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -32605,6 +34722,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: StraightRoad_L (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ea5b1a3fb278ac34690fb36e8f986369,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -32710,6 +34832,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: StraightRoad_R (11)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c3a28d4b44030d842a2b078c05a6689f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -33006,6 +35133,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: StraightRoad_L (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ea5b1a3fb278ac34690fb36e8f986369,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -33111,6 +35243,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: StraightRoad_L (15)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ea5b1a3fb278ac34690fb36e8f986369,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -33318,10 +35455,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 5a8bf6fee64699c4b9b62896c8e42669,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 27abb3694f347be4a81cb819c4a05224, type: 2}
+    - target: {fileID: -5754084199372789682, guid: 5a8bf6fee64699c4b9b62896c8e42669,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 3959308059485820923, guid: 2db31b04c2132ee49b6f24de87da9301,
+        type: 3}
     - target: {fileID: 919132149155446097, guid: 5a8bf6fee64699c4b9b62896c8e42669,
         type: 3}
       propertyPath: m_Name
-      value: human_male_try
+      value: Male_Passenger_1
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 5a8bf6fee64699c4b9b62896c8e42669,
         type: 3}
@@ -33412,6 +35560,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: StraightRoad_L (19)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ea5b1a3fb278ac34690fb36e8f986369,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -33664,6 +35817,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: StraightRoad_Connector (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f690d798c977da242805a409222ccfd7,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -33769,6 +35927,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: CurveRoad_R
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ee834b2bc5b62c84a935e60a58824caa,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -33993,6 +36156,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: StraightRoad_L (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ea5b1a3fb278ac34690fb36e8f986369,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -34365,6 +36533,124 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2084686185}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &2097615576
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2097615577}
+  - component: {fileID: 2097615579}
+  - component: {fileID: 2097615578}
+  m_Layer: 0
+  m_Name: Lights (16)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2097615577
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2097615576}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.570216, y: -0, z: -0, w: 0.8214949}
+  m_LocalPosition: {x: 0.30735427, y: -0.5469999, z: -0.7400002}
+  m_LocalScale: {x: 0.008057369, y: 0.018374609, z: 0.019771805}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1719760002}
+  m_LocalEulerAnglesHint: {x: -69.531, y: 0, z: 0}
+--- !u!114 &2097615578
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2097615576}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Version: 3
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_LightLayerMask: 1
+  m_RenderingLayers: 1
+  m_CustomShadowLayers: 0
+  m_ShadowLayerMask: 1
+  m_ShadowRenderingLayers: 1
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
+  m_SoftShadowQuality: 0
+--- !u!108 &2097615579
+Light:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2097615576}
+  m_Enabled: 1
+  serializedVersion: 10
+  m_Type: 0
+  m_Shape: 0
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Intensity: 100
+  m_Range: 100
+  m_SpotAngle: 62.522713
+  m_InnerSpotAngle: 54.32479
+  m_CookieSize: 10
+  m_Shadows:
+    m_Type: 2
+    m_Resolution: -1
+    m_CustomResolution: -1
+    m_Strength: 1
+    m_Bias: 0.05
+    m_NormalBias: 0.4
+    m_NearPlane: 0.2
+    m_CullingMatrixOverride:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+    m_UseCullingMatrixOverride: 0
+  m_Cookie: {fileID: 0}
+  m_DrawHalo: 0
+  m_Flare: {fileID: 0}
+  m_RenderMode: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RenderingLayerMask: 1
+  m_Lightmapping: 4
+  m_LightShadowCasterMode: 0
+  m_AreaSize: {x: 1, y: 1}
+  m_BounceIntensity: 1
+  m_ColorTemperature: 6570
+  m_UseColorTemperature: 0
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_UseBoundingSphereOverride: 0
+  m_UseViewFrustumForShadowCasterCull: 1
+  m_ShadowRadius: 0
+  m_ShadowAngle: 0
 --- !u!4 &2100273625 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -5200250868657063561, guid: b1476580c7b24d04ca7f4c6785bea89c,
@@ -34533,6 +36819,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: StraightRoad_L (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ea5b1a3fb278ac34690fb36e8f986369,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -34670,6 +36961,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: StraightRoad_Connector (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f690d798c977da242805a409222ccfd7,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -34776,6 +37072,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: StraightRoad_L (12)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ea5b1a3fb278ac34690fb36e8f986369,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -34847,5 +37148,5 @@ SceneRoots:
   - {fileID: 272177110}
   - {fileID: 1355465289}
   - {fileID: 876747878}
-  - {fileID: 1175143965}
+  - {fileID: 1828530355}
   - {fileID: 768179654}
