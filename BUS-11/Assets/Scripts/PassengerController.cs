@@ -13,6 +13,8 @@ public class PassengerController : MonoBehaviour, IInteractable
     public Transform entryPoint;           // The PassengerEntry point on the bus (drag in Inspector)
     public Transform exitPoint;            // The PassengerExit point on the bus (drag in Inspector)
 
+    [Header("Animation")]
+    public Animator animator; // Add this
 
     private UnityEngine.AI.NavMeshAgent agent;
     public BusController busController;
@@ -41,6 +43,26 @@ public class PassengerController : MonoBehaviour, IInteractable
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
         agent.speed = walkSpeed;
 
+        // Get animator if not assigned
+        if (animator == null)
+        {
+            animator = GetComponent<Animator>();
+        }
+        // DEBUG: Check animator setup
+        if (animator != null)
+        {
+            Debug.Log("✓ Animator found on " + name);
+            Debug.Log("Has controller: " + (animator.runtimeAnimatorController != null));
+            Debug.Log("Has avatar: " + (animator.avatar != null));
+            Debug.Log("Is enabled: " + animator.enabled);
+
+            // List all parameters
+            foreach (AnimatorControllerParameter param in animator.parameters)
+            {
+                Debug.Log("Parameter: " + param.name + " (Type: " + param.type + ")");
+            }
+        }
+
         // Find the bus and its components
         GameObject bus = GameObject.FindGameObjectWithTag("Bus");
         if (bus != null)
@@ -66,6 +88,9 @@ public class PassengerController : MonoBehaviour, IInteractable
         {
             Debug.LogError("No BusSeatManager found in scene!");
         }
+
+        // Start with idle animation
+        SetAnimation(false, false, false);
     }
 
     void Update()
@@ -117,6 +142,10 @@ public class PassengerController : MonoBehaviour, IInteractable
         {
             currentState = PassengerState.WalkingToEntry;
             agent.SetDestination(entryPoint.position);
+
+            // Play walking animation
+            SetAnimation(true, false, false);
+
             Debug.Log("Bus is in Park! Walking to entry point.");
         }
     }
@@ -145,6 +174,9 @@ public class PassengerController : MonoBehaviour, IInteractable
         // Optional: Make passenger a child of the bus so they move with it
         transform.SetParent(entryPoint.transform.parent);
 
+        // Play idle animation
+        SetAnimation(false, false, false);
+
         Debug.Log("Passenger boarded the bus!");
     }
 
@@ -154,6 +186,9 @@ public class PassengerController : MonoBehaviour, IInteractable
         if (currentState == PassengerState.AtEntry)
         {
             FindAndWalkToSeat();
+
+            // Gesture animation
+            SetAnimation(false, false, true);
 
             Debug.Log("Passenger clicked!");
         }
@@ -185,6 +220,9 @@ public class PassengerController : MonoBehaviour, IInteractable
         agent.enabled = true;
         agent.SetDestination(targetSeat.position);
 
+        // Play walking animation
+        SetAnimation(true, false, false);
+
         Debug.Log("Walking to seat: " + targetSeat.name);
     }
 
@@ -206,6 +244,9 @@ public class PassengerController : MonoBehaviour, IInteractable
         // Snap to seat position and rotation
         transform.position = targetSeat.position;
         transform.rotation = targetSeat.rotation;
+
+        // Play sitting animation
+        SetAnimation(false, true, false);
 
         Debug.Log("Passenger is now seated!");
     }
@@ -229,6 +270,9 @@ public class PassengerController : MonoBehaviour, IInteractable
 
             // Unparent from bus so they can walk away
             transform.SetParent(null);
+
+            // Play walking animation
+            SetAnimation(true, false, false);
 
             Debug.Log(name + " alighting.");
         }
@@ -255,6 +299,19 @@ public class PassengerController : MonoBehaviour, IInteractable
         transform.position = exitPoint.position;
         transform.rotation = exitPoint.rotation;
 
+        // Play idle animation
+        SetAnimation(false, false, false);
+
         Debug.Log("Passenger alighted the bus!");
+    }
+
+    // Helper function to set animations
+    void SetAnimation(bool walking, bool sitting, bool gesture)
+    {
+        if (animator == null) return;
+
+        animator.SetBool("isWalking", walking);
+        animator.SetBool("isSitting", sitting);
+        animator.SetBool("isGesturing", gesture);
     }
 }
