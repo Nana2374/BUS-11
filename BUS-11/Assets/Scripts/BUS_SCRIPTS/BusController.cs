@@ -15,7 +15,8 @@ public class BusController : MonoBehaviour
     public bool playerDriving;
 
     // Gear System
-    public int currentGear = 0; // -1 = Reverse, 0 = Park, 1-4 = Gears
+    public int currentGear = 0; // -1 = Reverse, 0 = Park, 1-3 = Gears
+    private int previousForwardGear = 1;
     public float reverseRatio = 0.5f;
     public float[] gearRatios = new float[] { 0f, 0.3f, 0.7f, 1f }; // Park, Gear1, Gear2, Gear3
     public float reverseSpeedLimit = 40f;
@@ -260,7 +261,20 @@ public class BusController : MonoBehaviour
 
     void UpShift()
     {
-        if (currentGear < 4)
+        if (currentGear == -1) // Reverse
+        {
+            currentGear = 1; // Go to Gear 1
+            previousForwardGear = 1; // Reset to Gear 1
+            Debug.Log("Shifted to Gear 1");
+        }
+        else if (currentGear == 0) // Park
+        {
+            currentGear = 1; // Go to Gear 1
+            previousForwardGear = 1;
+            Debug.Log("Shifted UP to Gear: 1");
+        }
+
+        if (currentGear < 3)
         {
             // Get current speed
             float currentSpeed = rb.velocity.magnitude * 3.6f;
@@ -312,7 +326,7 @@ public class BusController : MonoBehaviour
     void ReverseGear()
     {
         currentGear = -1;
-        Debug.Log("Shifted to REVERSE (Max: 40 km/h)");
+        Debug.Log("Shifted to REVERSE (Max: 15 km/h)");
     }
 
     // Optional: Display current gear on screen
