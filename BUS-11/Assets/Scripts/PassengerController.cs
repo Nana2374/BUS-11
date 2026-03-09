@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
+using Unity.AI.Navigation;
 
 public class PassengerController : MonoBehaviour, IInteractable
 {
@@ -17,6 +19,7 @@ public class PassengerController : MonoBehaviour, IInteractable
     public Animator animator; // Add this
 
     private UnityEngine.AI.NavMeshAgent agent;
+    private NavMeshSurface busNavMesh;
     public BusController busController;
     public BusDoors busDoors;
     public Rigidbody busRigidbody;
@@ -70,6 +73,7 @@ public class PassengerController : MonoBehaviour, IInteractable
             busController = bus.GetComponent<BusController>();
             busRigidbody = bus.GetComponent<Rigidbody>();
             busTransform = bus.transform;
+            busNavMesh = bus.GetComponentInChildren<NavMeshSurface>();
 
             // Find the entry point on the bus if not manually assigned
             if (entryPoint == null)
@@ -90,7 +94,7 @@ public class PassengerController : MonoBehaviour, IInteractable
         }
 
         // Start with idle animation
-        SetAnimation(false, false, false);
+        SetAnimation(false, false);
     }
 
     void Update()
@@ -140,11 +144,11 @@ public class PassengerController : MonoBehaviour, IInteractable
             busController.currentGear == 0 && // Must be in Park (gear 0)
             busDoors.isOpen == true) //Bus doors must be open
         {
+            // Play walking animation
+            SetAnimation(true, false);
+
             currentState = PassengerState.WalkingToEntry;
             agent.SetDestination(entryPoint.position);
-
-            // Play walking animation
-            SetAnimation(true, false, false);
 
             Debug.Log("Bus is in Park! Walking to entry point.");
         }
@@ -168,14 +172,17 @@ public class PassengerController : MonoBehaviour, IInteractable
         agent.enabled = false; // Stop NavMesh agent
 
         // Snap passenger to entry point
-        transform.position = entryPoint.position + new Vector3(0f, 0.8f, 0f);
+        transform.position = entryPoint.position + new Vector3(0f, 0f, 0f);
         transform.rotation = entryPoint.rotation;
 
         // Optional: Make passenger a child of the bus so they move with it
         transform.SetParent(entryPoint.transform.parent);
 
+        // Re-enable agent for walking on bus
+        agent.enabled = true;
+
         // Play idle animation
-        SetAnimation(false, false, false);
+        SetAnimation(false, false);
 
         Debug.Log("Passenger boarded the bus!");
     }
@@ -185,17 +192,23 @@ public class PassengerController : MonoBehaviour, IInteractable
     {
         if (currentState == PassengerState.AtEntry)
         {
-            FindAndWalkToSeat();
-
-            // Gesture animation
-            SetAnimation(false, false, true);
-
-            Debug.Log("Passenger clicked!");
+            // Start gesture animation, then walk to seat after it finishes
+            StartCoroutine(GestureThenWalkToSeat());
         }
-        else
+    }
+
+    IEnumerator GestureThenWalkToSeat()
+    {
+        // Play gesture animation
+        if (animator != null)
         {
-            Debug.Log("Passenger is not ready to sit yet!");
+            animator.SetTrigger("Gesture");
         }
+
+        // Wait for gesture animation to finish
+        yield return new WaitForSeconds(2.5f); // Change this to your gesture duration
+
+        FindAndWalkToSeat();
     }
 
     void FindAndWalkToSeat()
@@ -213,15 +226,15 @@ public class PassengerController : MonoBehaviour, IInteractable
             Debug.Log("No available seats!");
             return;
         }
+        
+        // Play walking animation
+        SetAnimation(true, false);
 
         seatManager.OccupySeat(targetSeat);
 
         currentState = PassengerState.WalkingToSeat;
         agent.enabled = true;
         agent.SetDestination(targetSeat.position);
-
-        // Play walking animation
-        SetAnimation(true, false, false);
 
         Debug.Log("Walking to seat: " + targetSeat.name);
     }
@@ -246,7 +259,7 @@ public class PassengerController : MonoBehaviour, IInteractable
         transform.rotation = targetSeat.rotation;
 
         // Play sitting animation
-        SetAnimation(false, true, false);
+        SetAnimation(false, true);
 
         Debug.Log("Passenger is now seated!");
     }
@@ -272,7 +285,7 @@ public class PassengerController : MonoBehaviour, IInteractable
             transform.SetParent(null);
 
             // Play walking animation
-            SetAnimation(true, false, false);
+            SetAnimation(true, false);
 
             Debug.Log(name + " alighting.");
         }
@@ -300,18 +313,17 @@ public class PassengerController : MonoBehaviour, IInteractable
         transform.rotation = exitPoint.rotation;
 
         // Play idle animation
-        SetAnimation(false, false, false);
+        SetAnimation(false, false);
 
         Debug.Log("Passenger alighted the bus!");
     }
 
     // Helper function to set animations
-    void SetAnimation(bool walking, bool sitting, bool gesture)
+    void SetAnimation(bool walking, bool sitting)
     {
         if (animator == null) return;
 
         animator.SetBool("isWalking", walking);
         animator.SetBool("isSitting", sitting);
-        animator.SetBool("isGesturing", gesture);
     }
 }

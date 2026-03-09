@@ -3,7 +3,12 @@ guid: feaf37c5bf2f07945abdfc864aab0232
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ghost_tex
+    second: {fileID: 2100000, guid: 27abb3694f347be4a81cb819c4a05224, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -17,7 +22,14 @@ ModelImporter:
     removeConstantScaleCurves: 0
     motionNodeName: 
     rigImportErrors: 
-    rigImportWarnings: 
+    rigImportWarnings: "Copied Avatar Rig Configuration mis-match. Bone length in
+      copied configuration does not match position in animation file:\n\t'mixamorig:LeftUpLeg'
+      : position error = 12.194797 mm\n\t'mixamorig:LeftLeg' : position error = 5.175864
+      mm\n\t'mixamorig:LeftFoot' : position error = 11.797961 mm\n\t'mixamorig:LeftToeBase'
+      : position error = 3.546788 mm\n\t'mixamorig:RightUpLeg' : position error =
+      11.221664 mm\n\t'mixamorig:RightLeg' : position error = 5.418694 mm\n\t'mixamorig:RightFoot'
+      : position error = 11.814571 mm\n\t'mixamorig:RightToeBase' : position error
+      = 1.641480 mm\n"
     animationImportErrors: 
     animationImportWarnings: 
     animationRetargetingWarnings: 
