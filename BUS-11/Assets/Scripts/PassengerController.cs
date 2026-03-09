@@ -169,7 +169,7 @@ public class PassengerController : MonoBehaviour, IInteractable
     void ReachEntry()
     {
         currentState = PassengerState.AtEntry;
-        agent.enabled = false; // Stop NavMesh agent
+        
 
         // Snap passenger to entry point
         transform.position = entryPoint.position + new Vector3(0f, 0f, 0f);
@@ -178,6 +178,7 @@ public class PassengerController : MonoBehaviour, IInteractable
         // Optional: Make passenger a child of the bus so they move with it
         transform.SetParent(entryPoint.transform.parent);
 
+        agent.enabled = false; // Stop NavMesh agent
         // Re-enable agent for walking on bus
         agent.enabled = true;
 
@@ -226,14 +227,16 @@ public class PassengerController : MonoBehaviour, IInteractable
             Debug.Log("No available seats!");
             return;
         }
-        
+        // Re-enable agent for walking on bus
+        agent.enabled = true;
+
         // Play walking animation
         SetAnimation(true, false);
 
         seatManager.OccupySeat(targetSeat);
 
         currentState = PassengerState.WalkingToSeat;
-        agent.enabled = true;
+       
         agent.SetDestination(targetSeat.position);
 
         Debug.Log("Walking to seat: " + targetSeat.name);
