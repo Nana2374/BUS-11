@@ -12,4 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05e9573c6467e754e97a0e7e8baf0ff4, type: 3}
   m_Name: StartMonologue
   m_EditorClassIdentifier: 
-  nodes: []
+  nodes:
+  - nodeID: 0
+    branchType: 0
+    dialogueLine: I should get to my shift...
+    isPlayerLine: 1
+    choices: []
+  - nodeID: 1
+    branchType: 0
+    dialogueLine: I hope I could end early today.
+    isPlayerLine: 1
+    choices: []
