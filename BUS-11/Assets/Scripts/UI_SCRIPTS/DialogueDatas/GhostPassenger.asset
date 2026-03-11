@@ -15,22 +15,22 @@ MonoBehaviour:
   nodes:
   - nodeID: 0
     branchType: 0
-    dialogueLine: '"Hey there. Didn''t even hear you board."'
+    dialogueLine: Hey there. Didn't even hear you board.
     isPlayerLine: 1
     choices: []
   - nodeID: 1
     branchType: 0
-    dialogueLine: '"....."'
+    dialogueLine: .....
     isPlayerLine: 0
     choices: []
   - nodeID: 2
     branchType: 0
-    dialogueLine: '"Are you alright?"'
+    dialogueLine: Are you alright?
     isPlayerLine: 1
     choices: []
   - nodeID: 3
     branchType: 0
-    dialogueLine: '"....."'
+    dialogueLine: .....
     isPlayerLine: 0
     choices: []
   - nodeID: 4
@@ -38,17 +38,53 @@ MonoBehaviour:
     dialogueLine: So umm...
     isPlayerLine: 1
     choices:
-    - choiceText: '"Long night?"'
+    - choiceText: Long day?
       nextNodeIndex: 5
-    - choiceText: '"Hey! You gonna answer me or what?"'
-      nextNodeIndex: 0
+    - choiceText: Hey! You gonna answer me or what?
+      nextNodeIndex: 9
   - nodeID: 5
     branchType: 1
-    dialogueLine: '"Very..."'
+    dialogueLine: Very.
     isPlayerLine: 0
     choices: []
   - nodeID: 6
     branchType: 1
-    dialogueLine: '"....."'
+    dialogueLine: Where you heading?
+    isPlayerLine: 1
+    choices: []
+  - nodeID: 7
+    branchType: 1
+    dialogueLine: Home.
     isPlayerLine: 0
     choices: []
+  - nodeID: 8
+    branchType: 1
+    dialogueLine: Alright!
+    isPlayerLine: 1
+    choices:
+    - choiceText: Let's go!
+      nextNodeIndex: 13
+    - choiceText: '[Say nothing.]'
+      nextNodeIndex: 13
+  - nodeID: 9
+    branchType: 2
+    dialogueLine: .....
+    isPlayerLine: 0
+    choices: []
+  - nodeID: 10
+    branchType: 2
+    dialogueLine: Look, you're not suppose to be here, without a driver.
+    isPlayerLine: 1
+    choices: []
+  - nodeID: 11
+    branchType: 2
+    dialogueLine: ....
+    isPlayerLine: 0
+    choices: []
+  - nodeID: 12
+    branchType: 2
+    dialogueLine: Gahh, you know? Whatever.
+    isPlayerLine: 1
+    choices:
+    - choiceText: '[Get back to seat]'
+      nextNodeIndex: 13
