@@ -8,53 +8,52 @@ public class BusDoors : MonoBehaviour
     public Transform doorTransform1;           // The door object to move/rotate
     public Transform doorTransform2;           // Optional second door (for double doors)
     public bool isOpen = true;
-    public float openSpeed = 2f;
+    public float openSpeed = 2.5f;
 
-    [Header("Sliding Door Settings")]
-    public Vector3 slideOffset1 = new Vector3(0, 0, 1.5f);  // How far door 1 slides
-    public Vector3 slideOffset2 = new Vector3(0, 0, -1.5f); // How far door 2 slides
+    [Header("Rotation Door Settings")]
+    public float rotationAngle = 90f;
 
-    private Vector3 closedPosition1;
-    private Vector3 closedPosition2;
-    private Vector3 openPosition1;
-    private Vector3 openPosition2;
+    private Quaternion closedRotation1;
+    private Quaternion closedRotation2;
+    private Quaternion openRotation1;
+    private Quaternion openRotation2;
 
     void Start()
     {
-        // Store closed positions
+        // Store open rotations
         if (doorTransform1 != null)
         {
-            closedPosition1 = doorTransform1.localPosition;
-            openPosition1 = closedPosition1 + slideOffset1;
+            openRotation1 = doorTransform1.localRotation;
+            closedRotation1 = openRotation1 * Quaternion.Euler(0, -rotationAngle, 0);
         }
 
         if (doorTransform2 != null)
         {
-            closedPosition2 = doorTransform2.localPosition;
-            openPosition2 = closedPosition2 + slideOffset2;
+            openRotation2 = doorTransform2.localRotation;
+            closedRotation2 = openRotation2 * Quaternion.Euler(0, -rotationAngle, 0);
         }
     }
 
     void Update()
     {
-        // Move door 1
+        // Rotate door 1
         if (doorTransform1 != null)
         {
-            Vector3 targetPosition1 = isOpen ? openPosition1 : closedPosition1;
-            doorTransform1.localPosition = Vector3.Lerp(
-                doorTransform1.localPosition,
-                targetPosition1,
+            Quaternion targetRotation1 = isOpen ? openRotation1 : closedRotation1;
+            doorTransform1.localRotation = Quaternion.Slerp(
+                doorTransform1.localRotation,
+                targetRotation1,
                 openSpeed * Time.deltaTime
             );
         }
 
-        // Move door 2
+        // Rotate door 2
         if (doorTransform2 != null)
         {
-            Vector3 targetPosition2 = isOpen ? openPosition2 : closedPosition2;
-            doorTransform2.localPosition = Vector3.Lerp(
-                doorTransform2.localPosition,
-                targetPosition2,
+            Quaternion targetRotation2 = isOpen ? openRotation2 : closedRotation2;
+            doorTransform2.localRotation = Quaternion.Slerp(
+                doorTransform2.localRotation,
+                targetRotation2,
                 openSpeed * Time.deltaTime
             );
         }

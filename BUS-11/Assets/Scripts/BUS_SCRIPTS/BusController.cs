@@ -91,6 +91,9 @@ public class BusController : MonoBehaviour
             rb.constraints = RigidbodyConstraints.None;
         }
 
+        // NEW: If speed exceeds gear limit, apply braking
+        float gearSpeedLimit = currentGear == -1 ? reverseSpeedLimit : gearSpeedLimits[currentGear];
+
         // Reset engine brake when pressing W or S
         if (Mathf.Abs(motorInput) > 0.1f)
         {
@@ -102,7 +105,7 @@ public class BusController : MonoBehaviour
         float currentSpeed = Mathf.Abs(signedSpeed);
 
         // Get gear speed limit and ratio based on current gear
-        float gearSpeedLimit;
+        //float gearSpeedLimit;
         float gearModifiedForce;
 
         if (currentGear == -1) // Reverse
@@ -264,14 +267,14 @@ public class BusController : MonoBehaviour
         if (currentGear == -1) // Reverse
         {
             currentGear = 1; // Go to Gear 1
-            previousForwardGear = 1; // Reset to Gear 1
             Debug.Log("Shifted to Gear 1");
+            return;
         }
         else if (currentGear == 0) // Park
         {
             currentGear = 1; // Go to Gear 1
-            previousForwardGear = 1;
             Debug.Log("Shifted UP to Gear: 1");
+            return;
         }
 
         if (currentGear < 3)

@@ -51,20 +51,6 @@ public class PassengerController : MonoBehaviour, IInteractable
         {
             animator = GetComponent<Animator>();
         }
-        // DEBUG: Check animator setup
-        if (animator != null)
-        {
-            Debug.Log("✓ Animator found on " + name);
-            Debug.Log("Has controller: " + (animator.runtimeAnimatorController != null));
-            Debug.Log("Has avatar: " + (animator.avatar != null));
-            Debug.Log("Is enabled: " + animator.enabled);
-
-            // List all parameters
-            foreach (AnimatorControllerParameter param in animator.parameters)
-            {
-                Debug.Log("Parameter: " + param.name + " (Type: " + param.type + ")");
-            }
-        }
 
         // Find the bus and its components
         GameObject bus = GameObject.FindGameObjectWithTag("Bus");
@@ -169,18 +155,15 @@ public class PassengerController : MonoBehaviour, IInteractable
     void ReachEntry()
     {
         currentState = PassengerState.AtEntry;
-        
+
+        agent.enabled = false; // Stop NavMesh agent
 
         // Snap passenger to entry point
-        transform.position = entryPoint.position + new Vector3(0f, 0f, 0f);
+        transform.position = entryPoint.position;
         transform.rotation = entryPoint.rotation;
 
         // Optional: Make passenger a child of the bus so they move with it
         transform.SetParent(entryPoint.transform.parent);
-
-        agent.enabled = false; // Stop NavMesh agent
-        // Re-enable agent for walking on bus
-        agent.enabled = true;
 
         // Play idle animation
         SetAnimation(false, false);
@@ -209,6 +192,9 @@ public class PassengerController : MonoBehaviour, IInteractable
         // Wait for gesture animation to finish
         yield return new WaitForSeconds(2.5f); // Change this to your gesture duration
 
+        // Re-enable agent for walking on bus
+        agent.enabled = true;
+
         FindAndWalkToSeat();
     }
 
@@ -227,8 +213,7 @@ public class PassengerController : MonoBehaviour, IInteractable
             Debug.Log("No available seats!");
             return;
         }
-        // Re-enable agent for walking on bus
-        agent.enabled = true;
+        
 
         // Play walking animation
         SetAnimation(true, false);

@@ -24,8 +24,6 @@ public class SteeringWheelRotation : MonoBehaviour
                 busController = bus.GetComponent<BusController>();
             }
         }
-
-        // Store the initial rotation of the steering wheel
         initialRotation = transform.localRotation;
     }
 
