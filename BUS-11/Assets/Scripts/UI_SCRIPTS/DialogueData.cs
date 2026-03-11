@@ -3,27 +3,53 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
+public enum DialogueBranchType
+{
+    None,
+    Friendly,
+    Rude,
+    Neutral,
+    HorrorEscalation,
+    Ending
+}
+
 [System.Serializable]
 public class DialogueChoice
 {
-    public string choiceText;   // What player sees
-    public int nextNodeIndex;   // Which node this choice goes to
+    public string choiceText;
+    public int nextNodeIndex;
 }
 
 [System.Serializable]
 public class DialogueNode
 {
+    public int nodeID;   // automatic numbering
+
+    public DialogueBranchType branchType;
+
     [TextArea(2, 5)]
-    public string dialogueLine;         // NPC or player line
+    public string dialogueLine;
 
-    public bool isPlayerLine;           // Optional, if you want to label who is speaking
+    public bool isPlayerLine;
 
-    public List<DialogueChoice> choices; // If empty, dialogue continues automatically
+    public List<DialogueChoice> choices;
 }
 
 [CreateAssetMenu(fileName = "NewDialogue", menuName = "Dialogue/Dialogue Data")]
 public class DialogueData : ScriptableObject
 {
+
     public List<DialogueNode> nodes;
-    public int startNodeIndex = 0;
+
+#if UNITY_EDITOR
+    void OnValidate()
+    {
+        if (nodes == null) return;
+
+        for (int i = 0; i < nodes.Count; i++)
+        {
+            nodes[i].nodeID = i;
+        }
+    }
+#endif
 }

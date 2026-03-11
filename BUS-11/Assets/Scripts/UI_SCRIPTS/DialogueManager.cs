@@ -82,7 +82,7 @@ public class DialogueManager : MonoBehaviour
         }
 
         currentDialogue = dialogue;
-        currentNodeIndex = dialogue.startNodeIndex;
+        currentNodeIndex = 0;
         dialogueActive = true;
 
         dialoguePanel.SetActive(true);

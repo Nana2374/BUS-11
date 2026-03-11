@@ -13,29 +13,42 @@ MonoBehaviour:
   m_Name: GhostPassenger
   m_EditorClassIdentifier: 
   nodes:
-  - dialogueLine: '"Hey there. Didn''t even hear you board."'
+  - nodeID: 0
+    branchType: 0
+    dialogueLine: '"Hey there. Didn''t even hear you board."'
     isPlayerLine: 1
     choices: []
-  - dialogueLine: '"....."'
+  - nodeID: 1
+    branchType: 0
+    dialogueLine: '"....."'
     isPlayerLine: 0
     choices: []
-  - dialogueLine: '"Are you alright?"'
+  - nodeID: 2
+    branchType: 0
+    dialogueLine: '"Are you alright?"'
     isPlayerLine: 1
     choices: []
-  - dialogueLine: '"....."'
+  - nodeID: 3
+    branchType: 0
+    dialogueLine: '"....."'
     isPlayerLine: 0
     choices: []
-  - dialogueLine: So umm...
+  - nodeID: 4
+    branchType: 0
+    dialogueLine: So umm...
     isPlayerLine: 1
     choices:
     - choiceText: '"Long night?"'
       nextNodeIndex: 5
     - choiceText: '"Hey! You gonna answer me or what?"'
-      nextNodeIndex: 6
-  - dialogueLine: '"Very..."'
+      nextNodeIndex: 0
+  - nodeID: 5
+    branchType: 1
+    dialogueLine: '"Very..."'
     isPlayerLine: 0
     choices: []
-  - dialogueLine: '"....."'
+  - nodeID: 6
+    branchType: 1
+    dialogueLine: '"....."'
     isPlayerLine: 0
     choices: []
-  startNodeIndex: 0
