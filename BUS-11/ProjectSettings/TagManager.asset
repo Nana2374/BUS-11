@@ -18,8 +18,8 @@ TagManager:
   - Player
   - Ground
   - Interactable
-  - 
-  - 
+  - Boundary
+  - BoundaryTrigger
   - 
   - 
   - 

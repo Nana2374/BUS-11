@@ -9385,11 +9385,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactionDistance: 3
-  dialogueLines:
-  - Why are you here?
-  - '.......
-
-'
+  passengerDialogue: {fileID: 0}
+  interactPrompt: {fileID: 0}
 --- !u!4 &4072361809698128732 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 5a8bf6fee64699c4b9b62896c8e42669,
