@@ -29,6 +29,14 @@ public class CameraShake : MonoBehaviour
     {
         if (!enableShake) return;
 
+        // STOP camera shake during dialogue
+        if (DialogueManager.Instance != null && DialogueManager.Instance.IsDialogueActive())
+        {
+            // smoothly reset camera position
+            transform.localPosition = Vector3.Lerp(transform.localPosition, originalLocalPosition, 5f * Time.deltaTime);
+            return;
+        }
+
         // Only shake if player is NOT driving
         if (busController != null && busController.playerDriving)
         {
