@@ -20,6 +20,7 @@ public class PassengerController : MonoBehaviour, IInteractable
 
     private UnityEngine.AI.NavMeshAgent agent;
     private NavMeshSurface busNavMesh;
+
     public BusController busController;
     public BusDoors busDoors;
     public Rigidbody busRigidbody;
@@ -156,11 +157,11 @@ public class PassengerController : MonoBehaviour, IInteractable
     {
         currentState = PassengerState.AtEntry;
 
-        agent.enabled = false; // Stop NavMesh agent
-
         // Snap passenger to entry point
         transform.position = entryPoint.position;
         transform.rotation = entryPoint.rotation;
+
+        agent.enabled = false; // Stop NavMesh agent
 
         // Optional: Make passenger a child of the bus so they move with it
         transform.SetParent(entryPoint.transform.parent);
@@ -192,9 +193,6 @@ public class PassengerController : MonoBehaviour, IInteractable
         // Wait for gesture animation to finish
         yield return new WaitForSeconds(2.5f); // Change this to your gesture duration
 
-        // Re-enable agent for walking on bus
-        agent.enabled = true;
-
         FindAndWalkToSeat();
     }
 
@@ -213,7 +211,9 @@ public class PassengerController : MonoBehaviour, IInteractable
             Debug.Log("No available seats!");
             return;
         }
-        
+
+        agent.enabled = true; // Enable NavMesh agent to walk to seat
+        agent.SetDestination(targetSeat.position);
 
         // Play walking animation
         SetAnimation(true, false);
@@ -221,10 +221,6 @@ public class PassengerController : MonoBehaviour, IInteractable
         seatManager.OccupySeat(targetSeat);
 
         currentState = PassengerState.WalkingToSeat;
-       
-        agent.SetDestination(targetSeat.position);
-
-        Debug.Log("Walking to seat: " + targetSeat.name);
     }
 
     void CheckIfReachedSeat()
@@ -254,7 +250,7 @@ public class PassengerController : MonoBehaviour, IInteractable
 
     void CheckForStop()
     {
-        if (busTransform == null || busRigidbody == null) return;
+        if (busTransform == null || busRigidbody == null || exitPoint == null) return;
 
         float distanceToStop = Vector3.Distance(busTransform.position, exitPoint.position);
         float busSpeed = busRigidbody.velocity.magnitude * 3.6f; // Convert to km/h
@@ -266,11 +262,11 @@ public class PassengerController : MonoBehaviour, IInteractable
             busDoors.isOpen == true) //Bus doors must be open
         {
             currentState = PassengerState.WalkingToExit;
-            agent.enabled = true;
-            agent.SetDestination(exitPoint.position);
 
             // Unparent from bus so they can walk away
             transform.SetParent(null);
+            agent.enabled = true;
+            agent.SetDestination(exitPoint.position);
 
             // Play walking animation
             SetAnimation(true, false);
