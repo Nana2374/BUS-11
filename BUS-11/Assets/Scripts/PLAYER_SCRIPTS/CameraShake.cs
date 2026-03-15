@@ -11,6 +11,7 @@ public class CameraShake : MonoBehaviour
 
     [Header("References")]
     public BusController busController;
+    public SnaptoSeat seatController;
 
     private Vector3 originalLocalPosition;
     private float shakeTimer = 0f;
@@ -23,11 +24,25 @@ public class CameraShake : MonoBehaviour
         {
             busController = FindObjectOfType<BusController>();
         }
+        // Auto-find seat controller
+        if (seatController == null)
+        {
+            seatController = FindObjectOfType<SnaptoSeat>();
+        }
     }
 
     void Update()
     {
         if (!enableShake) return;
+
+        // Get the correct base position (standing or seated)
+        Vector3 basePosition = originalLocalPosition;
+
+        if (seatController != null && seatController.isSeated)
+        {
+            // Use seated position as base when seated
+            basePosition = seatController.seatedCameraLocalPos;
+        }
 
         // STOP camera shake during dialogue
         if (DialogueManager.Instance != null && DialogueManager.Instance.IsDialogueActive())
@@ -61,14 +76,14 @@ public class CameraShake : MonoBehaviour
             float shakeZ = (Mathf.PerlinNoise(shakeTimer, shakeTimer) - 0.5f) * 2f * shakeIntensity;
 
             // Apply shake to local position
-            transform.localPosition = originalLocalPosition + new Vector3(shakeY, shakeZ);
+            transform.localPosition = originalLocalPosition + new Vector3(0, shakeY, shakeZ);
 
             //Debug.Log("Shaking!");
         }
         else
         {
-            // Smoothly return to original position when not moving
-            transform.localPosition = Vector3.Lerp(transform.localPosition, originalLocalPosition, 5f * Time.deltaTime);
+            // Return to base position (standing or seated)
+            transform.localPosition = Vector3.Lerp(transform.localPosition, basePosition, 5f * Time.deltaTime);
         }
     }
 }

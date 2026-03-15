@@ -18,6 +18,9 @@ public class PlayerMovement : MonoBehaviour
     Vector3 velocity;
     bool isGrounded;
 
+    [Header("Animation")]
+    public Animator animator;
+
     // Update is called once per frame
     void Update()
     {
@@ -49,5 +52,23 @@ public class PlayerMovement : MonoBehaviour
         velocity.y += gravity * Time.deltaTime;
 
         controller.Move(velocity * Time.deltaTime);
+
+        if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
+        {
+            SetAnimation(true, false); // Walking
+        }
+        else
+        {
+            SetAnimation(false, false); // Idle
+        }
+    }
+
+    // Helper function to set animations
+    void SetAnimation(bool walking, bool sitting)
+    {
+        if (animator == null) return;
+
+        animator.SetBool("isWalking", walking);
+        animator.SetBool("isSitting", sitting);
     }
 }
