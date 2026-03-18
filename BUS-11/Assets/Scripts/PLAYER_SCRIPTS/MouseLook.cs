@@ -8,7 +8,7 @@ public class MouseLook : MonoBehaviour
 
     public Transform playerBody;
 
-    public SnaptoSeat seatController; // Add reference to your seat script
+    //public SnaptoSeat seatController; // Add reference to your seat script
 
     float xRotation = 0f;
     float yRotation = 0f; // Store Y rotation separately
@@ -32,9 +32,9 @@ public class MouseLook : MonoBehaviour
         playerBody.Rotate(Vector3.up * mouseX);
 
         // ONLY rotate player body if NOT seated
-        if (seatController == null || !seatController.isSeated)
+        /*/if (seatController == null || !seatController.isSeated)
         {
             playerBody.Rotate(Vector3.up * mouseX);
-        }
+        }*/
     }
 }

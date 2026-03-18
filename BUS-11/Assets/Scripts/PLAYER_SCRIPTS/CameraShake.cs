@@ -38,11 +38,11 @@ public class CameraShake : MonoBehaviour
         // Get the correct base position (standing or seated)
         Vector3 basePosition = originalLocalPosition;
 
-        if (seatController != null && seatController.isSeated)
+        /*if (seatController != null && seatController.isSeated)
         {
             // Use seated position as base when seated
             basePosition = seatController.seatedCameraLocalPos;
-        }
+        }*/
 
         // STOP camera shake during dialogue
         if (DialogueManager.Instance != null && DialogueManager.Instance.IsDialogueActive())

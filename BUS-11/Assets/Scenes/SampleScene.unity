@@ -11968,7 +11968,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.01
+  near clip plane: 0.13
   far clip plane: 1000
   field of view: 100.388855
   orthographic: 0
@@ -12061,7 +12061,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mouseSensitivty: 150
   playerBody: {fileID: 2107316705}
-  seatController: {fileID: 2107316707}
 --- !u!114 &330585549
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16053,13 +16052,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 422129965}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7411244827143319294}
-  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &426772512
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -80184,12 +80183,12 @@ MonoBehaviour:
   driverSeat: {fileID: 422129966}
   exitPoint: {fileID: 3909404723573062428}
   bus: {fileID: 8591317311015121196}
-  busDriver: {fileID: 1756858033}
-  mainCamera: {fileID: 330585545}
-  cameraShake: {fileID: 330585550}
-  seatedCameraLocalPos: {x: 0, y: 0.6, z: -3}
+  busDriverP: {fileID: 1756858033}
+  busDriverMesh: {fileID: 653222073}
   animator: {fileID: 653222075}
   isSeated: 0
+  mainCamera: {fileID: 330585545}
+  cameraShake: {fileID: 330585550}
 --- !u!1001 &2107533775
 PrefabInstance:
   m_ObjectHideFlags: 0
