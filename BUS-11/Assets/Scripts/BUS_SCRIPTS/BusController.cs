@@ -8,7 +8,7 @@ public class BusController : MonoBehaviour
     public WheelCollider rearLeft, rearRight;
 
     public float motorForce = 80000f;
-    public float steerAngle = 45f;
+    public float steerAngle = 60f;
     public float brakeForce = 50000f;
     public float maxSpeed = 50f; // Adjust to your top speed
 
@@ -35,7 +35,7 @@ public class BusController : MonoBehaviour
 
         // Reduce drag
         rb.drag = 0.5f;
-        rb.angularDrag = 3f;
+        rb.angularDrag = 1.5f;
     }
 
     void Update()
@@ -67,6 +67,25 @@ public class BusController : MonoBehaviour
     void FixedUpdate()
     {
         if (!playerDriving) return;
+
+        // Get current speed in km/h
+        float signedSpeed = Vector3.Dot(rb.velocity, transform.forward) * 3.6f;
+        float currentSpeed = Mathf.Abs(signedSpeed);
+
+        // Boost torque during turns
+        float turnBoost = 1f + (Mathf.Abs(steerInput) * 2.5f);
+
+        // Boost torque during turns - MORE boost at higher speeds
+        float baseTurnBoost = 1f + (Mathf.Abs(steerInput) * 2.0f);
+
+        // Extra boost if speed is dropping during turn
+        float speedBoost = 1f;
+        if (Mathf.Abs(steerInput) > 0.3f && currentSpeed < 30f)
+        {
+            speedBoost = 1.5f; // 50% extra power when turning slowly
+        }
+
+        //float turnBoost = baseTurnBoost * speedBoost;
 
         // Can't move in Park
         if (currentGear == 0)
@@ -100,10 +119,6 @@ public class BusController : MonoBehaviour
             engineBrakeAmount = 0f;
         }
 
-        // Get current speed in km/h
-        float signedSpeed = Vector3.Dot(rb.velocity, transform.forward) * 3.6f;
-        float currentSpeed = Mathf.Abs(signedSpeed);
-
         // Get gear speed limit and ratio based on current gear
         //float gearSpeedLimit;
         float gearModifiedForce;
@@ -118,9 +133,6 @@ public class BusController : MonoBehaviour
             gearSpeedLimit = gearSpeedLimits[currentGear];
             gearModifiedForce = motorForce * gearRatios[currentGear];
         }
-
-        // Boost torque during turns
-        float turnBoost = 1f + (Mathf.Abs(steerInput) * 0.4f);
 
         // Gradual brake based on how long S is held
         // Higher = slower increase, Lower = faster increase
@@ -248,14 +260,26 @@ public class BusController : MonoBehaviour
             }
         }
 
-        // Calculate speed-based steering
-        float speed = rb.velocity.magnitude;
-        //float steerMultiplier = Mathf.Clamp(1f - (speed / maxSpeed) * 0.5f, 0.5f, 1f);
+        
 
-        float currentSteerAngle = steerInput * steerAngle; //* steerMultiplier;
+        // At low speeds: full steering (60 degrees)
+        // At high speeds: reduced steering (30 degrees)
+        float speedFactor = Mathf.Clamp01(currentSpeed / 40f); // 0 at 0 km/h, 1 at 40+ km/h
+        float dynamicSteerAngle = Mathf.Lerp(steerAngle, steerAngle * 0.5f, speedFactor);
+
+        float currentSteerAngle = steerInput * dynamicSteerAngle;
 
         frontLeft.steerAngle = currentSteerAngle;
         frontRight.steerAngle = currentSteerAngle;
+
+        // Calculate speed-based steering
+        //float speed = rb.velocity.magnitude;
+        //float steerMultiplier = Mathf.Clamp(1f - (speed / maxSpeed) * 0.5f, 0.5f, 1f);
+
+        //float currentSteerAngle = steerInput * steerAngle; //* steerMultiplier;
+
+        //frontLeft.steerAngle = currentSteerAngle;
+        //frontRight.steerAngle = currentSteerAngle;
 
         // Rear wheels steer opposite (slight angle)
         //rearLeft.steerAngle = -steerInput * (steerAngle * 0.3f);

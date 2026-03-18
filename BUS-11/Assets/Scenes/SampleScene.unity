@@ -12177,7 +12177,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 0ecb157a37f556f42af9313cfd27a758,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 207.78
+      value: 263.284
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0ecb157a37f556f42af9313cfd27a758,
         type: 3}
@@ -12187,7 +12187,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 0ecb157a37f556f42af9313cfd27a758,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -269.68
+      value: -140.044
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0ecb157a37f556f42af9313cfd27a758,
         type: 3}
@@ -83051,7 +83051,7 @@ WheelCollider:
     m_ExtremumValue: 2.5
     m_AsymptoteSlip: 0.5
     m_AsymptoteValue: 1.5
-    m_Stiffness: 3
+    m_Stiffness: 5
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -87961,7 +87961,7 @@ WheelCollider:
     m_ExtremumValue: 2.5
     m_AsymptoteSlip: 0.5
     m_AsymptoteValue: 1.5
-    m_Stiffness: 3
+    m_Stiffness: 5
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -93390,7 +93390,7 @@ WheelCollider:
     m_ExtremumValue: 2.5
     m_AsymptoteSlip: 0.5
     m_AsymptoteValue: 1.5
-    m_Stiffness: 3
+    m_Stiffness: 5
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -96204,7 +96204,7 @@ WheelCollider:
     m_ExtremumValue: 2.5
     m_AsymptoteSlip: 0.5
     m_AsymptoteValue: 1.5
-    m_Stiffness: 3
+    m_Stiffness: 5
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -96540,7 +96540,7 @@ MonoBehaviour:
   rearLeft: {fileID: 694171816477670255}
   rearRight: {fileID: 3547536586555973010}
   motorForce: 30000
-  steerAngle: 35
+  steerAngle: 65
   brakeForce: 200
   maxSpeed: 70
   playerDriving: 0
