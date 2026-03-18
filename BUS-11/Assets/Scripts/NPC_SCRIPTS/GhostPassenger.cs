@@ -9,10 +9,11 @@ public class GhostPassenger : MonoBehaviour
     public DialogueData passengerDialogue;
 
     [Header("UI")]
-    public GameObject interactPrompt; // Assign your "F to interact with passenger" UI here
+    public GameObject interactPrompt;
 
     private Transform player;
     private bool playerInRange = false;
+    private bool hasInteracted = false; // NEW
 
     void Start()
     {
@@ -56,6 +57,7 @@ public class GhostPassenger : MonoBehaviour
 
         bool canShowPrompt =
             playerInRange &&
+            !hasInteracted && // NEW
             DialogueManager.Instance != null &&
             !DialogueManager.Instance.IsDialogueActive();
 
@@ -67,6 +69,9 @@ public class GhostPassenger : MonoBehaviour
         if (!playerInRange)
             return;
 
+        if (hasInteracted) // NEW
+            return;
+
         if (DialogueManager.Instance == null)
             return;
 
@@ -75,6 +80,7 @@ public class GhostPassenger : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.F))
         {
+            hasInteracted = true; // NEW
             DialogueManager.Instance.StartDialogue(passengerDialogue);
 
             if (interactPrompt != null)

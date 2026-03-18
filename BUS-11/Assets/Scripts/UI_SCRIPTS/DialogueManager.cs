@@ -2,9 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DialogueManager : MonoBehaviour
 {
+
     public static DialogueManager Instance;
 
     [Header("UI References")]
@@ -13,7 +15,10 @@ public class DialogueManager : MonoBehaviour
 
     [Header("Choice UI")]
     public GameObject choicesPanel;
-    public TextMeshProUGUI[] choiceTexts; // Assign 2, 3, or 4 choice text objects in Inspector
+    public Button[] choiceButtons;              // Assign your choice buttons here
+    public TextMeshProUGUI[] choiceTexts;      // Assign TMP text inside each button
+
+    public MouseLook mouseLook;
 
     [Header("Typing Settings")]
     public float typingSpeed = 0.03f;
@@ -23,7 +28,6 @@ public class DialogueManager : MonoBehaviour
     private bool isTyping;
     private bool dialogueActive;
     private bool isChoosing;
-    private int selectedChoiceIndex;
 
     private Coroutine typingCoroutine;
 
@@ -41,7 +45,7 @@ public class DialogueManager : MonoBehaviour
 
         if (isChoosing)
         {
-            HandleChoiceInput();
+            // No more W/S input
             return;
         }
 
@@ -55,7 +59,6 @@ public class DialogueManager : MonoBehaviour
             }
             else
             {
-                // If node has choices, show them
                 if (currentNode.choices != null && currentNode.choices.Count > 0)
                 {
                     ShowChoices(currentNode.choices);
@@ -147,81 +150,45 @@ public class DialogueManager : MonoBehaviour
 
     void ShowChoices(List<DialogueChoice> choices)
     {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+
+        if (mouseLook != null)
+            mouseLook.canLook = false;
+
         if (choices == null || choices.Count == 0)
             return;
 
         isChoosing = true;
-        selectedChoiceIndex = 0;
         choicesPanel.SetActive(true);
 
-        for (int i = 0; i < choiceTexts.Length; i++)
+        for (int i = 0; i < choiceButtons.Length; i++)
         {
             if (i < choices.Count)
             {
-                choiceTexts[i].gameObject.SetActive(true);
+                choiceButtons[i].gameObject.SetActive(true);
                 choiceTexts[i].text = choices[i].choiceText;
+
+                int choiceIndex = i; // Important: local copy for button click
+                choiceButtons[i].onClick.RemoveAllListeners();
+                choiceButtons[i].onClick.AddListener(() => SelectChoice(choiceIndex));
             }
             else
             {
-                choiceTexts[i].gameObject.SetActive(false);
-            }
-        }
-
-        UpdateChoiceHighlight();
-    }
-
-    void HandleChoiceInput()
-    {
-        DialogueNode node = currentDialogue.nodes[currentNodeIndex];
-        List<DialogueChoice> choices = node.choices;
-
-        if (Input.GetKeyDown(KeyCode.W))
-        {
-            selectedChoiceIndex--;
-            if (selectedChoiceIndex < 0)
-                selectedChoiceIndex = choices.Count - 1;
-
-            UpdateChoiceHighlight();
-        }
-
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            selectedChoiceIndex++;
-            if (selectedChoiceIndex >= choices.Count)
-                selectedChoiceIndex = 0;
-
-            UpdateChoiceHighlight();
-        }
-
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            SelectChoice();
-        }
-    }
-
-    void UpdateChoiceHighlight()
-    {
-        DialogueNode node = currentDialogue.nodes[currentNodeIndex];
-        List<DialogueChoice> choices = node.choices;
-
-        for (int i = 0; i < choiceTexts.Length; i++)
-        {
-            if (i < choices.Count)
-            {
-                if (i == selectedChoiceIndex)
-                    choiceTexts[i].text = "> " + choices[i].choiceText;
-                else
-                    choiceTexts[i].text = choices[i].choiceText;
+                choiceButtons[i].gameObject.SetActive(false);
             }
         }
     }
 
-    void SelectChoice()
+    void SelectChoice(int choiceIndex)
     {
         DialogueNode node = currentDialogue.nodes[currentNodeIndex];
         List<DialogueChoice> choices = node.choices;
 
-        int nextNode = choices[selectedChoiceIndex].nextNodeIndex;
+        if (choiceIndex < 0 || choiceIndex >= choices.Count)
+            return;
+
+        int nextNode = choices[choiceIndex].nextNodeIndex;
 
         choicesPanel.SetActive(false);
         isChoosing = false;
@@ -238,6 +205,12 @@ public class DialogueManager : MonoBehaviour
 
     void EndDialogue()
     {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+
+        if (mouseLook != null)
+            mouseLook.canLook = true;
+
         if (typingCoroutine != null)
             StopCoroutine(typingCoroutine);
 
