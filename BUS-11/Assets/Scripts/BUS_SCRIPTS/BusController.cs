@@ -31,11 +31,14 @@ public class BusController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        rb.centerOfMass = new Vector3(0, -1.5f, 0);
+        rb.centerOfMass = new Vector3(0, -3f, 0);
 
         // Reduce drag
         rb.drag = 0.5f;
         rb.angularDrag = 1.5f;
+
+        // START IN PARK - freeze the bus immediately
+        rb.constraints = RigidbodyConstraints.FreezeAll;
     }
 
     void Update()
@@ -66,6 +69,30 @@ public class BusController : MonoBehaviour
 
     void FixedUpdate()
     {
+        // Apply Park constraints even when player isn't driving
+        if (!playerDriving || currentGear == 0)
+        {
+            if (currentGear == 0)
+            {
+                rearLeft.motorTorque = 0f;
+                rearRight.motorTorque = 0f;
+                rearLeft.brakeTorque = brakeForce * 10f;
+                rearRight.brakeTorque = brakeForce * 10f;
+                frontLeft.brakeTorque = brakeForce * 10f;
+                frontRight.brakeTorque = brakeForce * 10f;
+
+                rb.constraints = RigidbodyConstraints.FreezeAll;
+            }
+
+            if (!playerDriving) return; // Return AFTER applying Park
+        }
+        else
+        {
+            // When driving and NOT in Park: only lock tilt rotations
+            rb.constraints = RigidbodyConstraints.FreezeRotationX |
+                             RigidbodyConstraints.FreezeRotationZ;
+        }
+
         if (!playerDriving) return;
 
         // Get current speed in km/h
@@ -98,10 +125,13 @@ public class BusController : MonoBehaviour
             frontRight.brakeTorque = brakeForce * 10f;
 
             // Completely freeze the bus in Park
-            rb.constraints = RigidbodyConstraints.FreezePosition |
-                            RigidbodyConstraints.FreezeRotationX |
-                            RigidbodyConstraints.FreezeRotationY |
-                            RigidbodyConstraints.FreezeRotationZ;
+            //rb.constraints = RigidbodyConstraints.FreezePosition |
+                            //RigidbodyConstraints.FreezeRotationX |
+                            //RigidbodyConstraints.FreezeRotationY |
+                            //RigidbodyConstraints.FreezeRotationZ;
+
+            // Completely freeze the bus in Park
+            rb.constraints = RigidbodyConstraints.FreezeAll; // Lock EVERYTHING
             return;
         }
         else

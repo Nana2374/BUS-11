@@ -243,5 +243,43 @@ public class SnaptoSeat : MonoBehaviour
             animator.SetBool("isWalking", walking);
             animator.SetBool("isSitting", sitting);
         }
+
+    void OnGUI()
+    {
+        // Show prompt when in range and not seated
+        if (playerInRange && !isSeated)
+        {
+            // Create a style for the text
+            GUIStyle style = new GUIStyle();
+            style.fontSize = 15;
+            style.normal.textColor = Color.white;
+            style.alignment = TextAnchor.MiddleCenter;
+
+            string message = "[Left Shift] to enter Driver's Seat";
+
+            // Calculate position (center bottom of screen)
+            float xPos = Screen.width / 2 - 150;
+            float yPos = Screen.height - 150;
+
+            // Draw main text
+            GUI.Label(new Rect(xPos, yPos, 300, 40), message, style);
+        }
+
+        // Show exit prompt when seated
+        if (isSeated)
+        {
+            GUIStyle style = new GUIStyle();
+            style.fontSize = 15;
+            style.normal.textColor = Color.white;
+            style.alignment = TextAnchor.MiddleCenter;
+
+            string message = "[Left Shift] to exit Driver's Seat";
+
+            float xPos = Screen.width / 2 - 150;
+            float yPos = Screen.height - 150;
+
+            GUI.Label(new Rect(xPos, yPos, 300, 40), message, style);
+        }
+    }
 }
 
