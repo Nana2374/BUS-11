@@ -31,7 +31,7 @@ public class BusController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        rb.centerOfMass = new Vector3(0, -3f, 0);
+        rb.centerOfMass = new Vector3(0, -1.5f, 0);
 
         // Reduce drag
         rb.drag = 0.5f;
