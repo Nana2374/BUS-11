@@ -6,7 +6,7 @@ public class DeadBodyController : MonoBehaviour
 {
     [Header("Detection Settings")]
     public BoxCollider detectionTrigger;     // Assign a box collider trigger
-    public float activationSpeed = 5f;       // Bus must be going faster than this (km/h)
+    public float activationSpeed = 1f;       // Bus must be going faster than this (km/h)
 
     [Header("Flight Settings")]
     public Transform endPosition;            // Where the body flies to
@@ -88,8 +88,9 @@ public class DeadBodyController : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        // Check if bus entered trigger
-        if (other.CompareTag("Bus"))
+        Debug.Log($"Trigger hit by: {other.gameObject.name}, Tag: {other.tag}, Parent: {other.transform.root.name}");
+        // Check if the collider OR its parent has the "Bus" tag
+        if (other.CompareTag("Bus") || other.transform.root.CompareTag("Bus"))
         {
             busInTrigger = true;
             busRigidbody = other.GetComponent<Rigidbody>();
@@ -100,7 +101,7 @@ public class DeadBodyController : MonoBehaviour
     void OnTriggerExit(Collider other)
     {
         // Check if bus left trigger
-        if (other.CompareTag("Bus"))
+        if (other.CompareTag("Bus") || other.transform.root.CompareTag("Bus"))
         {
             busInTrigger = false;
             Debug.Log("Bus left detection zone.");

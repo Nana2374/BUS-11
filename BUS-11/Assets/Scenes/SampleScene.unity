@@ -149,7 +149,7 @@ GameObject:
   - component: {fileID: 5285521}
   m_Layer: 10
   m_Name: Front_trigger
-  m_TagString: Untagged
+  m_TagString: Bus
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -647,7 +647,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 24015576}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: EndPosition
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1426,7 +1426,7 @@ GameObject:
   - component: {fileID: 46405995}
   m_Layer: 9
   m_Name: Left_soild
-  m_TagString: Untagged
+  m_TagString: Bus
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10076,7 +10076,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -27334,7 +27334,7 @@ GameObject:
   - component: {fileID: 703657674}
   m_Layer: 0
   m_Name: Wall_Front
-  m_TagString: Untagged
+  m_TagString: Bus
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -27986,7 +27986,7 @@ GameObject:
   - component: {fileID: 720435917}
   m_Layer: 10
   m_Name: Left_trigger
-  m_TagString: Untagged
+  m_TagString: Bus
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -40674,7 +40674,7 @@ GameObject:
   - component: {fileID: 1073125568}
   m_Layer: 9
   m_Name: Front_block
-  m_TagString: Untagged
+  m_TagString: Bus
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -44748,7 +44748,7 @@ GameObject:
   - component: {fileID: 1170514591}
   m_Layer: 9
   m_Name: Right_soild
-  m_TagString: Untagged
+  m_TagString: Bus
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -45178,7 +45178,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 5a8bf6fee64699c4b9b62896c8e42669,
         type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 5a8bf6fee64699c4b9b62896c8e42669,
         type: 3}
@@ -50796,8 +50796,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1345487460}
   - component: {fileID: 1345487459}
-  m_Layer: 0
-  m_Name: DetectionTrigger
+  m_Layer: 11
+  m_Name: DeadBody Trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -50818,12 +50818,12 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 20.21358, y: 7.355003, z: 1}
-  m_Center: {x: 12.028581, y: 3.1775017, z: 0.00000034493775}
+  m_Size: {x: 46.19759, y: 7.3550034, z: 1}
+  m_Center: {x: 17.120974, y: 3.1775017, z: -0.000000018054546}
 --- !u!4 &1345487460
 Transform:
   m_ObjectHideFlags: 0
@@ -50832,12 +50832,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1345487458}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.000000037252903, y: -0.7087419, z: 0.000000044703484, w: 0.70546794}
-  m_LocalPosition: {x: 33.001877, y: 0.43000126, z: 16.29332}
+  m_LocalRotation: {x: 0.0000000052683564, y: -0.0023150146, z: 0.000000057951922,
+    w: 0.9999974}
+  m_LocalPosition: {x: 256.6933, y: 0.60000134, z: -224}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1828530355}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1345979265
 GameObject:
@@ -62521,7 +62522,7 @@ GameObject:
   - component: {fileID: 1651807207}
   m_Layer: 0
   m_Name: Wall_Left
-  m_TagString: Untagged
+  m_TagString: Bus
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -67698,7 +67699,7 @@ GameObject:
   - component: {fileID: 1752300000}
   m_Layer: 0
   m_Name: BusBoundary
-  m_TagString: Untagged
+  m_TagString: Bus
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -69087,7 +69088,7 @@ GameObject:
   - component: {fileID: 1791511176}
   m_Layer: 10
   m_Name: Right_trigger
-  m_TagString: Untagged
+  m_TagString: Bus
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -70555,7 +70556,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1828530355}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Dead Body Grp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -70570,16 +70571,15 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1828530354}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -180.7, y: 0.17000008, z: 155.35}
+  m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: -22.81, y: -1.97, z: 24.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1345487460}
   - {fileID: 24015576}
   - {fileID: 229424959}
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Father: {fileID: 1976901388651935757}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!1001 &1834332539
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -85653,6 +85653,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1828530355}
   - {fileID: 3247088050777897120}
   - {fileID: 650770680393354980}
   - {fileID: 206009283978056619}
@@ -97213,7 +97214,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &8813675050134217968
 GameObject:
   m_ObjectHideFlags: 0
@@ -97834,7 +97835,7 @@ SceneRoots:
   - {fileID: 1355465289}
   - {fileID: 876747878}
   - {fileID: 281197554}
-  - {fileID: 1828530355}
+  - {fileID: 1345487460}
   - {fileID: 1647437442}
   - {fileID: 272177110}
   - {fileID: 1345979266}
