@@ -21,6 +21,9 @@ public class SnaptoSeat : MonoBehaviour
     public Camera mainCamera; // Use Camera component instead of Transform
     public CameraShake cameraShake; // Add reference to camera shake script
 
+    [Header("UI Elements")]
+    public GameObject drivingUI; // Assign your UI panel/images here
+
     // Store original positions
     private Vector3 originalParentLocalPos;
     private Quaternion originalParentLocalRot;
@@ -31,6 +34,12 @@ public class SnaptoSeat : MonoBehaviour
     void Start()
     {
         playerMovement = GetComponent<PlayerMovement>();
+
+        // Hide driving UI at start
+        if (drivingUI != null)
+        {
+            drivingUI.SetActive(false);
+        }
 
         // Store original Bus_Driver_P position
         if (busDriverP != null)
@@ -139,6 +148,12 @@ public class SnaptoSeat : MonoBehaviour
                 cameraShake.enabled = false;
             }
 
+            // SHOW DRIVING UI
+            if (drivingUI != null)
+            {
+                drivingUI.SetActive(true);
+            }
+
             // Rigidbody fix (if needed)
             Rigidbody rb = GetComponent<Rigidbody>();
             if (rb) rb.isKinematic = true;
@@ -199,7 +214,13 @@ public class SnaptoSeat : MonoBehaviour
                 cameraShake.enabled = true;
             }
 
-            playerMovement.enabled = true;
+        // HIDE DRIVING UI
+        if (drivingUI != null)
+        {
+            drivingUI.SetActive(false);
+        }
+
+        playerMovement.enabled = true;
 
             Rigidbody rb = GetComponent<Rigidbody>();
             if (rb) rb.isKinematic = false;
@@ -262,22 +283,6 @@ public class SnaptoSeat : MonoBehaviour
             float yPos = Screen.height - 150;
 
             // Draw main text
-            GUI.Label(new Rect(xPos, yPos, 300, 40), message, style);
-        }
-
-        // Show exit prompt when seated
-        if (isSeated)
-        {
-            GUIStyle style = new GUIStyle();
-            style.fontSize = 15;
-            style.normal.textColor = Color.white;
-            style.alignment = TextAnchor.MiddleCenter;
-
-            string message = "[Left Shift] to exit Driver's Seat";
-
-            float xPos = Screen.width / 2 - 150;
-            float yPos = Screen.height - 150;
-
             GUI.Label(new Rect(xPos, yPos, 300, 40), message, style);
         }
     }
