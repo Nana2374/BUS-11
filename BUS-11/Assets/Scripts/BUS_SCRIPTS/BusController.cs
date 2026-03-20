@@ -22,7 +22,7 @@ public class BusController : MonoBehaviour
     public float reverseSpeedLimit = 40f;
     public float[] gearSpeedLimits = new float[] { 0f, 20f, 45f, 70f }; // Park, Gear1, Gear2, Gear3
 
-    Rigidbody rb;
+    public Rigidbody rb;
     float motorInput;
     float steerInput;
     float engineBrakeAmount = 0f;
@@ -43,7 +43,11 @@ public class BusController : MonoBehaviour
 
     void Update()
     {
-        if (!playerDriving) return;
+        if (!playerDriving)
+        {
+            currentGear = 0; // Ensure we're in Park when not driving
+            return;
+        }
 
         motorInput = Input.GetAxis("Vertical");
         steerInput = Input.GetAxis("Horizontal");
