@@ -9,9 +9,12 @@ public class DeadBodyController : MonoBehaviour
     public float activationSpeed = 1f;       // Bus must be going faster than this (km/h)
 
     [Header("Flight Settings")]
-    public Transform endPosition;            // Where the body flies to
-    public float launchForce = 10f;          // How hard to launch upward/forward
-    public float launchAngle = 45f;          // Launch angle (degrees)
+    public Transform deadBody;
+    public Rigidbody bodyRigidbody;
+    public float dropDistance = 15f;
+    //public Transform endPosition;            // Where the body flies to
+    //public float launchForce = 10f;          // How hard to launch upward/forward
+    //public float launchAngle = 45f;          // Launch angle (degrees)
 
     [Header("Auto-Destroy")]
     public bool destroyOnLand = true;        // Destroy after reaching end position
@@ -26,50 +29,21 @@ public class DeadBodyController : MonoBehaviour
 
     private BodyState currentState = BodyState.Lying;
     private Rigidbody busRigidbody;
-    private Rigidbody bodyRigidbody;
     private bool hasLaunched = false;
     private bool busInTrigger = false;
 
     void Start()
     {
-        // Get or add rigidbody to body
-        bodyRigidbody = GetComponent<Rigidbody>();
         if (bodyRigidbody == null)
         {
-            bodyRigidbody = gameObject.AddComponent<Rigidbody>();
+            bodyRigidbody = deadBody.GetComponent<Rigidbody>();
         }
 
         // Start frozen (kinematic)
         bodyRigidbody.isKinematic = true;
         bodyRigidbody.useGravity = false;
 
-        // Setup trigger if not assigned
-        if (detectionTrigger == null)
-        {
-            // Create trigger as child object
-            GameObject triggerObj = new GameObject("DetectionTrigger");
-            triggerObj.transform.SetParent(transform);
-            triggerObj.transform.localPosition = Vector3.zero;
-
-            detectionTrigger = triggerObj.AddComponent<BoxCollider>();
-            detectionTrigger.isTrigger = true;
-            detectionTrigger.size = new Vector3(10f, 3f, 10f); // Default size
-
-            Debug.Log("Auto-created detection trigger. Adjust size in Inspector.");
-        }
-        else
-        {
-            // Make sure it's set as trigger
-            detectionTrigger.isTrigger = true;
-        }
-
-        // Create end position if not assigned
-        if (endPosition == null)
-        {
-            GameObject endPosObj = new GameObject("DeadBodyEndPosition");
-            endPosition = endPosObj.transform;
-            endPosition.position = transform.position + transform.forward * 20f + Vector3.up * 2f;
-        }
+        deadBody.gameObject.SetActive(false);
     }
 
     void Update()
@@ -80,15 +54,10 @@ public class DeadBodyController : MonoBehaviour
         {
             CheckForBus();
         }
-        else if (currentState == BodyState.Flying)
-        {
-            CheckIfLanded();
-        }
     }
 
     void OnTriggerEnter(Collider other)
     {
-        Debug.Log($"Trigger hit by: {other.gameObject.name}, Tag: {other.tag}, Parent: {other.transform.root.name}");
         // Check if the collider OR its parent has the "Bus" tag
         if (other.CompareTag("Bus") || other.transform.root.CompareTag("Bus"))
         {
@@ -123,18 +92,33 @@ public class DeadBodyController : MonoBehaviour
 
     void LaunchBody()
     {
+        deadBody.gameObject.SetActive(true);
+
         hasLaunched = true;
         currentState = BodyState.Flying;
+
+        // UNPARENT from bus first!
+        deadBody.SetParent(null);
+
+        // Position in front of the bus
+        Vector3 busForward = busRigidbody.transform.forward;
+        float dropDistance = 15f; // How far in front (adjust in Inspector)
+
+        Vector3 dropPosition = deadBody.position + (busForward * dropDistance);
+        deadBody.position = dropPosition;
 
         // Enable physics
         bodyRigidbody.isKinematic = false;
         bodyRigidbody.useGravity = true;
 
+        // Start landing timer
+        Invoke("MarkAsLanded", 3f); // Call MarkAsLanded after 1 second
+
         // Calculate launch direction
-        Vector3 directionToEnd = (endPosition.position - transform.position).normalized;
+        /*Vector3 directionToEnd = (endPosition.position - deadBody.position).normalized;
 
         // Calculate launch velocity using projectile motion
-        float distance = Vector3.Distance(transform.position, endPosition.position);
+        float distance = Vector3.Distance(deadBody.position, endPosition.position);
         float angleRad = launchAngle * Mathf.Deg2Rad;
 
         // Calculate required velocity for ballistic trajectory
@@ -145,36 +129,33 @@ public class DeadBodyController : MonoBehaviour
         Vector3 launchVelocity = directionToEnd * velocity * Mathf.Cos(angleRad);
         launchVelocity.y = velocity * Mathf.Sin(angleRad);
 
-        bodyRigidbody.velocity = launchVelocity;
+        bodyRigidbody.velocity = launchVelocity;*/
+
+        Debug.Log("Dead body dropped!");
     }
 
-    void CheckIfLanded()
+    void MarkAsLanded()
     {
-        // Check if close to end position or stopped moving
-        float distanceToEnd = Vector3.Distance(transform.position, endPosition.position);
-        bool isStopped = bodyRigidbody.velocity.magnitude < 0.5f;
+        currentState = BodyState.Landed;
+        Debug.Log("Dead body landed!");
 
-        if ((distanceToEnd < 2f || isStopped) && currentState == BodyState.Flying)
-        {
-            currentState = BodyState.Landed;
-            Debug.Log("Dead body landed!");
+        bodyRigidbody.isKinematic = true;
 
-            if (destroyOnLand)
+        if (destroyOnLand)
             {
                 Destroy(gameObject, destroyDelay);
                 Debug.Log("Dead body will be destroyed in " + destroyDelay + " seconds.");
             }
-        }
     }
 
-    void OnDrawGizmos()
+    /*void OnDrawGizmos()
     {
         // End position (red)
         if (endPosition != null)
         {
             Gizmos.color = Color.red;
             Gizmos.DrawWireSphere(endPosition.position, 1f);
-            Gizmos.DrawLine(transform.position, endPosition.position);
+            Gizmos.DrawLine(deadBody.position, endPosition.position);
         }
-    }
+    }*/
 }
