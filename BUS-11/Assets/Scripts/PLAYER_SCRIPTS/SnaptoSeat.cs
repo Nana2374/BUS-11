@@ -23,6 +23,7 @@ public class SnaptoSeat : MonoBehaviour
 
     [Header("UI Elements")]
     public GameObject drivingUI; // Assign your UI panel/images here
+    public GameObject driverSeatUI;
 
     // Store original positions
     private Vector3 originalParentLocalPos;
@@ -113,7 +114,7 @@ public class SnaptoSeat : MonoBehaviour
         playerMovement.enabled = false;
 
         // Snap to seat
-        transform.position = driverSeat.position + new Vector3(0f, 0.08f, 0.08f); //Snap Player to seat 
+        transform.position = driverSeat.position + new Vector3(0f, 0.15f, 0.08f); //Snap Player to seat 
         transform.rotation = driverSeat.rotation;
         transform.SetParent(driverSeat);
 
@@ -151,6 +152,7 @@ public class SnaptoSeat : MonoBehaviour
             // SHOW DRIVING UI
             if (drivingUI != null)
             {
+                driverSeatUI.SetActive(false);
                 drivingUI.SetActive(true);
             }
 
@@ -245,7 +247,12 @@ public class SnaptoSeat : MonoBehaviour
             if (other.CompareTag("DriverSeat"))
             {
                 playerInRange = true;
+            
+            if (driverSeatUI != null)
+            {
+                driverSeatUI.SetActive(true);
             }
+        }
         }
 
         void OnTriggerExit(Collider other)
@@ -253,7 +260,11 @@ public class SnaptoSeat : MonoBehaviour
             if (other.CompareTag("DriverSeat"))
             {
                 playerInRange = false;
+            if (driverSeatUI != null)
+            {
+                driverSeatUI.SetActive(false);
             }
+        }
         }
 
         // Helper function to set animations
@@ -264,27 +275,5 @@ public class SnaptoSeat : MonoBehaviour
             animator.SetBool("isWalking", walking);
             animator.SetBool("isSitting", sitting);
         }
-
-    void OnGUI()
-    {
-        // Show prompt when in range and not seated
-        if (playerInRange && !isSeated)
-        {
-            // Create a style for the text
-            GUIStyle style = new GUIStyle();
-            style.fontSize = 15;
-            style.normal.textColor = Color.white;
-            style.alignment = TextAnchor.MiddleCenter;
-
-            string message = "[Left Shift] to enter Driver's Seat";
-
-            // Calculate position (center bottom of screen)
-            float xPos = Screen.width / 2 - 150;
-            float yPos = Screen.height - 150;
-
-            // Draw main text
-            GUI.Label(new Rect(xPos, yPos, 300, 40), message, style);
-        }
-    }
 }
 

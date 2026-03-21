@@ -158,21 +158,31 @@ public class PassengerController : MonoBehaviour, IInteractable
 
     void ReachEntry()
     {
-        currentState = PassengerState.AtEntry;
+        if (isGhost)
+        {
+            transform.SetParent(entryPoint.transform.parent);
 
-        // Snap passenger to entry point
-        transform.position = entryPoint.position;
-        transform.rotation = entryPoint.rotation;
+            FindAndWalkToSeat();
+            Debug.Log("Ghost passenger skipping gesture and walking to seat.");
+        }
+        else
+        {
+            currentState = PassengerState.AtEntry;
 
-        agent.enabled = false; // Stop NavMesh agent
+            // Snap passenger to entry point
+            transform.position = entryPoint.position;
+            transform.rotation = entryPoint.rotation;
 
-        // Optional: Make passenger a child of the bus so they move with it
-        transform.SetParent(entryPoint.transform.parent);
+            agent.enabled = false; // Stop NavMesh agent
 
-        // Play idle animation
-        SetAnimation(false, false);
+            // Optional: Make passenger a child of the bus so they move with it
+            transform.SetParent(entryPoint.transform.parent);
 
-        Debug.Log("Passenger boarded the bus!");
+            // Play idle animation
+            SetAnimation(false, false);
+
+            Debug.Log("Passenger boarded the bus!");
+        }
     }
 
     // Called when player clicks on the passenger (implements IInteractable)
@@ -180,17 +190,8 @@ public class PassengerController : MonoBehaviour, IInteractable
     {
         if (currentState == PassengerState.AtEntry)
         {
-            if (isGhost)
-            {
-                FindAndWalkToSeat();
-                Debug.Log("Ghost passenger skipping gesture and walking to seat.");
-            }
-            else
-            {
                 // Start gesture animation, then walk to seat after it finishes
                 StartCoroutine(GestureThenWalkToSeat());
-            }
-            
         }
     }
 
