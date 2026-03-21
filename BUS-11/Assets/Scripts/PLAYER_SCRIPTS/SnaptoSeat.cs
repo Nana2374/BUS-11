@@ -123,7 +123,7 @@ public class SnaptoSeat : MonoBehaviour
         if (busDriverP != null)
         {
             busDriverP.SetParent(driverSeat); // Parent to seat
-            busDriverP.localPosition = new Vector3(0f, -0.35f, 0.47f); // Position relative to seat
+            busDriverP.localPosition = new Vector3(0f, -0.35f, 0.07f); // Position relative to seat
             busDriverP.localRotation = Quaternion.identity;
             Debug.Log("Bus_Driver_P positioned at seat");
         }
