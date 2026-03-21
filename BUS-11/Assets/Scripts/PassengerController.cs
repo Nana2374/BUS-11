@@ -6,6 +6,9 @@ using Unity.AI.Navigation;
 
 public class PassengerController : MonoBehaviour, IInteractable
 {
+    [Header("Passenger Type")]
+    public bool isGhost = false; // Check this for the ghost passenger
+
     [Header("Settings")]
     public float pickupRadius = 10f;       // How close the bus needs to be to the passenger
     public float busStopSpeed = 2f;        // Bus must be slower than this to count as "stopped"
@@ -177,8 +180,17 @@ public class PassengerController : MonoBehaviour, IInteractable
     {
         if (currentState == PassengerState.AtEntry)
         {
-            // Start gesture animation, then walk to seat after it finishes
-            StartCoroutine(GestureThenWalkToSeat());
+            if (isGhost)
+            {
+                FindAndWalkToSeat();
+                Debug.Log("Ghost passenger skipping gesture and walking to seat.");
+            }
+            else
+            {
+                // Start gesture animation, then walk to seat after it finishes
+                StartCoroutine(GestureThenWalkToSeat());
+            }
+            
         }
     }
 
