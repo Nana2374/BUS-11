@@ -10,8 +10,24 @@ public class ChickenController : MonoBehaviour
     public float detectionRadius = 15f;      // How far the chicken can detect the bus
     public float panicRadius = 8f;           // Distance when chicken starts running
 
+    [Header("Bob Movement")]
+    public bool enableBobbing = true;
+    public float walkBobSpeed = 5f;      // How fast it bobs when walking
+    public float walkBobHeight = 0.1f;   // How high it bobs when walking
+    public float runBobSpeed = 8f;       // How fast it bobs when running
+    public float runBobHeight = 0.15f;   // How high it bobs when running
+
+    private float bobTimer = 0f;
+    private float originalYPosition;
+
     [Header("Crossing Settings")]
     public Transform endPosition;
+
+    [Header("Materials")]
+    public Material aliveMaterial;
+    public Material deadMaterial; // Assign your blood/dead material here
+
+    private Renderer chickenRenderer;
 
     private enum ChickenState
     {
@@ -52,12 +68,21 @@ public class ChickenController : MonoBehaviour
         {
             Debug.LogError("No end position set for chicken!");
         }
+        // Get the renderer component (works for both MeshRenderer and SkinnedMeshRenderer)
+        chickenRenderer = GetComponentInChildren<Renderer>();
 
+        if (chickenRenderer == null)
+        {
+            Debug.LogError("No Renderer found on chicken!");
+        }
         // Store starting position
         startPosition = transform.position;
+        // Store original Y position
+        originalYPosition = transform.position.y;
+
 
         // Try to get animator if exists
-        animator = GetComponent<Animator>();
+        //animator = GetComponent<Animator>();
 
         currentSpeed = walkSpeed;
     }
@@ -65,6 +90,11 @@ public class ChickenController : MonoBehaviour
     void Update()
     {
         if (busTransform == null) return;
+
+        if (enableBobbing)
+        {
+            ApplyBobbing();
+        }
 
         switch (currentState)
         {
@@ -188,16 +218,57 @@ public class ChickenController : MonoBehaviour
             currentState = ChickenState.Dead;
 
             // Stop all animations
-            if (animator != null)
+            /*if (animator != null)
             {
                 animator.SetBool("isWalking", false);
                 animator.SetBool("isRunning", false);
                 animator.enabled = false; // Completely freeze animator
+            }*/
+            // Swap to dead material
+            if (chickenRenderer != null && deadMaterial != null)
+            {
+                chickenRenderer.material = deadMaterial;
+                Debug.Log("Chicken material swapped to dead");
             }
-
             // Optional: Tip the chicken over
-            transform.rotation = Quaternion.Euler(90f, transform.rotation.eulerAngles.y, 0);
+            transform.rotation = Quaternion.Euler(0f, transform.rotation.eulerAngles.y, 90f);
         }
+    }
+
+    void ApplyBobbing()
+    {
+        float bobSpeed = 0f;
+        float bobHeight = 0f;
+
+        // Determine bob parameters based on state
+        if (currentState == ChickenState.Walking)
+        {
+            bobSpeed = walkBobSpeed;
+            bobHeight = walkBobHeight;
+            bobTimer += Time.deltaTime;
+        }
+        else if (currentState == ChickenState.Running)
+        {
+            bobSpeed = runBobSpeed;
+            bobHeight = runBobHeight;
+            bobTimer += Time.deltaTime;
+        }
+        else
+        {
+            // Idle - smoothly return to original height
+            bobTimer = 0f;
+            Vector3 targetPos = new Vector3(transform.position.x, originalYPosition, transform.position.z);
+            transform.position = Vector3.Lerp(transform.position, targetPos, 5f * Time.deltaTime);
+            return;
+        }
+
+        // Calculate bob offset using sine wave
+        float bobOffset = Mathf.Sin(bobTimer * bobSpeed) * bobHeight;
+
+        // Apply to Y position
+        Vector3 newPos = transform.position;
+        newPos.y = originalYPosition + bobOffset;
+        transform.position = newPos;
     }
 
     // Optional: Visualize detection radius in editor
