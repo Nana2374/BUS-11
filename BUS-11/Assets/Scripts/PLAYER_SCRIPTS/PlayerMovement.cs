@@ -11,6 +11,7 @@ public class PlayerMovement : MonoBehaviour
     public float gravity = -9.81f;
     public float jumpHeight = 3f;
 
+
     public Transform groundCheck;
     public float groundDistance = 0.4f;
     public LayerMask groundMask;
@@ -20,6 +21,10 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Animation")]
     public Animator animator;
+
+    [Header("Audio")]
+    public AudioSource footstepSource;
+    public AudioClip footstepLoop;
 
     // Update is called once per frame
     void Update()
@@ -61,6 +66,26 @@ public class PlayerMovement : MonoBehaviour
         {
             SetAnimation(false, false); // Idle
         }
+
+        bool isMoving = (x != 0 || z != 0);
+
+        if (isMoving && isGrounded)
+        {
+            if (!footstepSource.isPlaying)
+            {
+                footstepSource.clip = footstepLoop;
+                footstepSource.loop = true;
+                footstepSource.pitch = UnityEngine.Random.Range(0.95f, 1.05f); // slight variation
+                footstepSource.Play();
+            }
+        }
+        else
+        {
+            if (footstepSource.isPlaying)
+            {
+                footstepSource.Stop();
+            }
+        }
     }
 
     // Helper function to set animations
@@ -69,6 +94,11 @@ public class PlayerMovement : MonoBehaviour
         if (animator == null) return;
 
         animator.SetBool("isWalking", walking);
+
         animator.SetBool("isSitting", sitting);
+
     }
+
+
+
 }
