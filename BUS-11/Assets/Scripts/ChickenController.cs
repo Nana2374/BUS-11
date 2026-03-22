@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
 public class ChickenController : MonoBehaviour
 {
     [Header("Movement Settings")]
@@ -27,12 +26,6 @@ public class ChickenController : MonoBehaviour
     [Header("Materials")]
     public Material aliveMaterial;
     public Material deadMaterial; // Assign your blood/dead material here
-
-    [Header("Audio")]
-    public AudioSource chickenSource;
-
-    public AudioClip chickenDeadClip;
-    public AudioClip chickenEscapeClip;
 
     private Renderer chickenRenderer;
 
@@ -96,7 +89,6 @@ public class ChickenController : MonoBehaviour
 
     void Update()
     {
-
         if (busTransform == null) return;
 
         if (enableBobbing)
@@ -113,7 +105,6 @@ public class ChickenController : MonoBehaviour
             case ChickenState.Walking:
                 CrossRoad();
                 CheckForPanic();
-
                 break;
 
             case ChickenState.Running:
@@ -139,7 +130,6 @@ public class ChickenController : MonoBehaviour
         {
             currentState = ChickenState.Walking;
             currentSpeed = walkSpeed;
-            chickenSource.Play();
 
             // Face the end position
             Vector3 directionToEnd = (targetPosition - transform.position).normalized;
@@ -205,7 +195,6 @@ public class ChickenController : MonoBehaviour
         {
             currentState = ChickenState.CrossedRoad;
 
-            AudioManager.Instance.PlaySFX(chickenEscapeClip);
             Debug.Log("Chicken safely crossed the road!");
 
             // Optional: Stop animations
@@ -223,11 +212,9 @@ public class ChickenController : MonoBehaviour
         // Check if hit by bus
         if (collision.gameObject.CompareTag("Bus"))
         {
-            AudioManager.Instance.PlaySFX(chickenDeadClip);
             Debug.Log("Chicken got hit!");
 
             // Freeze chicken at current position
-
             currentState = ChickenState.Dead;
 
             // Stop all animations

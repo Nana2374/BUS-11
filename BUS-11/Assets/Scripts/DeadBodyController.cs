@@ -20,10 +20,6 @@ public class DeadBodyController : MonoBehaviour
     public bool destroyOnLand = true;        // Destroy after reaching end position
     public float destroyDelay = 2f;          // Seconds after landing to destroy
 
-    [Header("Audio")]
-    public AudioClip bodyFallClip;
-    public AudioClip bodyRunOverClip;
-
     private enum BodyState
     {
         Lying,          // Just lying on ground
@@ -116,7 +112,6 @@ public class DeadBodyController : MonoBehaviour
         bodyRigidbody.useGravity = true;
 
         // Start landing timer
-
         Invoke("MarkAsLanded", 3f); // Call MarkAsLanded after 1 second
 
         // Calculate launch direction
@@ -142,17 +137,15 @@ public class DeadBodyController : MonoBehaviour
     void MarkAsLanded()
     {
         currentState = BodyState.Landed;
-
         Debug.Log("Dead body landed!");
-        AudioManager.Instance.PlaySFX(bodyFallClip);
 
         bodyRigidbody.isKinematic = true;
 
         if (destroyOnLand)
-        {
-            Destroy(gameObject, destroyDelay);
-            Debug.Log("Dead body will be destroyed in " + destroyDelay + " seconds.");
-        }
+            {
+                Destroy(gameObject, destroyDelay);
+                Debug.Log("Dead body will be destroyed in " + destroyDelay + " seconds.");
+            }
     }
 
     /*void OnDrawGizmos()
@@ -165,6 +158,4 @@ public class DeadBodyController : MonoBehaviour
             Gizmos.DrawLine(deadBody.position, endPosition.position);
         }
     }*/
-
-
 }

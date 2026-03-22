@@ -28,17 +28,6 @@ public class BusController : MonoBehaviour
     float engineBrakeAmount = 0f;
     float currentBrakeAmount = 0f;
 
-    [Header("Audio")]
-    public AudioSource engineSource;
-    public AudioSource brakeSource;
-
-    public AudioClip engineIdleClip;
-    public AudioClip engineDriveClip;
-    public AudioClip brakeClip;
-
-    public float minPitch = 0.8f;
-    public float maxPitch = 2.0f;
-
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -50,10 +39,6 @@ public class BusController : MonoBehaviour
 
         // START IN PARK - freeze the bus immediately
         rb.constraints = RigidbodyConstraints.FreezeAll;
-
-        engineSource.clip = engineIdleClip;
-        engineSource.loop = true;
-        engineSource.Play();
     }
 
     void Update()
@@ -145,9 +130,9 @@ public class BusController : MonoBehaviour
 
             // Completely freeze the bus in Park
             //rb.constraints = RigidbodyConstraints.FreezePosition |
-            //RigidbodyConstraints.FreezeRotationX |
-            //RigidbodyConstraints.FreezeRotationY |
-            //RigidbodyConstraints.FreezeRotationZ;
+                            //RigidbodyConstraints.FreezeRotationX |
+                            //RigidbodyConstraints.FreezeRotationY |
+                            //RigidbodyConstraints.FreezeRotationZ;
 
             // Completely freeze the bus in Park
             rb.constraints = RigidbodyConstraints.FreezeAll; // Lock EVERYTHING
@@ -309,7 +294,7 @@ public class BusController : MonoBehaviour
             }
         }
 
-
+        
 
         // At low speeds: full steering (60 degrees)
         // At high speeds: reduced steering (30 degrees)
@@ -333,34 +318,6 @@ public class BusController : MonoBehaviour
         // Rear wheels steer opposite (slight angle)
         //rearLeft.steerAngle = -steerInput * (steerAngle * 0.3f);
         //rearRight.steerAngle = -steerInput * (steerAngle * 0.3f);
-
-        // Get speed
-        float speed = rb.velocity.magnitude;
-
-        // Normalize speed (0 to 1)
-        float speedPercent = Mathf.Clamp01(speed / maxSpeed);
-
-        // Adjust pitch based on speed
-        engineSource.pitch = Mathf.Lerp(minPitch, maxPitch, speedPercent);
-
-        // Switch between idle and driving sound
-        if (speedPercent > 0.1f)
-        {
-            if (engineSource.clip != engineDriveClip)
-            {
-                engineSource.clip = engineDriveClip;
-                engineSource.Play();
-            }
-        }
-        else
-        {
-            if (engineSource.clip != engineIdleClip)
-            {
-                engineSource.clip = engineIdleClip;
-                engineSource.Play();
-            }
-        }
-
     }
 
     void UpShift()
