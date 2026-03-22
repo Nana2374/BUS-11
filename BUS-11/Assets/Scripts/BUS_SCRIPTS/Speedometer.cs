@@ -34,7 +34,7 @@ public class Speedometer : MonoBehaviour
         initialX = currentRotation.x;
         initialY = currentRotation.y;
 
-        Debug.Log($"Speedometer initialized - X: {initialX}, Y: {initialY}");
+        //Debug.Log($"Speedometer initialized - X: {initialX}, Y: {initialY}");
 
         // Set to minimum speed position at start
         transform.localRotation = Quaternion.Euler(initialX, initialY, minAngle);

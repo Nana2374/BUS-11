@@ -13,7 +13,7 @@ public class MouseLook : MonoBehaviour
     //public SnaptoSeat seatController; // Add reference to your seat script
 
     float xRotation = 0f;
-    float yRotation = 0f; // Store Y rotation separately
+    //float yRotation = 0f; // Store Y rotation separately
 
     // Start is called before the first frame update
     void Start()

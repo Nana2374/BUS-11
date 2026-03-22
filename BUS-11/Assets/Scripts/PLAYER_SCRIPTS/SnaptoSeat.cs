@@ -47,7 +47,7 @@ public class SnaptoSeat : MonoBehaviour
         {
             originalParentLocalPos = busDriverP.localPosition;
             originalParentLocalRot = busDriverP.localRotation;
-            Debug.Log($"Original Bus_Driver_P position: {originalParentLocalPos}");
+            //Debug.Log($"Original Bus_Driver_P position: {originalParentLocalPos}");
 
             // Auto-find the mesh child if not assigned
             if (busDriverMesh == null)
@@ -61,7 +61,7 @@ public class SnaptoSeat : MonoBehaviour
         {
             originalMeshLocalPos = busDriverMesh.localPosition;
             originalMeshLocalRot = busDriverMesh.localRotation;
-            Debug.Log($"Original BusDriver_Idle position: {originalMeshLocalPos}");
+            //Debug.Log($"Original BusDriver_Idle position: {originalMeshLocalPos}");
         }
 
         if (driverSeat == null)

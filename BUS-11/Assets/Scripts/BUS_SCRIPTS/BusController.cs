@@ -16,7 +16,6 @@ public class BusController : MonoBehaviour
 
     // Gear System
     public int currentGear = 0; // -1 = Reverse, 0 = Park, 1-3 = Gears
-    private int previousForwardGear = 1;
     public float reverseRatio = 0.5f;
     public float[] gearRatios = new float[] { 0f, 0.3f, 0.7f, 1f }; // Park, Gear1, Gear2, Gear3
     public float reverseSpeedLimit = 40f;
@@ -50,6 +49,30 @@ public class BusController : MonoBehaviour
 
         // START IN PARK - freeze the bus immediately
         rb.constraints = RigidbodyConstraints.FreezeAll;
+
+        // Register this AudioSource with AudioManager
+        /*AudioSource myAudio = GetComponent<engineSource>();
+        if (myAudio != null)
+        {
+            AudioManager.Instance.RegisterSFXSource(myAudio);
+        }
+
+        // Register this AudioSource with AudioManager
+        AudioSource myAudio = GetComponent<brakeSource>();
+        if (myAudio != null)
+        {
+            AudioManager.Instance.RegisterSFXSource(myAudio);
+        }*/
+
+        if (engineSource != null)
+        {
+            AudioManager.Instance.RegisterSFXSource(engineSource);
+        }
+
+        if (brakeSource != null)
+        {
+            AudioManager.Instance.RegisterSFXSource(brakeSource);
+        }
 
         engineSource.clip = engineIdleClip;
         engineSource.loop = true;

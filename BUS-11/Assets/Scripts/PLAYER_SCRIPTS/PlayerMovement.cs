@@ -25,6 +25,21 @@ public class PlayerMovement : MonoBehaviour
     public AudioSource footstepSource;
     public AudioClip footstepLoop;
 
+    void Start()
+    {
+        // Register this AudioSource with AudioManager
+        /*AudioSource myAudio = GetComponent<footstepSource>();
+        if (myAudio != null)
+        {
+            AudioManager.Instance.RegisterSFXSource(myAudio);
+        }*/
+
+        if (footstepSource != null)
+        {
+            AudioManager.Instance.RegisterSFXSource(footstepSource);
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {

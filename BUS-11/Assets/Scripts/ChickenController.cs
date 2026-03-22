@@ -86,9 +86,17 @@ public class ChickenController : MonoBehaviour
         // Store original Y position
         originalYPosition = transform.position.y;
 
+        // Register this AudioSource with AudioManager
+        /*AudioSource myAudio = GetComponent<chickenSource>();
+        if (myAudio != null)
+        {
+            AudioManager.Instance.RegisterSFXSource(myAudio);
+        }*/
 
-        // Try to get animator if exists
-        //animator = GetComponent<Animator>();
+        if (chickenSource != null)
+        {
+            AudioManager.Instance.RegisterSFXSource(chickenSource);
+        }
 
         currentSpeed = walkSpeed;
     }

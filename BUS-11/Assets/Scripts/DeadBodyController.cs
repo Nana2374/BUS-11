@@ -48,6 +48,13 @@ public class DeadBodyController : MonoBehaviour
         bodyRigidbody.useGravity = false;
 
         deadBody.gameObject.SetActive(false);
+
+        // Register this AudioSource with AudioManager
+        AudioSource myAudio = GetComponent<AudioSource>();
+        if (myAudio != null)
+        {
+            AudioManager.Instance.RegisterSFXSource(myAudio);
+        }
     }
 
     void Update()

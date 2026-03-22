@@ -12,6 +12,14 @@ public class GameManager : MonoBehaviour
     [Header("UI Panels")]
     public GameObject startScreen;
     public GameObject pauseScreen;
+    public GameObject drivingUI;
+    public GameObject driverSeatUI;
+    public GameObject endDemoUI;
+
+    [Header("Player Controls")]
+    public PlayerMovement playerMovement;
+    public MouseLook mouseLook;
+    public BusController busController;
 
     [Header("Blur Effect")]
     public Volume postProcessVolume;
@@ -37,6 +45,22 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        // Auto-find player controls if not assigned
+        if (playerMovement == null)
+        {
+            playerMovement = FindObjectOfType<PlayerMovement>();
+        }
+
+        if (mouseLook == null)
+        {
+            mouseLook = FindObjectOfType<MouseLook>();
+        }
+
+        if (busController == null)
+        {
+            busController = FindObjectOfType<BusController>();
+        }
+
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
@@ -51,38 +75,43 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        if (!gameStarted && Input.GetKeyDown(KeyCode.F))
-        {
-            AudioManager.Instance.PlaySFX(clickSound);
-            StartGame();
-        }
         // Press ESC to pause/unpause (only after game has started)
         if (gameStarted && Input.GetKeyDown(KeyCode.Escape))
-            // Press ESC to pause/unpause (only after game has started)
-            if (gameStarted && Input.GetKeyDown(KeyCode.Escape))
+        {
+            AudioManager.Instance.PlaySFX(clickSound);
+            if (isPaused)
             {
-                if (isPaused)
-                {
-                    ResumeGame();
-                }
-                else
-                {
-                    PauseGame();
-                }
+                ResumeGame();
             }
+            else
+            {
+                PauseGame();
+            }
+        }
+
+        if (endDemoUI != null && endDemoUI.activeSelf && Input.GetKeyDown(KeyCode.F))
+        {
+            AudioManager.Instance.PlaySFX(clickSound);
+            RestartGame();
+        }
     }
 
     public void ShowStartScreen()
     {
         if (startScreen != null) startScreen.SetActive(true);
         if (pauseScreen != null) pauseScreen.SetActive(false);
+        if (drivingUI != null) drivingUI.SetActive(false);
+        if (driverSeatUI != null) driverSeatUI.SetActive(false);
+        if (endDemoUI != null) endDemoUI.SetActive(false);
 
         AudioManager.Instance.PlayMenuMusic();
 
         // Freeze time and show cursor
         Time.timeScale = 0f;
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+
+        DisablePlayerControls();
 
         gameStarted = false;
     }
@@ -91,13 +120,19 @@ public class GameManager : MonoBehaviour
     {
         if (startScreen != null) startScreen.SetActive(false);
         if (pauseScreen != null) pauseScreen.SetActive(false);
+        if (drivingUI != null) drivingUI.SetActive(false);
+        if (driverSeatUI != null) driverSeatUI.SetActive(false);
+        if (endDemoUI != null) endDemoUI.SetActive(false);
 
         AudioManager.Instance.PlayGameMusic();
+        AudioManager.Instance.ResumeSFX();
 
         // Unfreeze time and lock cursor
         Time.timeScale = 1f;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+        EnablePlayerControls();
 
         gameStarted = true;
         isPaused = false;
@@ -109,14 +144,20 @@ public class GameManager : MonoBehaviour
     {
         if (startScreen != null) startScreen.SetActive(false);
         if (pauseScreen != null) pauseScreen.SetActive(true);
+        if (drivingUI != null) drivingUI.SetActive(false);
+        if (driverSeatUI != null) driverSeatUI.SetActive(false);
+        if (endDemoUI != null) endDemoUI.SetActive(false);
 
         // Freeze time and show cursor
         Time.timeScale = 0f;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
 
+        DisablePlayerControls();
+
         isPaused = true;
 
+        //AudioManager.Instance.PauseSFX();
 
         if (postProcessVolume != null)
         {
@@ -130,13 +171,18 @@ public class GameManager : MonoBehaviour
     {
         if (startScreen != null) startScreen.SetActive(false);
         if (pauseScreen != null) pauseScreen.SetActive(false);
+        if (endDemoUI != null) endDemoUI.SetActive(false);
 
         // Unfreeze time and lock cursor
         Time.timeScale = 1f;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
+        EnablePlayerControls();
+
         isPaused = false;
+
+        //AudioManager.Instance.ResumeSFX();
 
         if (postProcessVolume != null)
         {
@@ -144,6 +190,27 @@ public class GameManager : MonoBehaviour
         }
 
         Debug.Log("Game resumed!");
+    }
+
+    public void EndofDemo()
+    {
+        if (startScreen != null) startScreen.SetActive(false);
+        if (pauseScreen != null) pauseScreen.SetActive(false);
+        if (drivingUI != null) drivingUI.SetActive(false);
+        if (driverSeatUI != null) driverSeatUI.SetActive(false);
+        if (endDemoUI != null) endDemoUI.SetActive(true);
+
+        AudioManager.Instance.StopSFX();
+        AudioManager.Instance.PlayMenuMusic();
+
+        // Freeze time and show cursor
+        Time.timeScale = 0f;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+
+        DisablePlayerControls();
+
+        Debug.Log("End of demo reached!");
     }
 
     public void QuitGame()
@@ -155,6 +222,49 @@ public class GameManager : MonoBehaviour
     public void RestartGame()
     {
         Time.timeScale = 1f; // Reset time before reloading
+
+        // Destroy AudioManager so it recreates fresh
+        if (AudioManager.Instance != null)
+        {
+            Destroy(AudioManager.Instance.gameObject);
+        }
+
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    void EnablePlayerControls()
+    {
+        if (playerMovement != null)
+        {
+            playerMovement.enabled = true;
+        }
+
+        if (mouseLook != null)
+        {
+            mouseLook.enabled = true;
+        }
+
+        if (busController != null)
+        {
+            busController.enabled = true;
+        }
+    }
+
+    void DisablePlayerControls()
+    {
+        if (playerMovement != null)
+        {
+            playerMovement.enabled = false;
+        }
+
+        if (mouseLook != null)
+        {
+            mouseLook.enabled = false;
+        }
+
+        if (busController != null)
+        {
+            busController.enabled = false;
+        }
     }
 }
