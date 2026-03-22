@@ -15,11 +15,16 @@ public class PlayerMovement : MonoBehaviour
     public float groundDistance = 0.4f;
     public LayerMask groundMask;
 
+    public BusController busController;
+
     Vector3 velocity;
     bool isGrounded;
 
     [Header("Animation")]
     public Animator animator;
+
+    [Header("Seat Control")]
+    public SnaptoSeat seatController;
 
     [Header("Audio")]
     public AudioSource footstepSource;
@@ -72,18 +77,22 @@ public class PlayerMovement : MonoBehaviour
 
         controller.Move(velocity * Time.deltaTime);
 
-        if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
+        // ONLY set walking/idle animations if NOT seated
+        if (seatController == null || !seatController.isSeated)
         {
-            SetAnimation(true, false); // Walking
-        }
-        else
-        {
-            SetAnimation(false, false); // Idle
+            if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
+            {
+                SetAnimation(true, false); // Walking
+            }
+            else
+            {
+                SetAnimation(false, false); // Idle
+            }
         }
 
         bool isMoving = (x != 0 || z != 0);
 
-        if (isMoving && isGrounded)
+        if (isMoving && isGrounded && !busController.playerDriving)
         {
             if (!footstepSource.isPlaying)
             {

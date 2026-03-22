@@ -56,7 +56,7 @@ public class MouseLook : MonoBehaviour
         mouseSensitivity = sensitivity;
         PlayerPrefs.SetFloat("MouseSensitivity", sensitivity);
         PlayerPrefs.Save();
-        Debug.Log($"Mouse sensitivity set to: {sensitivity}");
+        //Debug.Log($"Mouse sensitivity set to: {sensitivity}");
     }
 
     public float GetSensitivity()

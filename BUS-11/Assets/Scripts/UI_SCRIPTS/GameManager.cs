@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
     [Header("Player Controls")]
     public PlayerMovement playerMovement;
     public MouseLook mouseLook;
+    public CameraInteraction cameraInteraction;
     public BusController busController;
 
     [Header("Blur Effect")]
@@ -26,6 +27,9 @@ public class GameManager : MonoBehaviour
 
     private bool isPaused = false;
     private bool gameStarted = false;
+
+    private bool wasDrivingUIActive = false;
+    private bool wasDriverSeatUIActive = false;
 
     [Header("SFX")]
     public AudioClip clickSound;
@@ -110,6 +114,7 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 0f;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+        cameraInteraction.showCrosshair = false;
 
         DisablePlayerControls();
 
@@ -131,6 +136,7 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1f;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        cameraInteraction.showCrosshair = true;
 
         EnablePlayerControls();
 
@@ -142,6 +148,9 @@ public class GameManager : MonoBehaviour
 
     public void PauseGame()
     {
+        wasDrivingUIActive = drivingUI != null && drivingUI.activeSelf;
+        wasDriverSeatUIActive = driverSeatUI != null && driverSeatUI.activeSelf;
+
         if (startScreen != null) startScreen.SetActive(false);
         if (pauseScreen != null) pauseScreen.SetActive(true);
         if (drivingUI != null) drivingUI.SetActive(false);
@@ -152,6 +161,7 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 0f;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+        cameraInteraction.showCrosshair = false;
 
         DisablePlayerControls();
 
@@ -173,10 +183,15 @@ public class GameManager : MonoBehaviour
         if (pauseScreen != null) pauseScreen.SetActive(false);
         if (endDemoUI != null) endDemoUI.SetActive(false);
 
+        // RESTORE UIs that were active before pausing
+        if (drivingUI != null) drivingUI.SetActive(wasDrivingUIActive);
+        if (driverSeatUI != null) driverSeatUI.SetActive(wasDriverSeatUIActive);
+
         // Unfreeze time and lock cursor
         Time.timeScale = 1f;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        cameraInteraction.showCrosshair = true;
 
         EnablePlayerControls();
 
@@ -207,6 +222,7 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 0f;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        cameraInteraction.showCrosshair = false;
 
         DisablePlayerControls();
 
@@ -252,9 +268,17 @@ public class GameManager : MonoBehaviour
 
     void DisablePlayerControls()
     {
+        // Only disable movement if NOT seated (sitting animations stay active)
         if (playerMovement != null)
         {
-            playerMovement.enabled = false;
+            SnaptoSeat seatController = playerMovement.GetComponent<SnaptoSeat>();
+
+            // Only disable movement if not sitting in driver's seat
+            if (seatController == null || !seatController.isSeated)
+            {
+                playerMovement.enabled = false;
+            }
+            // If seated, leave movement script enabled but it won't work due to Time.timeScale = 0
         }
 
         if (mouseLook != null)

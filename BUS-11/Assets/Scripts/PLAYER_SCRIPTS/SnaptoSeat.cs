@@ -91,12 +91,32 @@ public class SnaptoSeat : MonoBehaviour
 
     void Update()
     {
+        // Don't allow seat exit/enter while game is paused
+        if (Time.timeScale == 0f) return;
+
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
             if (!isSeated && playerInRange)
                 SnapPlayerToSeat();
             else if (isSeated)
                 ExitSeat();
+        }
+    }
+
+    void LateUpdate()
+    {
+        // Keep mesh at seat position when seated
+        if (isSeated && busDriverP != null && driverSeat != null)
+        {
+            busDriverP.localPosition = new Vector3(0f, -0.35f, 0.07f); 
+            busDriverP.localRotation = Quaternion.identity;
+
+            // Force sitting animation to stay active
+            if (animator != null)
+            {
+                animator.SetBool("isWalking", false);
+                animator.SetBool("isSitting", true);
+            }
         }
     }
 

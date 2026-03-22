@@ -50,20 +50,6 @@ public class BusController : MonoBehaviour
         // START IN PARK - freeze the bus immediately
         rb.constraints = RigidbodyConstraints.FreezeAll;
 
-        // Register this AudioSource with AudioManager
-        /*AudioSource myAudio = GetComponent<engineSource>();
-        if (myAudio != null)
-        {
-            AudioManager.Instance.RegisterSFXSource(myAudio);
-        }
-
-        // Register this AudioSource with AudioManager
-        AudioSource myAudio = GetComponent<brakeSource>();
-        if (myAudio != null)
-        {
-            AudioManager.Instance.RegisterSFXSource(myAudio);
-        }*/
-
         if (engineSource != null)
         {
             AudioManager.Instance.RegisterSFXSource(engineSource);
@@ -165,15 +151,6 @@ public class BusController : MonoBehaviour
             rearRight.brakeTorque = brakeForce * 10f;
             frontLeft.brakeTorque = brakeForce * 10f;
             frontRight.brakeTorque = brakeForce * 10f;
-
-            // Completely freeze the bus in Park
-            //rb.constraints = RigidbodyConstraints.FreezePosition |
-            //RigidbodyConstraints.FreezeRotationX |
-            //RigidbodyConstraints.FreezeRotationY |
-            //RigidbodyConstraints.FreezeRotationZ;
-            //RigidbodyConstraints.FreezeRotationX |
-            //RigidbodyConstraints.FreezeRotationY |
-            //RigidbodyConstraints.FreezeRotationZ;
 
             // Completely freeze the bus in Park
             rb.constraints = RigidbodyConstraints.FreezeAll; // Lock EVERYTHING
@@ -335,9 +312,6 @@ public class BusController : MonoBehaviour
             }
         }
 
-
-
-
         // At low speeds: full steering (60 degrees)
         // At high speeds: reduced steering (30 degrees)
         float speedFactor = Mathf.Clamp01(currentSpeed / 40f); // 0 at 0 km/h, 1 at 40+ km/h
@@ -373,8 +347,18 @@ public class BusController : MonoBehaviour
         // Switch between idle and driving sound
         bool isTryingToMove = Mathf.Abs(motorInput) > 0.1f && currentGear != 0;
 
-        if (isTryingToMove)
+        if (currentGear == 0)
         {
+            if (engineSource.clip != engineIdleClip)
+            {
+                engineSource.Stop(); // Stop current sound
+                engineSource.clip = engineIdleClip;
+                engineSource.Play();
+            }
+        }
+        else if (isTryingToMove)
+        {
+            // Driving - play drive sound
             if (engineSource.clip != engineDriveClip)
             {
                 engineSource.clip = engineDriveClip;
@@ -383,13 +367,13 @@ public class BusController : MonoBehaviour
         }
         else
         {
+            // Not driving but not in Park - play idle sound
             if (engineSource.clip != engineIdleClip)
             {
                 engineSource.clip = engineIdleClip;
                 engineSource.Play();
             }
         }
-
     }
 
     void UpShift()
