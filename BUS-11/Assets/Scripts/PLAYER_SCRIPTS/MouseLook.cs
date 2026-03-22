@@ -6,7 +6,7 @@ public class MouseLook : MonoBehaviour
 {
     public bool canLook = true;
 
-    public float mouseSensitivty = 100f;
+    public float mouseSensitivity = 150f;
 
     public Transform playerBody;
 
@@ -19,6 +19,8 @@ public class MouseLook : MonoBehaviour
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
+
+        LoadSensitivity();
     }
 
     // Update is called once per frame
@@ -26,8 +28,8 @@ public class MouseLook : MonoBehaviour
     {
         if (!canLook) return;
 
-        float mouseX = Input.GetAxis("Mouse X") * mouseSensitivty * Time.deltaTime;
-        float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivty * Time.deltaTime;
+        float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
+        float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
 
         xRotation -= mouseY;
         xRotation = Mathf.Clamp(xRotation, -90f, 90f);
@@ -40,5 +42,25 @@ public class MouseLook : MonoBehaviour
         {
             playerBody.Rotate(Vector3.up * mouseX);
         }*/
+    }
+
+    void LoadSensitivity()
+    {
+        // Load saved sensitivity, default to 100 if not saved
+        mouseSensitivity = PlayerPrefs.GetFloat("MouseSensitivity", 100f);
+        Debug.Log($"Loaded mouse sensitivity: {mouseSensitivity}");
+    }
+
+    public void SetSensitivity(float sensitivity)
+    {
+        mouseSensitivity = sensitivity;
+        PlayerPrefs.SetFloat("MouseSensitivity", sensitivity);
+        PlayerPrefs.Save();
+        Debug.Log($"Mouse sensitivity set to: {sensitivity}");
+    }
+
+    public float GetSensitivity()
+    {
+        return mouseSensitivity;
     }
 }

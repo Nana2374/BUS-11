@@ -7561,10 +7561,10 @@ MonoBehaviour:
   m_FillRect: {fileID: 1393745368}
   m_HandleRect: {fileID: 457997180}
   m_Direction: 0
-  m_MinValue: 0
-  m_MaxValue: 1
-  m_WholeNumbers: 0
-  m_Value: 0.5
+  m_MinValue: 35
+  m_MaxValue: 200
+  m_WholeNumbers: 1
+  m_Value: 150
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -13623,7 +13623,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canLook: 1
-  mouseSensitivty: 150
+  mouseSensitivity: 150
   playerBody: {fileID: 2107316705}
 --- !u!114 &330585549
 MonoBehaviour:
@@ -24814,7 +24814,7 @@ GameObject:
   - component: {fileID: 597602900}
   - component: {fileID: 597602901}
   m_Layer: 0
-  m_Name: VolumeController
+  m_Name: VolumeMouseController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -24848,6 +24848,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   masterVolumeSlider: {fileID: 2058987434}
+  sensitivitySlider: {fileID: 201052440}
+  mouseLook: {fileID: 330585548}
 --- !u!1 &598764785
 GameObject:
   m_ObjectHideFlags: 0
