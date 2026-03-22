@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Rendering;
+using UnityEditor;
 
 public class GameManager : MonoBehaviour
 {
@@ -17,6 +18,9 @@ public class GameManager : MonoBehaviour
 
     private bool isPaused = false;
     private bool gameStarted = false;
+
+    [Header("SFX")]
+    public AudioClip clickSound;
 
     void Awake()
     {
@@ -49,10 +53,11 @@ public class GameManager : MonoBehaviour
     {
         if (!gameStarted && Input.GetKeyDown(KeyCode.F))
         {
+            AudioManager.Instance.PlaySFX(clickSound);
             StartGame();
         }
-            // Press ESC to pause/unpause (only after game has started)
-            if (gameStarted && Input.GetKeyDown(KeyCode.Escape))
+        // Press ESC to pause/unpause (only after game has started)
+        if (gameStarted && Input.GetKeyDown(KeyCode.Escape))
         {
             if (isPaused)
             {
@@ -70,6 +75,8 @@ public class GameManager : MonoBehaviour
         if (startScreen != null) startScreen.SetActive(true);
         if (pauseScreen != null) pauseScreen.SetActive(false);
 
+        AudioManager.Instance.PlayMenuMusic();
+
         // Freeze time and show cursor
         Time.timeScale = 0f;
         Cursor.lockState = CursorLockMode.Locked;
@@ -82,6 +89,8 @@ public class GameManager : MonoBehaviour
     {
         if (startScreen != null) startScreen.SetActive(false);
         if (pauseScreen != null) pauseScreen.SetActive(false);
+
+        AudioManager.Instance.PlayGameMusic();
 
         // Unfreeze time and lock cursor
         Time.timeScale = 1f;
@@ -105,6 +114,7 @@ public class GameManager : MonoBehaviour
         Cursor.visible = true;
 
         isPaused = true;
+
 
         if (postProcessVolume != null)
         {
