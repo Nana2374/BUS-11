@@ -30,6 +30,11 @@ public class PassengerController : MonoBehaviour, IInteractable
     public Transform busTransform;
     public BusSeatManager seatManager;
 
+    public bool HasBeenPickedUp
+    {
+        get { return currentState != PassengerState.Waiting; }
+    }
+
     private enum PassengerState
     {
         Waiting,        // Standing at bus stop, waiting for bus
@@ -190,8 +195,8 @@ public class PassengerController : MonoBehaviour, IInteractable
     {
         if (currentState == PassengerState.AtEntry)
         {
-                // Start gesture animation, then walk to seat after it finishes
-                StartCoroutine(GestureThenWalkToSeat());
+            // Start gesture animation, then walk to seat after it finishes
+            StartCoroutine(GestureThenWalkToSeat());
         }
     }
 
