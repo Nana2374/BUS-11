@@ -15,8 +15,6 @@ public class PlayerMovement : MonoBehaviour
     public float groundDistance = 0.4f;
     public LayerMask groundMask;
 
-    public BusController busController;
-
     Vector3 velocity;
     bool isGrounded;
 
@@ -92,7 +90,7 @@ public class PlayerMovement : MonoBehaviour
 
         bool isMoving = (x != 0 || z != 0);
 
-        if (isMoving && isGrounded && !busController.playerDriving)
+        if (isMoving && isGrounded && !seatController.isSeated)
         {
             if (!footstepSource.isPlaying)
             {
