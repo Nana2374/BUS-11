@@ -7,7 +7,12 @@ public class BusResetController : MonoBehaviour
     public Rigidbody rb;
     public BusController busController;
 
+    [Header("Reset Monologues")]
+    public DialogueData firstResetMonologue;    // first teleport dialogue
+    public DialogueData repeatResetMonologue;   // second time onwards dialogue
+
     private bool isResetting = false;
+    private int resetCount = 0;
 
     public IEnumerator ResetBusRoutine(Transform resetPoint)
     {
@@ -64,6 +69,22 @@ public class BusResetController : MonoBehaviour
         // Fade back in
         if (ScreenFader.Instance != null)
             yield return StartCoroutine(ScreenFader.Instance.FadeIn());
+
+        // Increase reset count
+        resetCount++;
+
+        // Play different monologue depending on how many times reset happened
+        if (DialogueManager.Instance != null)
+        {
+            if (resetCount == 1 && firstResetMonologue != null)
+            {
+                DialogueManager.Instance.StartDialogue(firstResetMonologue);
+            }
+            else if (resetCount >= 2 && repeatResetMonologue != null)
+            {
+                DialogueManager.Instance.StartDialogue(repeatResetMonologue);
+            }
+        }
 
         isResetting = false;
     }

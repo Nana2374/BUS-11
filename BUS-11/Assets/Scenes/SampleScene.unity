@@ -24143,7 +24143,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &484384586
 RectTransform:
   m_ObjectHideFlags: 0
@@ -24898,7 +24898,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &498977845
 RectTransform:
   m_ObjectHideFlags: 0
@@ -116804,6 +116804,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 8254760196553937977}
   busController: {fileID: 8591317311015121196}
+  firstResetMonologue: {fileID: 11400000, guid: 13d66a851c7c11b4aac86162c32905f2,
+    type: 2}
+  repeatResetMonologue: {fileID: 11400000, guid: d9d0c97824e0e2b4c95966247960445c,
+    type: 2}
 --- !u!33 &9198686888429032445
 MeshFilter:
   m_ObjectHideFlags: 0
