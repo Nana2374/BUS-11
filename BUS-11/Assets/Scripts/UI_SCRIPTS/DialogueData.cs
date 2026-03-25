@@ -13,6 +13,16 @@ public enum DialogueBranchType
     Ending
 }
 
+public enum SpeakerType
+{
+    Driver,
+    Ghost,
+    Unknown,
+    SchoolGirl,
+    SchoolBoy,
+    Nurse
+}
+
 [System.Serializable]
 public class DialogueChoice
 {
@@ -30,9 +40,7 @@ public class DialogueNode
     [TextArea(2, 5)]
     public string dialogueLine;
 
-    public bool isPlayerLine;
-
-    public string speakerName;
+    public SpeakerType speaker;
 
     public List<DialogueChoice> choices;
 }

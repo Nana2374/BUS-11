@@ -105,12 +105,34 @@ public class DialogueManager : MonoBehaviour
 
         DialogueNode node = currentDialogue.nodes[currentNodeIndex];
 
-        if (node.isPlayerLine)
-            speakerNameText.text = "YOU";
-        else if (!string.IsNullOrEmpty(node.speakerName))
-            speakerNameText.text = node.speakerName;
-        else
-            speakerNameText.text = "???";
+        switch (node.speaker)
+        {
+            case SpeakerType.Driver:
+                speakerNameText.text = "DRIVER";
+                speakerNameText.color = Color.yellow;
+                break;
+
+            case SpeakerType.Ghost:
+                speakerNameText.text = "GHOST";
+                break;
+
+            case SpeakerType.Unknown:
+                speakerNameText.text = "???";
+                break;
+
+            case SpeakerType.SchoolGirl:
+                speakerNameText.text = "SCHOOL GIRL";
+                break;
+
+            case SpeakerType.SchoolBoy:
+                speakerNameText.text = "SCHOOL BOY";
+                break;
+
+            case SpeakerType.Nurse:
+                speakerNameText.text = "NURSE";
+                break;
+        }
+
 
         if (typingCoroutine != null)
             StopCoroutine(typingCoroutine);
@@ -229,6 +251,7 @@ public class DialogueManager : MonoBehaviour
         dialoguePanel.SetActive(false);
         choicesPanel.SetActive(false);
         dialogueText.text = "";
+        speakerNameText.text = "";
 
         currentDialogue = null;
         currentNodeIndex = 0;
