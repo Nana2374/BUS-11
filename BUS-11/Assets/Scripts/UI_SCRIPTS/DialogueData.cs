@@ -32,6 +32,8 @@ public class DialogueNode
 
     public bool isPlayerLine;
 
+    public string speakerName;
+
     public List<DialogueChoice> choices;
 }
 

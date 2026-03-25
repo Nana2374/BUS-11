@@ -12,6 +12,7 @@ public class DialogueManager : MonoBehaviour
     [Header("UI References")]
     public GameObject dialoguePanel;
     public TextMeshProUGUI dialogueText;
+    public TextMeshProUGUI speakerNameText;
 
     [Header("Choice UI")]
     public GameObject choicesPanel;
@@ -103,6 +104,13 @@ public class DialogueManager : MonoBehaviour
         }
 
         DialogueNode node = currentDialogue.nodes[currentNodeIndex];
+
+        if (node.isPlayerLine)
+            speakerNameText.text = "YOU";
+        else if (!string.IsNullOrEmpty(node.speakerName))
+            speakerNameText.text = node.speakerName;
+        else
+            speakerNameText.text = "???";
 
         if (typingCoroutine != null)
             StopCoroutine(typingCoroutine);
