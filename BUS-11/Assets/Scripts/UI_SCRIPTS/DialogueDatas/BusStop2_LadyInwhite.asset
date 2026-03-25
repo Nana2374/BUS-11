@@ -17,8 +17,4 @@ MonoBehaviour:
     branchType: 0
     dialogueLine: "That lady doesn\u2019t look right\u2026 Should I stop?"
     speaker: 0
-    choices:
-    - choiceText: 'Option A: Let her in'
-      nextNodeIndex: 1
-    - choiceText: 'Option B: Drive past her'
-      nextNodeIndex: 1
+    choices: []

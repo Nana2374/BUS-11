@@ -27,7 +27,7 @@ public class DialogueManager : MonoBehaviour
     private DialogueData currentDialogue;
     private int currentNodeIndex;
     private bool isTyping;
-    private bool dialogueActive;
+    public bool dialogueActive;
     private bool isChoosing;
 
     private Coroutine typingCoroutine;

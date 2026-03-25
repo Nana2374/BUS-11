@@ -32,25 +32,26 @@ public class PassengerController : MonoBehaviour, IInteractable
     public Rigidbody busRigidbody;
     public Transform busTransform;
     public BusSeatManager seatManager;
+    public PassengerState CurrentState => currentState;
 
     public bool HasBeenPickedUp
     {
         get { return currentState != PassengerState.Waiting; }
     }
 
-    private enum PassengerState
-    {
-        Waiting,        // Standing at bus stop, waiting for bus
-        WalkingToEntry,        // Walking towards bus entry point
-        AtEntry,        // Standing at entry, waiting to be clicked
-        WalkingToSeat,  // Walking to find a seat
-        Seated,          // Sitting in a seat
-        WalkingToExit,  // Walking towards bus exit point
-        Exited           // Exited the bus and walking away
+        public enum PassengerState
+        {
+            Waiting,        // Standing at bus stop, waiting for bus
+            WalkingToEntry,        // Walking towards bus entry point
+            AtEntry,        // Standing at entry, waiting to be clicked
+            WalkingToSeat,  // Walking to find a seat
+            Seated,          // Sitting in a seat
+            WalkingToExit,  // Walking towards bus exit point
+            Exited           // Exited the bus and walking away
 
-    }
+        }
 
-    private PassengerState currentState = PassengerState.Waiting;
+        private PassengerState currentState = PassengerState.Waiting;
     private Transform targetSeat;
 
     void Start()

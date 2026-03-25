@@ -38,6 +38,12 @@ public class BusController : MonoBehaviour
     public float minPitch = 0.8f;
     public float maxPitch = 2.0f;
 
+    [Header("Ghost Control")]
+    public float ghostSteerForce = 10f; // how strong the pull is
+    public float ghostAccelerationForce = 10f;
+    private float ghostSteerTimer = 0f;
+    private bool ghostActive = false;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -76,6 +82,14 @@ public class BusController : MonoBehaviour
         motorInput = Input.GetAxis("Vertical");
         steerInput = Input.GetAxis("Horizontal");
 
+        // Apply ghost influence (adds to player input)
+        if (ghostActive)
+        {
+            // Ghost presses "W"
+            motorInput = Mathf.Max(motorInput, ghostAccelerationForce);
+            steerInput += ghostSteerForce * Mathf.Clamp01(1f - (ghostSteerTimer / 5f));
+        }
+
         // Gear shifting
         if (Input.GetKeyDown(KeyCode.E))
         {
@@ -97,6 +111,16 @@ public class BusController : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (ghostActive)
+        {
+            ghostSteerTimer -= Time.fixedDeltaTime;
+
+            if (ghostSteerTimer <= 0f)
+            {
+                ghostActive = false;
+            }
+        }
+
         // Apply Park constraints even when player isn't driving
         if (!playerDriving || currentGear == 0)
         {
@@ -444,6 +468,14 @@ public class BusController : MonoBehaviour
     {
         currentGear = -1;
         Debug.Log("Shifted to REVERSE (Max: 15 km/h)");
+    }
+
+    public void TriggerGhostEvent(float duration, float force, float accelForce)
+    {
+        ghostActive = true;
+        ghostSteerTimer = duration;
+        ghostSteerForce = force;
+        ghostAccelerationForce = accelForce;
     }
 
     // Optional: Display current gear on screen

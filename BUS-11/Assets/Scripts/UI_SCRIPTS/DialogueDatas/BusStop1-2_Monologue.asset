@@ -15,6 +15,6 @@ MonoBehaviour:
   nodes:
   - nodeID: 0
     branchType: 0
-    dialogueLine: Seems like Uncle Tan was pretty well-liked
+    dialogueLine: Seems like Uncle Tan was pretty well-liked.
     speaker: 0
     choices: []

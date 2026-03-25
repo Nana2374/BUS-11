@@ -12,7 +12,7 @@ public class MonologueTrigger : MonoBehaviour
     {
         if (triggered) return;
 
-        if (other.CompareTag("Bus"))
+        if (other.CompareTag("Bus") || (other.CompareTag("Player")))
         {
             triggered = true;
 

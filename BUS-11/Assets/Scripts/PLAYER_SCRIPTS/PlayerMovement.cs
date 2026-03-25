@@ -88,6 +88,17 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
+        // HARD STOP if seated
+        if (seatController.isSeated)
+        {
+            if (footstepSource.isPlaying)
+            {
+                footstepSource.Stop();
+                Debug.Log("Player is seated, stopping footstep sounds.");
+            }
+            return; // prevents rest of logic from running
+        }
+
         bool isMoving = (x != 0 || z != 0);
 
         if (isMoving && isGrounded && !seatController.isSeated)

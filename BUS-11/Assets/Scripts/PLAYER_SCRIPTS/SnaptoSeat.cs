@@ -133,12 +133,18 @@ public class SnaptoSeat : MonoBehaviour
 
         playerMovement.enabled = false;
 
+        // FORCE STOP footsteps here
+        if (playerMovement.footstepSource != null && playerMovement.footstepSource.isPlaying)
+        {
+            playerMovement.footstepSource.Stop();
+        }
+
         // Snap to seat
         transform.position = driverSeat.position + new Vector3(0f, 0.15f, 0.08f); //Snap Player to seat 
         transform.rotation = driverSeat.rotation;
         transform.SetParent(driverSeat);
 
-        Debug.Log($"Snapped to seat at position: {transform.localPosition}, rotation: {transform.rotation.eulerAngles}");
+        //Debug.Log($"Snapped to seat at position: {transform.localPosition}, rotation: {transform.rotation.eulerAngles}");
 
         // Unparent Bus_Driver_P so it doesn't rotate
         if (busDriverP != null)
@@ -146,7 +152,7 @@ public class SnaptoSeat : MonoBehaviour
             busDriverP.SetParent(driverSeat); // Parent to seat
             busDriverP.localPosition = new Vector3(0f, -0.35f, 0.07f); // Position relative to seat
             busDriverP.localRotation = Quaternion.identity;
-            Debug.Log("Bus_Driver_P positioned at seat");
+            //Debug.Log("Bus_Driver_P positioned at seat");
         }
 
         // Position the actual mesh (BusDriver_Idle)
@@ -154,7 +160,7 @@ public class SnaptoSeat : MonoBehaviour
         {
             busDriverMesh.localPosition = new Vector3(0f, 0f, 0f); // Position relative to Bus_Driver_P
             busDriverMesh.localRotation = Quaternion.identity;
-            Debug.Log("BusDriver_Idle positioned");
+            //Debug.Log("BusDriver_Idle positioned");
 
             // Change camera to seated position (LOCAL position - relative to Player)
             /*if (cameraTransform != null)
@@ -219,7 +225,7 @@ public class SnaptoSeat : MonoBehaviour
                 busDriverP.SetParent(transform); // Re-parent to Player
                 busDriverP.localPosition = originalParentLocalPos + new Vector3(0f, 0f, -0.3f); // Restore exact original
                 busDriverP.localRotation = originalParentLocalRot;
-                Debug.Log($"Bus_Driver_P restored to: {busDriverP.localPosition}");
+                //Debug.Log($"Bus_Driver_P restored to: {busDriverP.localPosition}");
             }
 
             // Restore BusDriver_Idle mesh to ORIGINAL position (relative to Bus_Driver_P)
@@ -227,7 +233,7 @@ public class SnaptoSeat : MonoBehaviour
             {
                 busDriverMesh.localPosition = originalMeshLocalPos; // Restore exact original
                 busDriverMesh.localRotation = originalMeshLocalRot;
-                Debug.Log($"BusDriver_Idle restored to: {busDriverMesh.localPosition}");
+                //Debug.Log($"BusDriver_Idle restored to: {busDriverMesh.localPosition}");
             }
 
             // RE-ENABLE CameraShake when exiting

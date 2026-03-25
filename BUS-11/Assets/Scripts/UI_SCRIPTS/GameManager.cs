@@ -15,12 +15,17 @@ public class GameManager : MonoBehaviour
     public GameObject drivingUI;
     public GameObject driverSeatUI;
     public GameObject endDemoUI;
+    public GameObject dialogueUI;
+    public GameObject choicesUI;
+    public GameObject monologueUI;
 
     [Header("Player Controls")]
     public PlayerMovement playerMovement;
     public MouseLook mouseLook;
     public CameraInteraction cameraInteraction;
+    public SnaptoSeat snaptoSeat;
     public BusController busController;
+    public DialogueManager dialogueManager;
 
     [Header("Blur Effect")]
     public Volume postProcessVolume;
@@ -30,6 +35,11 @@ public class GameManager : MonoBehaviour
 
     private bool wasDrivingUIActive = false;
     private bool wasDriverSeatUIActive = false;
+    private bool wasDialogueUIActive = false;
+    private bool wasChoicesUIActive = false;
+    private bool wasMonologueUIActive = false;
+
+    private bool wasDialogueActive = false;
 
     [Header("SFX")]
     public AudioClip clickSound;
@@ -98,6 +108,44 @@ public class GameManager : MonoBehaviour
             AudioManager.Instance.PlaySFX(clickSound);
             RestartGame();
         }
+
+        HandleDialogueUI();
+    }
+
+    void HandleDialogueUI()
+    {
+        bool isDialogueActive = (dialogueUI != null && dialogueUI.activeSelf) ||
+                                (choicesUI != null && choicesUI.activeSelf);
+
+        // Dialogue just started (transition from inactive to active)
+        if (isDialogueActive && !wasDialogueActive)
+        {
+            // Save UI state
+            wasDrivingUIActive = drivingUI != null && drivingUI.activeSelf;
+            wasDriverSeatUIActive = driverSeatUI != null && driverSeatUI.activeSelf;
+
+            // Hide driving UI
+            if (drivingUI != null) drivingUI.SetActive(false);
+            if (driverSeatUI != null) driverSeatUI.SetActive(false);
+
+            DialogueActive();
+
+            Debug.Log("Dialogue started - disabled driving UI");
+        }
+        // Dialogue just ended (transition from active to inactive)
+        else if (!isDialogueActive && wasDialogueActive)
+        {
+            // Restore UI state
+            if (drivingUI != null) drivingUI.SetActive(wasDrivingUIActive);
+            if (driverSeatUI != null) driverSeatUI.SetActive(wasDriverSeatUIActive);
+
+            EnablePlayerControls();
+
+            Debug.Log("Dialogue ended - restored driving UI");
+        }
+
+        // Update previous state for next frame
+        wasDialogueActive = isDialogueActive;
     }
 
     public void ShowStartScreen()
@@ -107,6 +155,9 @@ public class GameManager : MonoBehaviour
         if (drivingUI != null) drivingUI.SetActive(false);
         if (driverSeatUI != null) driverSeatUI.SetActive(false);
         if (endDemoUI != null) endDemoUI.SetActive(false);
+        if (dialogueUI != null) dialogueUI.SetActive(false);
+        if (choicesUI != null) choicesUI.SetActive(false);
+        if (monologueUI != null) monologueUI.SetActive(false);
 
         AudioManager.Instance.PlayMenuMusic();
 
@@ -128,6 +179,9 @@ public class GameManager : MonoBehaviour
         if (drivingUI != null) drivingUI.SetActive(false);
         if (driverSeatUI != null) driverSeatUI.SetActive(false);
         if (endDemoUI != null) endDemoUI.SetActive(false);
+        if (dialogueUI != null) dialogueUI.SetActive(false);
+        if (choicesUI != null) choicesUI.SetActive(false);
+        if (monologueUI != null) monologueUI.SetActive(false);
 
         AudioManager.Instance.PlayGameMusic();
         AudioManager.Instance.ResumeSFX();
@@ -150,12 +204,18 @@ public class GameManager : MonoBehaviour
     {
         wasDrivingUIActive = drivingUI != null && drivingUI.activeSelf;
         wasDriverSeatUIActive = driverSeatUI != null && driverSeatUI.activeSelf;
+        wasDialogueUIActive = dialogueUI != null && dialogueUI.activeSelf;
+        wasChoicesUIActive = choicesUI != null && choicesUI.activeSelf;
+        wasMonologueUIActive = monologueUI != null && monologueUI.activeSelf;
 
         if (startScreen != null) startScreen.SetActive(false);
         if (pauseScreen != null) pauseScreen.SetActive(true);
         if (drivingUI != null) drivingUI.SetActive(false);
         if (driverSeatUI != null) driverSeatUI.SetActive(false);
         if (endDemoUI != null) endDemoUI.SetActive(false);
+        if (dialogueUI != null) dialogueUI.SetActive(false);
+        if (choicesUI != null) choicesUI.SetActive(false);
+        if (monologueUI != null) monologueUI.SetActive(false);
 
         // Freeze time and show cursor
         Time.timeScale = 0f;
@@ -186,6 +246,9 @@ public class GameManager : MonoBehaviour
         // RESTORE UIs that were active before pausing
         if (drivingUI != null) drivingUI.SetActive(wasDrivingUIActive);
         if (driverSeatUI != null) driverSeatUI.SetActive(wasDriverSeatUIActive);
+        if (dialogueUI != null) dialogueUI.SetActive(wasDialogueUIActive);
+        if (choicesUI != null) choicesUI.SetActive(wasChoicesUIActive);
+        if (monologueUI != null) monologueUI.SetActive(wasMonologueUIActive);
 
         // Unfreeze time and lock cursor
         Time.timeScale = 1f;
@@ -214,6 +277,9 @@ public class GameManager : MonoBehaviour
         if (drivingUI != null) drivingUI.SetActive(false);
         if (driverSeatUI != null) driverSeatUI.SetActive(false);
         if (endDemoUI != null) endDemoUI.SetActive(true);
+        if (dialogueUI != null) dialogueUI.SetActive(false);
+        if (choicesUI != null) choicesUI.SetActive(false);
+        if (monologueUI != null) monologueUI.SetActive(false);
 
         AudioManager.Instance.StopSFX();
         AudioManager.Instance.PlayMenuMusic();
@@ -260,6 +326,16 @@ public class GameManager : MonoBehaviour
             mouseLook.enabled = true;
         }
 
+        if (cameraInteraction != null)
+        {
+            cameraInteraction.enabled = true;
+        }
+
+        if (snaptoSeat != null)
+        {
+            snaptoSeat.enabled = true;
+        }
+
         if (busController != null)
         {
             busController.enabled = true;
@@ -284,6 +360,47 @@ public class GameManager : MonoBehaviour
         if (mouseLook != null)
         {
             mouseLook.enabled = false;
+        }
+
+        if (cameraInteraction != null)
+        {
+            cameraInteraction.enabled = false;
+        }
+
+        if (snaptoSeat != null)
+        {
+            snaptoSeat.enabled = false;
+        }
+
+        if (busController != null)
+        {
+            busController.enabled = false;
+        }
+    }
+
+    void DialogueActive()
+    {
+        // Only disable movement if NOT seated (sitting animations stay active)
+        if (playerMovement != null)
+        {
+            SnaptoSeat seatController = playerMovement.GetComponent<SnaptoSeat>();
+
+            // Only disable movement if not sitting in driver's seat
+            if (seatController == null || !seatController.isSeated)
+            {
+                playerMovement.enabled = false;
+            }
+            // If seated, leave movement script enabled but it won't work due to Time.timeScale = 0
+        }
+
+        if (cameraInteraction != null)
+        {
+            cameraInteraction.enabled = false;
+        }
+
+        if (snaptoSeat != null)
+        {
+            snaptoSeat.enabled = false;
         }
 
         if (busController != null)
