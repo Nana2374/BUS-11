@@ -20,7 +20,8 @@ public enum SpeakerType
     Unknown,
     SchoolGirl,
     SchoolBoy,
-    Nurse
+    Nurse,
+    OfficeWorker
 }
 
 [System.Serializable]

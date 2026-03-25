@@ -131,6 +131,11 @@ public class DialogueManager : MonoBehaviour
             case SpeakerType.Nurse:
                 speakerNameText.text = "NURSE";
                 break;
+
+
+            case SpeakerType.OfficeWorker:
+                speakerNameText.text = "OFFICE WORKER";
+                break;
         }
 
 

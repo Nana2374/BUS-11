@@ -1,0 +1,61 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05e9573c6467e754e97a0e7e8baf0ff4, type: 3}
+  m_Name: BS_1_OfficeWorker_Man
+  m_EditorClassIdentifier: 
+  nodes:
+  - nodeID: 0
+    branchType: 1
+    dialogueLine: Is this the same bus Uncle Tan drove?
+    speaker: 6
+    choices: []
+  - nodeID: 1
+    branchType: 1
+    dialogueLine: Nope, his bus was too  damaged when it was found.
+    speaker: 0
+    choices: []
+  - nodeID: 2
+    branchType: 1
+    dialogueLine: I see... That bus always gave me the creeps.
+    speaker: 6
+    choices: []
+  - nodeID: 3
+    branchType: 1
+    dialogueLine: I'd ocassionally hear strange noises while I sat in the back.
+    speaker: 6
+    choices: []
+  - nodeID: 4
+    branchType: 1
+    dialogueLine: What kinds?
+    speaker: 0
+    choices: []
+  - nodeID: 5
+    branchType: 4
+    dialogueLine: Sometimes screeching, sometimes...
+    speaker: 6
+    choices: []
+  - nodeID: 6
+    branchType: 4
+    dialogueLine: Thinking about it makes me queasy...
+    speaker: 6
+    choices: []
+  - nodeID: 7
+    branchType: 4
+    dialogueLine: Thinking about it makes me queasy...
+    speaker: 6
+    choices: []
+  - nodeID: 8
+    branchType: 4
+    dialogueLine: Anyways, hopefully Uncle Tan is found soon. He was such a sweet
+      man.
+    speaker: 6
+    choices: []

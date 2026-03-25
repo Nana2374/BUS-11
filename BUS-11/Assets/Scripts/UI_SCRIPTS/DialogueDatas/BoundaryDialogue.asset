@@ -15,6 +15,6 @@ MonoBehaviour:
   nodes:
   - nodeID: 0
     branchType: 0
-    dialogueLine: "Too dark\u2026 I better head back."
-    isPlayerLine: 0
+    dialogueLine: No more fooling around. I've gotta start my shift
+    speaker: 0
     choices: []

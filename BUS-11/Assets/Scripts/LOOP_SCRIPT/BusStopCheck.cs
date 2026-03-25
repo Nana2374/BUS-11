@@ -15,7 +15,7 @@ public class BusStopCheck : MonoBehaviour
         if (!passenger.HasBeenPickedUp)
         {
             Debug.Log("Passenger missed → RESET");
-            bus.ResetBus(resetPoint);
+            StartCoroutine(bus.ResetBusRoutine(resetPoint));
         }
         else
         {

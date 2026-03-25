@@ -4,13 +4,21 @@ using UnityEngine;
 
 public class BusResetController : MonoBehaviour
 {
-
     public Rigidbody rb;
     public BusController busController;
 
-    public void ResetBus(Transform resetPoint)
+    private bool isResetting = false;
+
+    public IEnumerator ResetBusRoutine(Transform resetPoint)
     {
-        if (resetPoint == null || rb == null) return;
+        if (isResetting) yield break;
+        if (resetPoint == null || rb == null) yield break;
+
+        isResetting = true;
+
+        // Fade to black first
+        if (ScreenFader.Instance != null)
+            yield return StartCoroutine(ScreenFader.Instance.FadeOut());
 
         // Put bus in park
         if (busController != null)
@@ -30,16 +38,16 @@ public class BusResetController : MonoBehaviour
             busController.rearRight.brakeTorque = 0f;
         }
 
-        // Clear physics first
+        // Clear physics
         rb.velocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
         rb.Sleep();
 
-        // Teleport the rigidbody itself
+        // Teleport rigidbody
         rb.position = resetPoint.position;
         rb.rotation = resetPoint.rotation;
 
-        // Also sync transform just in case
+        // Sync transform too
         transform.position = resetPoint.position;
         transform.rotation = resetPoint.rotation;
 
@@ -49,6 +57,15 @@ public class BusResetController : MonoBehaviour
         rb.constraints = RigidbodyConstraints.FreezeAll;
 
         Debug.Log("Bus reset to stop start.");
+
+        // Small pause while screen is black
+        yield return new WaitForSeconds(0.2f);
+
+        // Fade back in
+        if (ScreenFader.Instance != null)
+            yield return StartCoroutine(ScreenFader.Instance.FadeIn());
+
+        isResetting = false;
     }
 }
 

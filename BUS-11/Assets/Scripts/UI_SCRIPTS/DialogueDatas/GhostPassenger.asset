@@ -12,4 +12,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05e9573c6467e754e97a0e7e8baf0ff4, type: 3}
   m_Name: GhostPassenger
   m_EditorClassIdentifier: 
-  nodes: []
+  nodes:
+  - nodeID: 0
+    branchType: 3
+    dialogueLine: Wow you are early. Where are you off to?
+    speaker: 0
+    choices: []
+  - nodeID: 1
+    branchType: 3
+    dialogueLine: ....
+    speaker: 2
+    choices: []
+  - nodeID: 2
+    branchType: 3
+    dialogueLine: (So unfriendly...)
+    speaker: 0
+    choices: []
+  - nodeID: 3
+    branchType: 3
+    dialogueLine: Ok...
+    speaker: 0
+    choices: []
