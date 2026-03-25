@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 05e9573c6467e754e97a0e7e8baf0ff4, type: 3}
-  m_Name: BoundaryDialogue
+  m_Name: FirstLoop
   m_EditorClassIdentifier: 
   nodes:
   - nodeID: 0
     branchType: 0
-    dialogueLine: No more fooling around. I better get back.
+    dialogueLine: Did I fall asleep while driving?
     speaker: 0
     choices: []

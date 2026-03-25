@@ -114,28 +114,47 @@ public class DialogueManager : MonoBehaviour
 
             case SpeakerType.Ghost:
                 speakerNameText.text = "GHOST";
+                speakerNameText.color = Color.yellow;
                 break;
 
             case SpeakerType.Unknown:
                 speakerNameText.text = "???";
+                speakerNameText.color = Color.yellow;
                 break;
 
             case SpeakerType.SchoolGirl:
                 speakerNameText.text = "SCHOOL GIRL";
+                speakerNameText.color = Color.yellow;
                 break;
 
             case SpeakerType.SchoolBoy:
                 speakerNameText.text = "SCHOOL BOY";
+                speakerNameText.color = Color.yellow;
                 break;
 
             case SpeakerType.Nurse:
                 speakerNameText.text = "NURSE";
+                speakerNameText.color = Color.yellow;
                 break;
 
 
             case SpeakerType.OfficeWorker:
                 speakerNameText.text = "OFFICE WORKER";
+                speakerNameText.color = Color.yellow;
                 break;
+
+
+            case SpeakerType.ElderlyMan:
+                speakerNameText.text = "ELDERLY MAN";
+                speakerNameText.color = Color.yellow;
+                break;
+
+
+            case SpeakerType.ElderlyWoman:
+                speakerNameText.text = "ELDERLY WOMAN";
+                speakerNameText.color = Color.yellow;
+                break;
+
         }
 
 

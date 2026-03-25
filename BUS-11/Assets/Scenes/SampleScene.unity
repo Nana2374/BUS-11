@@ -7718,6 +7718,73 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 646227354}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &165515208
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 165515209}
+  - component: {fileID: 165515211}
+  - component: {fileID: 165515210}
+  m_Layer: 0
+  m_Name: 'BusStop_2Monologue '
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &165515209
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 165515208}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 4.1, y: -0.6, z: 154.3}
+  m_LocalScale: {x: 2.0678, y: 4.0451045, z: 5.5378017}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 796707643}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!114 &165515210
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 165515208}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8688bf9f66c68164680fd91b8f995e7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  monologueData: {fileID: 11400000, guid: 123e38ca3ae28d441a058f4287975b39, type: 2}
+--- !u!65 &165515211
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 165515208}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 4.1133857}
+  m_Center: {x: 0, y: 0, z: -0.6755347}
 --- !u!1001 &168742122
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -23500,7 +23567,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ee62bcb216ef9341affa827d8df4f01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  passengerDialogue: {fileID: 0}
+  passengerDialogue: {fileID: 11400000, guid: b17a2a662e1bbe14091ebf83176b9353, type: 2}
   isGhost: 0
   pickupRadius: 10
   busStopSpeed: 2
@@ -39198,6 +39265,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 346012506}
+  - {fileID: 165515209}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &796814746 stripped
@@ -45309,7 +45377,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ee62bcb216ef9341affa827d8df4f01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  passengerDialogue: {fileID: 0}
+  passengerDialogue: {fileID: 11400000, guid: 13340dbbc20421c4eb4dc68f6a07b0d4, type: 2}
   isGhost: 0
   pickupRadius: 10
   busStopSpeed: 2
@@ -91713,7 +91781,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   monologuePanel: {fileID: 498977844}
   monologueText: {fileID: 405205752}
-  lineDuration: 5
+  lineDuration: 4
 --- !u!1001 &1904489050
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -97404,7 +97472,7 @@ Transform:
   m_GameObject: {fileID: 2022530907}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.4589539, y: -1.6239998, z: 224.55}
+  m_LocalPosition: {x: 2.4589539, y: -1.6239998, z: 190.2}
   m_LocalScale: {x: 38.62539, y: 4.7032, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

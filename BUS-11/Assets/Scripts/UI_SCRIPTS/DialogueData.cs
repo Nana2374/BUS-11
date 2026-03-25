@@ -21,7 +21,9 @@ public enum SpeakerType
     SchoolGirl,
     SchoolBoy,
     Nurse,
-    OfficeWorker
+    OfficeWorker,
+    ElderlyMan,
+    ElderlyWoman
 }
 
 [System.Serializable]
