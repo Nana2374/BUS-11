@@ -36,7 +36,7 @@ public class DialogueTrigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!other.CompareTag("Player")) return;
+        if (!other.CompareTag("Bus")) return;
 
         if (playOnce && hasPlayed) return;
 
@@ -46,7 +46,7 @@ public class DialogueTrigger : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (!other.CompareTag("Player")) return;
+        if (!other.CompareTag("Bus")) return;
 
         playerInside = false;
         timer = 0f;
