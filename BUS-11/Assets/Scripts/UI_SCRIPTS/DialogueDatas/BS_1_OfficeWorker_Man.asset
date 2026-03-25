@@ -50,11 +50,6 @@ MonoBehaviour:
     choices: []
   - nodeID: 7
     branchType: 4
-    dialogueLine: Thinking about it makes me queasy...
-    speaker: 6
-    choices: []
-  - nodeID: 8
-    branchType: 4
     dialogueLine: Anyways, hopefully Uncle Tan is found soon. He was such a sweet
       man.
     speaker: 6

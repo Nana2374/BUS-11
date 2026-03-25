@@ -6,6 +6,9 @@ using Unity.AI.Navigation;
 
 public class PassengerController : MonoBehaviour, IInteractable
 {
+    [Header("Dialogue")]
+    public DialogueData passengerDialogue;
+
     [Header("Passenger Type")]
     public bool isGhost = false; // Check this for the ghost passenger
 
@@ -185,6 +188,13 @@ public class PassengerController : MonoBehaviour, IInteractable
 
             // Play idle animation
             SetAnimation(false, false);
+
+            // ADD THIS
+            if (passengerDialogue != null && DialogueManager.Instance != null)
+            {
+                DialogueManager.Instance.StartDialogue(passengerDialogue);
+            }
+
 
             Debug.Log("Passenger boarded the bus!");
         }
