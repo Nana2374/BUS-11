@@ -22,17 +22,17 @@ MonoBehaviour:
     branchType: 0
     dialogueLine: The driver before you always did that, like he's afraid of letting
       people board.
-    speaker: 7
+    speaker: 8
     choices: []
   - nodeID: 2
     branchType: 0
     dialogueLine: But I don't blame him... I wouldn't dare let some things in either.
-    speaker: 7
+    speaker: 8
     choices: []
   - nodeID: 3
     branchType: 0
     dialogueLine: Sorry, did I frighten you? You look rather pale.
-    speaker: 7
+    speaker: 8
     choices: []
   - nodeID: 4
     branchType: 0
@@ -43,5 +43,5 @@ MonoBehaviour:
     branchType: 0
     dialogueLine: "You still have the whole route ahead of you tonight. You\u2019ll
       get used to it."
-    speaker: 7
+    speaker: 8
     choices: []
