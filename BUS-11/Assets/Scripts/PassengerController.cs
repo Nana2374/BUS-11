@@ -11,6 +11,9 @@ public class PassengerController : MonoBehaviour, IInteractable
 
     [Header("Passenger Type")]
     public bool isGhost = false; // Check this for the ghost passenger
+    public bool isChild = false;
+
+    //private Vector3 seatPositionOffset = ;
 
     [Header("Settings")]
     public float pickupRadius = 10f;       // How close the bus needs to be to the passenger
@@ -267,9 +270,20 @@ public class PassengerController : MonoBehaviour, IInteractable
         currentState = PassengerState.Seated;
         agent.enabled = false;
 
-        // Snap to seat position and rotation
-        transform.position = targetSeat.position;
-        transform.rotation = targetSeat.rotation;
+        if (isChild)
+        {
+            // Apply child seat offset
+            Vector3 localOffset = new Vector3(0f, 0.25f, -0.25f);
+            transform.position = targetSeat.TransformPoint(localOffset);
+            transform.rotation = targetSeat.rotation;
+            Debug.Log("Offset applied.");
+        }
+        else
+        {
+            // Snap to seat position and rotation
+            transform.position = targetSeat.position;
+            transform.rotation = targetSeat.rotation;
+        }
 
         // Play sitting animation
         SetAnimation(false, true);

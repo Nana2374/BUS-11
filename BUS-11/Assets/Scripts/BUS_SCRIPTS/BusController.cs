@@ -115,6 +115,12 @@ public class BusController : MonoBehaviour
         {
             ghostSteerTimer -= Time.fixedDeltaTime;
 
+            // Remove brakes so ghost can accelerate freely
+            rearLeft.brakeTorque = 0f;
+            rearRight.brakeTorque = 0f;
+            frontLeft.brakeTorque = 0f;
+            frontRight.brakeTorque = 0f;
+
             if (ghostSteerTimer <= 0f)
             {
                 ghostActive = false;

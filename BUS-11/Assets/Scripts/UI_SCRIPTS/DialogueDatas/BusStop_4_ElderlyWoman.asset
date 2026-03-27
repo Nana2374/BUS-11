@@ -16,7 +16,7 @@ MonoBehaviour:
   - nodeID: 0
     branchType: 0
     dialogueLine: Oh good, you stopped. I thought you were going to drive past.
-    speaker: 7
+    speaker: 8
     choices: []
   - nodeID: 1
     branchType: 0
