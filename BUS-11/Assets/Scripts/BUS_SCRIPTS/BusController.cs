@@ -146,9 +146,7 @@ public class BusController : MonoBehaviour
         }
         else
         {
-            // When driving and NOT in Park: only lock tilt rotations
-            rb.constraints = RigidbodyConstraints.FreezeRotationX |
-                             RigidbodyConstraints.FreezeRotationZ;
+            rb.constraints = RigidbodyConstraints.None;
         }
 
         if (!playerDriving) return;
@@ -404,6 +402,7 @@ public class BusController : MonoBehaviour
                 engineSource.Play();
             }
         }
+        ClampTilt();
     }
 
     void UpShift()
@@ -484,8 +483,29 @@ public class BusController : MonoBehaviour
         ghostAccelerationForce = accelForce;
     }
 
+    void ClampTilt()
+    {
+        Vector3 angles = rb.rotation.eulerAngles;
+
+        float tiltX = NormalizeAngle(angles.x);
+        float tiltZ = NormalizeAngle(angles.z);
+
+        float maxTilt = 15f; // tweak this (10�20 good range)
+
+        tiltX = Mathf.Clamp(tiltX, -maxTilt, maxTilt);
+        tiltZ = Mathf.Clamp(tiltZ, -maxTilt, maxTilt);
+
+        rb.rotation = Quaternion.Euler(tiltX, angles.y, tiltZ);
+    }
+
+    float NormalizeAngle(float angle)
+    {
+        if (angle > 180f) angle -= 360f;
+        return angle;
+    }
+
     // Optional: Display current gear on screen
-    void OnGUI()
+    /*void OnGUI()
     {
         if (playerDriving)
         {
@@ -510,5 +530,5 @@ public class BusController : MonoBehaviour
                     new GUIStyle() { fontSize = 18, normal = new GUIStyleState() { textColor = limitColor } });
             }
         }
-    }
+    }*/
 }
