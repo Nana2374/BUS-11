@@ -18,6 +18,12 @@ public class BusDoors : MonoBehaviour
     private Quaternion openRotation1;
     private Quaternion openRotation2;
 
+
+    [Header("Door Audio")]
+    public AudioSource doorAudioSource;
+    public AudioClip doorOpenClip;
+    public AudioClip doorCloseClip;
+
     void Start()
     {
         // Store open rotations
@@ -68,18 +74,40 @@ public class BusDoors : MonoBehaviour
     public void ToggleDoor()
     {
         isOpen = !isOpen;
+
+        if (isOpen)
+            PlayDoorSound(doorOpenClip);
+        else
+            PlayDoorSound(doorCloseClip);
+
         Debug.Log("Door " + (isOpen ? "opened" : "closed"));
     }
 
     public void OpenDoor()
     {
         isOpen = true;
+
+        isOpen = true;
+
+        PlayDoorSound(doorOpenClip);
+
+
         Debug.Log("Door opened");
     }
 
     public void CloseDoor()
     {
         isOpen = false;
+
+        PlayDoorSound(doorCloseClip);
+
         Debug.Log("Door closed");
+    }
+    void PlayDoorSound(AudioClip clip)
+    {
+        if (doorAudioSource != null && clip != null)
+        {
+            doorAudioSource.PlayOneShot(clip);
+        }
     }
 }
