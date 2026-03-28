@@ -139,7 +139,7 @@ public class BloodyHandprints : MonoBehaviour
 
             // Normal slap
             handprintAudioSource.transform.position = handprint.transform.position;
-                PlayHandSlapSound();
+            PlayHandSlapSound();
 
             // Calculate speed ramp (0 → 1 across sequence)
             float t = (float)i / (total - 1);
@@ -154,14 +154,14 @@ public class BloodyHandprints : MonoBehaviour
 
         Debug.Log("All handprints activated!");
 
-        yield return StartCoroutine(FaceJumpscare(0.5f, 8f, 5f, 3));
+        yield return StartCoroutine(FaceJumpscare(0.5f, 8f, 5f, 5));
 
         //yield return new WaitForSeconds(1f);
 
         StopRedLightSound();
         yield return StartCoroutine(FadeOutHandprints(2f));
 
-        Destroy(gameObject); 
+        Destroy(gameObject);
     }
 
     IEnumerator StagedFaceJumpscare()
