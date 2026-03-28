@@ -17,6 +17,11 @@ public class LadyinWhite : MonoBehaviour
     public Color redColor = new Color(1f, 0f, 0f); // Pure red
     public bool enableRedLights = true;
 
+    [Header("Red Light Sound")]
+    public AudioSource audioSource;     // Drag your AudioSource here
+    public AudioClip redLightSFX;       // Drag your sound clip here
+
+
     [Header("Destroy Settings")]
     public float destroyDelay = 1f; // Delay after sequence before destroying
 
@@ -64,6 +69,8 @@ public class LadyinWhite : MonoBehaviour
         if (enableRedLights)
         {
             SetAllLightColors(redColor);
+
+            PlayRedLightSound();
         }
 
         Coroutine flickerCoroutine = StartCoroutine(FlickerLights(flickerDuration));
@@ -152,5 +159,21 @@ public class LadyinWhite : MonoBehaviour
             }
         }
         Debug.Log("Lights restored to original colors");
+    }
+    void PlayRedLightSound()
+    {
+        if (audioSource != null && redLightSFX != null)
+        {
+            audioSource.clip = redLightSFX;
+            audioSource.loop = true;
+            audioSource.Play();
+        }
+    }
+    void StopRedLightSound()
+    {
+        if (audioSource != null && audioSource.isPlaying)
+        {
+            audioSource.Stop();
+        }
     }
 }
