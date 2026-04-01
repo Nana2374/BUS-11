@@ -11,21 +11,22 @@ public class BusController : MonoBehaviour
     public float steerAngle = 60f;
     public float brakeForce = 50000f;
     public float maxSpeed = 50f; // Adjust to your top speed
+    public float accelerationTime = 8f;   // Seconds to reach full torque from 0
 
     public bool playerDriving;
 
-    // Gear System
+    // Gear System: -1 = Reverse, 0 = Park, 1 = Drive
     public int currentGear = 0; // -1 = Reverse, 0 = Park, 1-3 = Gears
-    public float reverseRatio = 0.5f;
-    public float[] gearRatios = new float[] { 0f, 0.3f, 0.7f, 1f }; // Park, Gear1, Gear2, Gear3
-    public float reverseSpeedLimit = 40f;
-    public float[] gearSpeedLimits = new float[] { 0f, 20f, 45f, 70f }; // Park, Gear1, Gear2, Gear3
+    public float driveSpeedLimit = 50f;
+    public float reverseRatio = 0.4f;
+    public float reverseSpeedLimit = 15f;
 
     public Rigidbody rb;
     float motorInput;
     float steerInput;
     float engineBrakeAmount = 0f;
     float currentBrakeAmount = 0f;
+    float currentTorqueRamp = 0f;         // Ramps from 0 → 1 for gradual acceleration
 
     [Header("Door Reference")]
     public BusDoors busDoors;
@@ -86,6 +87,12 @@ public class BusController : MonoBehaviour
         motorInput = Input.GetAxis("Vertical");
         steerInput = Input.GetAxis("Horizontal");
 
+        // Auto-shift to Drive when player accelerates from Park
+        if (motorInput > 0.1f && currentGear == 0)
+        {
+            DriveGear();
+        }
+
         // Apply ghost influence (adds to player input)
         if (ghostActive)
         {
@@ -97,11 +104,7 @@ public class BusController : MonoBehaviour
         // Gear shifting
         if (Input.GetKeyDown(KeyCode.E))
         {
-            UpShift();
-        }
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            DownShift();
+            DriveGear();
         }
         if (Input.GetKeyDown(KeyCode.P))
         {
@@ -136,13 +139,7 @@ public class BusController : MonoBehaviour
         {
             if (currentGear == 0)
             {
-                rearLeft.motorTorque = 0f;
-                rearRight.motorTorque = 0f;
-                rearLeft.brakeTorque = brakeForce * 10f;
-                rearRight.brakeTorque = brakeForce * 10f;
-                frontLeft.brakeTorque = brakeForce * 10f;
-                frontRight.brakeTorque = brakeForce * 10f;
-
+                ApplyParkBrakes();
                 rb.constraints = RigidbodyConstraints.FreezeAll;
             }
 
@@ -172,30 +169,12 @@ public class BusController : MonoBehaviour
             speedBoost = 1.5f; // 50% extra power when turning slowly
         }
 
-        //float turnBoost = baseTurnBoost * speedBoost;
-
-        // Can't move in Park
-        if (currentGear == 0)
-        {
-            rearLeft.motorTorque = 0f;
-            rearRight.motorTorque = 0f;
-            rearLeft.brakeTorque = brakeForce * 10f; // Softer park brake
-            rearRight.brakeTorque = brakeForce * 10f;
-            frontLeft.brakeTorque = brakeForce * 10f;
-            frontRight.brakeTorque = brakeForce * 10f;
-
-            // Completely freeze the bus in Park
-            rb.constraints = RigidbodyConstraints.FreezeAll; // Lock EVERYTHING
-            return;
-        }
-        else
-        {
-            // Unfreeze everything when not in Park
-            rb.constraints = RigidbodyConstraints.None;
-        }
-
-        // NEW: If speed exceeds gear limit, apply braking
-        float gearSpeedLimit = currentGear == -1 ? reverseSpeedLimit : gearSpeedLimits[currentGear];
+        // Braking detection (S key)
+        bool isBraking = motorInput < -0.1f;
+        float brakeSmoothing = 1f;
+        float targetBrakeAmount = isBraking ? 1f : 0f;
+        currentBrakeAmount = Mathf.MoveTowards(currentBrakeAmount, targetBrakeAmount, brakeSmoothing * Time.fixedDeltaTime);
+        float currentBrakeTorque = brakeForce * currentBrakeAmount;
 
         // Reset engine brake when pressing W or S
         if (Mathf.Abs(motorInput) > 0.1f)
@@ -203,61 +182,40 @@ public class BusController : MonoBehaviour
             engineBrakeAmount = 0f;
         }
 
-        // Get gear speed limit and ratio based on current gear
-        //float gearSpeedLimit;
-        float gearModifiedForce;
+        // Torque ramp: smoothly builds up from 0 when player presses accelerator
+        bool isAccelerating = motorInput > 0.1f;
+        float rampTarget = isAccelerating ? 1f : 0f;
+        currentTorqueRamp = Mathf.MoveTowards(currentTorqueRamp, rampTarget, (1f / accelerationTime) * Time.fixedDeltaTime);
 
-        if (currentGear == -1) // Reverse
-        {
-            gearSpeedLimit = reverseSpeedLimit;
-            gearModifiedForce = motorForce * reverseRatio;
-        }
-        else // Forward gears 1-4
-        {
-            gearSpeedLimit = gearSpeedLimits[currentGear];
-            gearModifiedForce = motorForce * gearRatios[currentGear];
-        }
-
-        // Gradual brake based on how long S is held
-        // Higher = slower increase, Lower = faster increase
-        float brakeSmoothing = 1f;
-
-        // Check if braking (S key / down arrow)
-        bool isBraking = motorInput < 0;
-
-        // Smoothly calculate brake amount (0 to 1)
-        float targetBrakeAmount = isBraking ? 1f : 0f;
-        currentBrakeAmount = Mathf.MoveTowards(currentBrakeAmount, targetBrakeAmount, brakeSmoothing * Time.fixedDeltaTime);
-
-        // Calculate the actual brake torque
-        float currentBrakeTorque = brakeForce * currentBrakeAmount;
-
-        if (currentGear == -1) // REVERSE GEAR LOGIC
+        if (currentGear == -1) // ── REVERSE ──────────────────────────────────
         {
             if (isBraking)
             {
                 rearLeft.motorTorque = 0f;
                 rearRight.motorTorque = 0f;
-                //rearLeft.brakeTorque = currentBrakeTorque;
-                //rearRight.brakeTorque = currentBrakeTorque;
-                frontLeft.brakeTorque = currentBrakeTorque * 0.001f;
-                frontRight.brakeTorque = currentBrakeTorque * 0.001f;
+                frontLeft.brakeTorque = currentBrakeTorque * 0.004f;
+                frontRight.brakeTorque = currentBrakeTorque * 0.004f;
+                rearLeft.brakeTorque = 0f;
+                rearRight.brakeTorque = 0f;
             }
-            else if (motorInput > 0.1f) // W key pressed
+            else if (isAccelerating)
             {
-                if (currentSpeed >= gearSpeedLimit)
+                if (currentSpeed >= reverseSpeedLimit)
                 {
+                    // At limit: hold with gentle brake
                     rearLeft.motorTorque = 0f;
                     rearRight.motorTorque = 0f;
-                    rearLeft.brakeTorque = brakeForce * 0.1f; // Very light brake at limit
+                    rearLeft.brakeTorque = brakeForce * 0.1f;
                     rearRight.brakeTorque = brakeForce * 0.1f;
                     frontLeft.brakeTorque = brakeForce * 0.1f;
                     frontRight.brakeTorque = brakeForce * 0.1f;
                 }
                 else
                 {
-                    rearLeft.motorTorque = -motorInput * gearModifiedForce * turnBoost;
-                    rearRight.motorTorque = -motorInput * gearModifiedForce * turnBoost;
+                    // Negative torque = reverse movement
+                    float reverseTorque = -motorInput * motorForce * reverseRatio * currentTorqueRamp * turnBoost;
+                    rearLeft.motorTorque = reverseTorque;
+                    rearRight.motorTorque = reverseTorque;
                     rearLeft.brakeTorque = 0f;
                     rearRight.brakeTorque = 0f;
                     frontLeft.brakeTorque = 0f;
@@ -266,66 +224,49 @@ public class BusController : MonoBehaviour
             }
             else
             {
-                // No input - gradual engine brake
+                // No input: coast (engine brake commented out for smoothness)
                 rearLeft.motorTorque = 0f;
                 rearRight.motorTorque = 0f;
-
-                // Smoothly increase engine brake over time
-                //engineBrakeAmount = Mathf.MoveTowards(engineBrakeAmount, brakeForce * 0.15f, 500f * Time.fixedDeltaTime);
-
-                //rearLeft.brakeTorque = engineBrakeAmount;
-                //rearRight.brakeTorque = engineBrakeAmount;
-                //frontLeft.brakeTorque = engineBrakeAmount * 0.00001f;
-                //frontRight.brakeTorque = engineBrakeAmount * 0.00001f;
+                rearLeft.brakeTorque = 0f;
+                rearRight.brakeTorque = 0f;
+                frontLeft.brakeTorque = 0f;
+                frontRight.brakeTorque = 0f;
             }
         }
-        else // FORWARD GEAR LOGIC
+        else // ── DRIVE ────────────────────────────────────────────────────────
         {
             if (isBraking)
             {
                 rearLeft.motorTorque = 0f;
                 rearRight.motorTorque = 0f;
-                // Gradual braking - rear takes 60%, front takes 40% (realistic bus braking)
-                //rearLeft.brakeTorque = currentBrakeTorque * 0.006f;
-                //rearRight.brakeTorque = currentBrakeTorque * 0.006f;
                 frontLeft.brakeTorque = currentBrakeTorque * 0.004f;
                 frontRight.brakeTorque = currentBrakeTorque * 0.004f;
+                rearLeft.brakeTorque = 0f;
+                rearRight.brakeTorque = 0f;
             }
-            else if (motorInput > 0.1f)
+            else if (isAccelerating)
             {
-                // STRICT SPEED LIMITING
-                if (currentSpeed >= gearSpeedLimit)
+                if (currentSpeed >= driveSpeedLimit)
                 {
+                    // Speed cap: cut motor and apply soft brake
                     rearLeft.motorTorque = 0f;
                     rearRight.motorTorque = 0f;
-
-                    float overspeed = currentSpeed - gearSpeedLimit;
-                    // Gentler speed limit braking
-                    float brakingForce = brakeForce * Mathf.Clamp(overspeed / 10f, 0.1f, 0.5f);
-
-                    rearLeft.brakeTorque = brakingForce;
-                    rearRight.brakeTorque = brakingForce;
-                    frontLeft.brakeTorque = brakingForce * 0.5f;
-                    frontRight.brakeTorque = brakingForce * 0.5f;
-                }
-                else if (currentSpeed >= gearSpeedLimit * 0.8f)
-                {
-                    float proximityToLimit = (currentSpeed - (gearSpeedLimit * 0.8f)) / (gearSpeedLimit * 0.2f);
-                    float powerReduction = 1f - (proximityToLimit * 0.7f);
-
-                    rearLeft.motorTorque = motorInput * gearModifiedForce * turnBoost * powerReduction;
-                    rearRight.motorTorque = motorInput * gearModifiedForce * turnBoost * powerReduction;
-
-                    rearLeft.brakeTorque = 0f;
-                    rearRight.brakeTorque = 0f;
-                    frontLeft.brakeTorque = 0f;
-                    frontRight.brakeTorque = 0f;
+                    float overspeed = currentSpeed - driveSpeedLimit;
+                    float capBrake = brakeForce * Mathf.Clamp(overspeed / 10f, 0.1f, 0.5f);
+                    rearLeft.brakeTorque = capBrake;
+                    rearRight.brakeTorque = capBrake;
+                    frontLeft.brakeTorque = capBrake * 0.5f;
+                    frontRight.brakeTorque = capBrake * 0.5f;
                 }
                 else
                 {
-                    rearLeft.motorTorque = motorInput * gearModifiedForce * turnBoost;
-                    rearRight.motorTorque = motorInput * gearModifiedForce * turnBoost;
+                    // Soft torque taper as speed approaches limit
+                    float proximityFactor = Mathf.Clamp01(currentSpeed / driveSpeedLimit);
+                    float powerScale = 1f - (proximityFactor * proximityFactor * 0.6f); // quadratic taper
 
+                    float torque = motorInput * motorForce * currentTorqueRamp * turnBoost * powerScale;
+                    rearLeft.motorTorque = torque;
+                    rearRight.motorTorque = torque;
                     rearLeft.brakeTorque = 0f;
                     rearRight.brakeTorque = 0f;
                     frontLeft.brakeTorque = 0f;
@@ -334,13 +275,13 @@ public class BusController : MonoBehaviour
             }
             else
             {
-                // No input - very gentle auto-brake (heavy bus rolls slowly)
+                // No input: coast
                 rearLeft.motorTorque = 0f;
                 rearRight.motorTorque = 0f;
-                rearLeft.brakeTorque = brakeForce * 0f;
-                rearRight.brakeTorque = brakeForce * 0f;
-                //frontLeft.brakeTorque = brakeForce * 0.00001f;
-                //frontRight.brakeTorque = brakeForce * 0.00001f;
+                rearLeft.brakeTorque = 0f;
+                rearRight.brakeTorque = 0f;
+                frontLeft.brakeTorque = 0f;
+                frontRight.brakeTorque = 0f;
             }
         }
 
@@ -354,26 +295,8 @@ public class BusController : MonoBehaviour
         frontLeft.steerAngle = currentSteerAngle;
         frontRight.steerAngle = currentSteerAngle;
 
-        // Calculate speed-based steering
-        //float speed = rb.velocity.magnitude;
-        //float steerMultiplier = Mathf.Clamp(1f - (speed / maxSpeed) * 0.5f, 0.5f, 1f);
-
-        //float currentSteerAngle = steerInput * steerAngle; //* steerMultiplier;
-
-        //frontLeft.steerAngle = currentSteerAngle;
-        //frontRight.steerAngle = currentSteerAngle;
-
-        // Rear wheels steer opposite (slight angle)
-        //rearLeft.steerAngle = -steerInput * (steerAngle * 0.3f);
-        //rearRight.steerAngle = -steerInput * (steerAngle * 0.3f);
-
-        // Get speed
-        float speed = rb.velocity.magnitude;
-
-        // Normalize speed (0 to 1)
-        float speedPercent = Mathf.Clamp01(speed / maxSpeed);
-
         // Adjust pitch based on speed
+        float speedPercent = Mathf.Clamp01(rb.velocity.magnitude / maxSpeed);
         engineSource.pitch = Mathf.Lerp(minPitch, maxPitch, speedPercent);
 
         // Switch between idle and driving sound
@@ -409,6 +332,18 @@ public class BusController : MonoBehaviour
         ClampTilt();
     }
 
+    // ── Helpers ───────────────────────────────────────────────────────────────
+
+    void ApplyParkBrakes()
+    {
+        rearLeft.motorTorque = 0f;
+        rearRight.motorTorque = 0f;
+        rearLeft.brakeTorque = brakeForce * 10f;
+        rearRight.brakeTorque = brakeForce * 10f;
+        frontLeft.brakeTorque = brakeForce * 10f;
+        frontRight.brakeTorque = brakeForce * 10f;
+    }
+
     void CloseDoorsIfLeavingPark()
     {
         if (busDoors != null && busDoors.isOpen)
@@ -418,79 +353,33 @@ public class BusController : MonoBehaviour
         }
     }
 
-    void UpShift()
+    // ── Gear Methods ──────────────────────────────────────────────────────────
+
+    public void DriveGear()
     {
-        if (currentGear == -1) // Reverse
-        {
-            currentGear = 1; // Go to Gear 1
-            CloseDoorsIfLeavingPark();
-            Debug.Log("Shifted to Gear 1");
-            return;
-        }
-        else if (currentGear == 0) // Park
-        {
-            currentGear = 1; // Go to Gear 1
-            CloseDoorsIfLeavingPark();
-            Debug.Log("Shifted UP to Gear: 1");
-            return;
-        }
-
-        if (currentGear < 3)
-        {
-            // Get current speed
-            float currentSpeed = rb.velocity.magnitude * 3.6f;
-            float currentGearLimit = gearSpeedLimits[currentGear];
-
-            // Check if we're at least 80% of current gear's speed limit before allowing upshift
-            float minSpeedToShift = currentGearLimit * 0.8f;
-
-            if (currentGear == 0) // Special case for Park -> Gear 1
-            {
-                currentGear++;
-                CloseDoorsIfLeavingPark();
-                Debug.Log("Shifted UP to Gear: " + currentGear);
-            }
-            else if (currentSpeed >= minSpeedToShift)
-            {
-                currentGear++;
-                Debug.Log($"Shifted UP to Gear: {currentGear} (Speed: {currentSpeed:F0} km/h)");
-            }
-            else
-            {
-                Debug.Log($"Cannot upshift! Reach {minSpeedToShift:F0} km/h first. Current: {currentSpeed:F0} km/h");
-            }
-        }
-        else
-        {
-            Debug.Log("Already in highest gear!");
-        }
+        if (currentGear == 1) return; // Already in Drive
+        currentGear = 1;
+        currentTorqueRamp = 0f; // Reset ramp so bus starts from 0
+        CloseDoorsIfLeavingPark();
+        Debug.Log("Shifted to DRIVE");
     }
 
-    void DownShift()
-    {
-        if (currentGear > 1)
-        {
-            currentGear--;
-            Debug.Log("Shifted DOWN to Gear: " + currentGear);
-        }
-        else if (currentGear == 1)
-        {
-            Debug.Log("Already in lowest gear! Press P for Park.");
-        }
-    }
-
-    void ParkGear()
+    public void ParkGear()
     {
         currentGear = 0;
+        currentTorqueRamp = 0f;
         Debug.Log("Shifted to PARK");
     }
 
     void ReverseGear()
     {
         currentGear = -1;
+        currentTorqueRamp = 0f;
         CloseDoorsIfLeavingPark();
         Debug.Log("Shifted to REVERSE (Max: 15 km/h)");
     }
+
+    // ── Ghost Event ───────────────────────────────────────────────────────────
 
     public void TriggerGhostEvent(float duration, float force, float accelForce)
     {
@@ -499,6 +388,8 @@ public class BusController : MonoBehaviour
         ghostSteerForce = force;
         ghostAccelerationForce = accelForce;
     }
+
+    // ── Tilt Clamp ────────────────────────────────────────────────────────────
 
     void ClampTilt()
     {
@@ -521,8 +412,8 @@ public class BusController : MonoBehaviour
         return angle;
     }
 
-    // Optional: Display current gear on screen
-    /*void OnGUI()
+    // ── GUI ────────────────────────────────────────────────────────────
+    void OnGUI()
     {
         if (playerDriving)
         {
@@ -533,19 +424,6 @@ public class BusController : MonoBehaviour
             float speed = rb.velocity.magnitude * 3.6f;
             GUI.Label(new Rect(10, 40, 200, 30), "Speed: " + speed.ToString("F0") + " km/h",
                 new GUIStyle() { fontSize = 20, normal = new GUIStyleState() { textColor = Color.white } });
-
-            // Show speed limit for current gear with color coding
-            if (currentGear != 0)
-            {
-                float limit = currentGear == -1 ? reverseSpeedLimit : gearSpeedLimits[currentGear];
-                Color limitColor = Color.yellow;
-
-                if (speed >= limit) limitColor = Color.red;
-                else if (speed >= limit * 0.8f) limitColor = new Color(1f, 0.5f, 0f); // Orange
-
-                GUI.Label(new Rect(10, 70, 200, 30), $"Limit: {limit} km/h",
-                    new GUIStyle() { fontSize = 18, normal = new GUIStyleState() { textColor = limitColor } });
-            }
         }
-    }*/
+    }
 }

@@ -5,6 +5,9 @@ using UnityEngine;
 public class BusDoors : MonoBehaviour
 {
     [Header("Door Settings")]
+    public BusController busController;           // Reference to the bus controller to check if bus is moving
+
+    [Header("Door Settings")]
     public Transform doorTransform1;           // The door object to move/rotate
     public Transform doorTransform2;           // Optional second door (for double doors)
     public bool isOpen = true;
@@ -73,26 +76,25 @@ public class BusDoors : MonoBehaviour
 
     public void ToggleDoor()
     {
-        isOpen = !isOpen;
-
         if (isOpen)
-            PlayDoorSound(doorOpenClip);
+            CloseDoor();
         else
-            PlayDoorSound(doorCloseClip);
-
-        Debug.Log("Door " + (isOpen ? "opened" : "closed"));
+            OpenDoor();
     }
 
     public void OpenDoor()
     {
         isOpen = true;
 
-        isOpen = true;
+        if (busController != null && busController.currentGear != 0 )
+        {
+            busController.ParkGear();
+        }
 
         PlayDoorSound(doorOpenClip);
 
 
-        Debug.Log("Door opened");
+        Debug.Log("Door opened, bus Parked.");
     }
 
     public void CloseDoor()
@@ -103,6 +105,7 @@ public class BusDoors : MonoBehaviour
 
         Debug.Log("Door closed");
     }
+
     void PlayDoorSound(AudioClip clip)
     {
         if (doorAudioSource != null && clip != null)
