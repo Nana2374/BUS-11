@@ -20,7 +20,7 @@ MonoBehaviour:
     choices: []
   - nodeID: 1
     branchType: 1
-    dialogueLine: Nope, his bus was too  damaged when it was found.
+    dialogueLine: Nope, his bus was too damaged when it was found.
     speaker: 0
     choices: []
   - nodeID: 2

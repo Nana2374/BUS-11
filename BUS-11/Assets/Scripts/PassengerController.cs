@@ -31,6 +31,12 @@ public class PassengerController : MonoBehaviour, IInteractable
     [Header("Animation")]
     public Animator animator; // Add this
 
+    [Header("Stuck Detection")]
+    public float stuckCheckInterval = 1f; // Check every second
+    public float minMovementDistance = 0.3f; // Minimum movement to not be stuck
+    private Vector3 lastPosition;
+    private float stuckCheckTimer = 0f;
+
     private UnityEngine.AI.NavMeshAgent agent;
     private NavMeshSurface busNavMesh;
 
@@ -145,6 +151,7 @@ public class PassengerController : MonoBehaviour, IInteractable
 
             case PassengerState.WalkingToSeat:
                 CheckIfReachedSeat();
+                CheckIfStuck();
                 break;
 
             case PassengerState.Seated:
@@ -255,6 +262,71 @@ public class PassengerController : MonoBehaviour, IInteractable
         yield return new WaitForSeconds(2.5f); // Change this to your gesture duration
 
         FindAndWalkToSeat();
+    }
+
+    void CheckIfStuck()
+    {
+        if (agent == null || !agent.enabled || targetSeat == null) return;
+
+        stuckCheckTimer += Time.deltaTime;
+
+        if (stuckCheckTimer >= stuckCheckInterval)
+        {
+            // Check if passenger has moved
+            float distanceMoved = Vector3.Distance(transform.position, lastPosition);
+
+            if (distanceMoved < minMovementDistance)
+            {
+                // Passenger is stuck! Switch to simple movement
+                Debug.LogWarning($"{name} got stuck! Switching to simple movement.");
+
+                // Disable NavMesh agent
+                if (agent != null && agent.enabled)
+                {
+                    agent.enabled = false;
+                }
+
+                // Use simple walk instead of teleport
+                StartCoroutine(WalkToSeatSimple());
+
+                // Stop checking for stuck (we're now using simple movement)
+                currentState = PassengerState.WalkingToSeat; // Keep state
+                return; // Exit check
+            }
+
+            // Update last position and reset timer
+            lastPosition = transform.position;
+            stuckCheckTimer = 0f;
+        }
+    }
+
+    IEnumerator WalkToSeatSimple()
+    {
+        float walkSpeed = 2f;
+
+        while (Vector3.Distance(transform.position, targetSeat.position) > 0.3f)
+        {
+            // Move toward seat
+            transform.position = Vector3.MoveTowards(
+                transform.position,
+                targetSeat.position,
+                walkSpeed * Time.deltaTime
+            );
+
+            // Face direction of movement
+            Vector3 direction = (targetSeat.position - transform.position).normalized;
+            if (direction != Vector3.zero)
+            {
+                transform.rotation = Quaternion.Slerp(
+                    transform.rotation,
+                    Quaternion.LookRotation(direction),
+                    5f * Time.deltaTime
+                );
+            }
+
+            yield return null;
+        }
+        SitDown();
     }
 
     void FindAndWalkToSeat()

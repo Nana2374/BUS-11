@@ -157,16 +157,16 @@ public class BusController : MonoBehaviour
         float currentSpeed = Mathf.Abs(signedSpeed);
 
         // Boost torque during turns
-        float turnBoost = 1f + (Mathf.Abs(steerInput) * 2.5f);
+        float turnBoost = 1f + (Mathf.Abs(steerInput) * 5f);
 
         // Boost torque during turns - MORE boost at higher speeds
-        float baseTurnBoost = 1f + (Mathf.Abs(steerInput) * 2.0f);
+        float baseTurnBoost = 1f + (Mathf.Abs(steerInput) * 5f);
 
         // Extra boost if speed is dropping during turn
         float speedBoost = 1f;
         if (Mathf.Abs(steerInput) > 0.3f && currentSpeed < 30f)
         {
-            speedBoost = 1.5f; // 50% extra power when turning slowly
+            speedBoost = 3f; // 50% extra power when turning slowly
         }
 
         // Braking detection (S key)
@@ -287,8 +287,8 @@ public class BusController : MonoBehaviour
 
         // At low speeds: full steering (60 degrees)
         // At high speeds: reduced steering (30 degrees)
-        float speedFactor = Mathf.Clamp01(currentSpeed / 40f); // 0 at 0 km/h, 1 at 40+ km/h
-        float dynamicSteerAngle = Mathf.Lerp(steerAngle, steerAngle * 0.5f, speedFactor);
+        float speedFactor = Mathf.Clamp01(currentSpeed / 50f); // 0 at 0 km/h, 1 at 40+ km/h
+        float dynamicSteerAngle = Mathf.Lerp(steerAngle, steerAngle * 0.8f, speedFactor);
 
         float currentSteerAngle = steerInput * dynamicSteerAngle;
 
