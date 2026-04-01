@@ -27,6 +27,9 @@ public class BusController : MonoBehaviour
     float engineBrakeAmount = 0f;
     float currentBrakeAmount = 0f;
 
+    [Header("Door Reference")]
+    public BusDoors busDoors;
+
     [Header("Audio")]
     public AudioSource engineSource;
     public AudioSource brakeSource;
@@ -70,6 +73,7 @@ public class BusController : MonoBehaviour
         engineSource.loop = true;
         engineSource.Play();
     }
+
 
     void Update()
     {
@@ -405,17 +409,28 @@ public class BusController : MonoBehaviour
         ClampTilt();
     }
 
+    void CloseDoorsIfLeavingPark()
+    {
+        if (busDoors != null && busDoors.isOpen)
+        {
+            busDoors.CloseDoor();
+            Debug.Log("Bus left Park, doors closed automatically.");
+        }
+    }
+
     void UpShift()
     {
         if (currentGear == -1) // Reverse
         {
             currentGear = 1; // Go to Gear 1
+            CloseDoorsIfLeavingPark();
             Debug.Log("Shifted to Gear 1");
             return;
         }
         else if (currentGear == 0) // Park
         {
             currentGear = 1; // Go to Gear 1
+            CloseDoorsIfLeavingPark();
             Debug.Log("Shifted UP to Gear: 1");
             return;
         }
@@ -432,6 +447,7 @@ public class BusController : MonoBehaviour
             if (currentGear == 0) // Special case for Park -> Gear 1
             {
                 currentGear++;
+                CloseDoorsIfLeavingPark();
                 Debug.Log("Shifted UP to Gear: " + currentGear);
             }
             else if (currentSpeed >= minSpeedToShift)
@@ -472,6 +488,7 @@ public class BusController : MonoBehaviour
     void ReverseGear()
     {
         currentGear = -1;
+        CloseDoorsIfLeavingPark();
         Debug.Log("Shifted to REVERSE (Max: 15 km/h)");
     }
 
