@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BusButton : MonoBehaviour, IInteractable 
+public class BusButton : MonoBehaviour, IInteractable
 {
     [Header("Button Type")]
     public ButtonType buttonType;
@@ -18,6 +18,10 @@ public class BusButton : MonoBehaviour, IInteractable
     public BusDoors doorsToControl;           // For door buttons
     public AudioSource hornSound;             // For horn button
 
+    [Header("UI")]
+    public GameObject interactUI; // assign your "Door" text here
+
+
     public void Interact()
     {
         switch (buttonType)
@@ -30,18 +34,31 @@ public class BusButton : MonoBehaviour, IInteractable
                 }
                 break;
 
-            //case ButtonType.Horn:
+                //case ButtonType.Horn:
                 //PlayHorn();
                 //break;
         }
     }
 
-    /*void PlayHorn()
+    public void ShowUI()
     {
-        if (hornSound != null)
-        {
-            hornSound.Play();
-            Debug.Log("Horn pressed!");
-        }
-    }*/
+        if (interactUI != null)
+            interactUI.SetActive(true);
+    }
+
+
+    public void HideUI()
+    {
+        if (interactUI != null)
+            interactUI.SetActive(false);
+    }
 }
+
+/*void PlayHorn()
+{
+    if (hornSound != null)
+    {
+        hornSound.Play();
+        Debug.Log("Horn pressed!");
+    }
+}*/
