@@ -40,6 +40,8 @@ public class PassengerController : MonoBehaviour, IInteractable
     private UnityEngine.AI.NavMeshAgent agent;
     private NavMeshSurface busNavMesh;
 
+    private bool gestureStarted = false;
+
     public BusController busController;
     public BusDoors busDoors;
     public Rigidbody busRigidbody;
@@ -242,8 +244,9 @@ public class PassengerController : MonoBehaviour, IInteractable
     // Called when player clicks on the passenger (implements IInteractable)
     public void Interact()
     {
-        if (currentState == PassengerState.AtEntry)
+        if (currentState == PassengerState.AtEntry && !gestureStarted)
         {
+            gestureStarted = true;
             HideUI();
             // Start gesture animation, then walk to seat after it finishes
             StartCoroutine(GestureThenWalkToSeat());
