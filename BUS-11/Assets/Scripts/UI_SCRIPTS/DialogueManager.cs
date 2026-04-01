@@ -9,6 +9,9 @@ public class DialogueManager : MonoBehaviour
 
     public static DialogueManager Instance;
 
+    [Header("Seat Lock Reference")]
+    public SnaptoSeat snapToSeat;
+
     [Header("UI References")]
     public GameObject dialoguePanel;
     public TextMeshProUGUI dialogueText;
@@ -88,6 +91,11 @@ public class DialogueManager : MonoBehaviour
         currentDialogue = dialogue;
         currentNodeIndex = 0;
         dialogueActive = true;
+
+        if (snapToSeat != null && snapToSeat.isSeated)
+        {
+            snapToSeat.LockSeat();
+        }
 
         dialoguePanel.SetActive(true);
         choicesPanel.SetActive(false);
@@ -264,6 +272,9 @@ public class DialogueManager : MonoBehaviour
 
         if (mouseLook != null)
             mouseLook.canLook = true;
+
+        if (snapToSeat != null)
+            snapToSeat.UnlockSeat();
 
         if (typingCoroutine != null)
             StopCoroutine(typingCoroutine);

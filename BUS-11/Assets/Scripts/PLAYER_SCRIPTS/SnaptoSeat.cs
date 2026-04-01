@@ -10,6 +10,9 @@ public class SnaptoSeat : MonoBehaviour
     public Transform busDriverP;
     public Transform busDriverMesh; // Actual mesh (BusDriver_Idle)
 
+    [Header("Seat Lock")]
+    public bool seatLockedByDialogue = false;
+
     [Header("Animation")]
     public Animator animator;
 
@@ -89,17 +92,45 @@ public class SnaptoSeat : MonoBehaviour
         }
     }
 
+    public void LockSeat()
+    {
+        seatLockedByDialogue = true;
+    }
+
+    public void UnlockSeat()
+    {
+        seatLockedByDialogue = false;
+    }
+
     void Update()
     {
         // Don't allow seat exit/enter while game is paused
         if (Time.timeScale == 0f) return;
 
+        // OPTIONAL: hide seat UI while dialogue is active
+        if (DialogueManager.Instance != null && DialogueManager.Instance.IsDialogueActive())
+        {
+            if (driverSeatUI != null)
+                driverSeatUI.SetActive(false);
+        }
+
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
             if (!isSeated && playerInRange)
+            {
                 SnapPlayerToSeat();
+            }
             else if (isSeated)
+            {
+                // BLOCK EXIT IF DIALOGUE IS LOCKING THE DRIVER IN SEAT
+                if (seatLockedByDialogue)
+                {
+                    Debug.Log("Driver is locked in seat during dialogue.");
+                    return;
+                }
+
                 ExitSeat();
+            }
         }
     }
 
@@ -108,7 +139,7 @@ public class SnaptoSeat : MonoBehaviour
         // Keep mesh at seat position when seated
         if (isSeated && busDriverP != null && driverSeat != null)
         {
-            busDriverP.localPosition = new Vector3(0f, -0.35f, 0.07f); 
+            busDriverP.localPosition = new Vector3(0f, -0.35f, 0.07f);
             busDriverP.localRotation = Quaternion.identity;
 
             // Force sitting animation to stay active
@@ -201,46 +232,46 @@ public class SnaptoSeat : MonoBehaviour
         }
     }
 
-        void ExitSeat()
+    void ExitSeat()
+    {
+        transform.SetParent(null);
+
+        // Move to exit point FIRST
+        if (exitPoint != null)
         {
-            transform.SetParent(null);
+            transform.position = exitPoint.position;
+            transform.rotation = Quaternion.identity; // Reset rotation
+        }
 
-            // Move to exit point FIRST
-            if (exitPoint != null)
-            {
-                transform.position = exitPoint.position;
-                transform.rotation = Quaternion.identity; // Reset rotation
-            }
+        // Restore original LOCAL camera position
+        /*if (cameraTransform != null)
+        {
+            cameraTransform.localPosition = originalCameraLocalPos;
+            Debug.Log($"Camera restored to local position: {cameraTransform.localPosition}");
+        }*/
 
-            // Restore original LOCAL camera position
-            /*if (cameraTransform != null)
-            {
-                cameraTransform.localPosition = originalCameraLocalPos;
-                Debug.Log($"Camera restored to local position: {cameraTransform.localPosition}");
-            }*/
+        // Re-parent Bus_Driver_P and restore ORIGINAL position
+        if (busDriverP != null)
+        {
+            busDriverP.SetParent(transform); // Re-parent to Player
+            busDriverP.localPosition = originalParentLocalPos + new Vector3(0f, 0f, -0.3f); // Restore exact original
+            busDriverP.localRotation = originalParentLocalRot;
+            //Debug.Log($"Bus_Driver_P restored to: {busDriverP.localPosition}");
+        }
 
-            // Re-parent Bus_Driver_P and restore ORIGINAL position
-            if (busDriverP != null)
-            {
-                busDriverP.SetParent(transform); // Re-parent to Player
-                busDriverP.localPosition = originalParentLocalPos + new Vector3(0f, 0f, -0.3f); // Restore exact original
-                busDriverP.localRotation = originalParentLocalRot;
-                //Debug.Log($"Bus_Driver_P restored to: {busDriverP.localPosition}");
-            }
+        // Restore BusDriver_Idle mesh to ORIGINAL position (relative to Bus_Driver_P)
+        if (busDriverMesh != null)
+        {
+            busDriverMesh.localPosition = originalMeshLocalPos; // Restore exact original
+            busDriverMesh.localRotation = originalMeshLocalRot;
+            //Debug.Log($"BusDriver_Idle restored to: {busDriverMesh.localPosition}");
+        }
 
-            // Restore BusDriver_Idle mesh to ORIGINAL position (relative to Bus_Driver_P)
-            if (busDriverMesh != null)
-            {
-                busDriverMesh.localPosition = originalMeshLocalPos; // Restore exact original
-                busDriverMesh.localRotation = originalMeshLocalRot;
-                //Debug.Log($"BusDriver_Idle restored to: {busDriverMesh.localPosition}");
-            }
-
-            // RE-ENABLE CameraShake when exiting
-            if (cameraShake != null)
-            {
-                cameraShake.enabled = true;
-            }
+        // RE-ENABLE CameraShake when exiting
+        if (cameraShake != null)
+        {
+            cameraShake.enabled = true;
+        }
 
         // HIDE DRIVING UI
         if (drivingUI != null)
@@ -250,56 +281,56 @@ public class SnaptoSeat : MonoBehaviour
 
         playerMovement.enabled = true;
 
-            Rigidbody rb = GetComponent<Rigidbody>();
-            if (rb) rb.isKinematic = false;
+        Rigidbody rb = GetComponent<Rigidbody>();
+        if (rb) rb.isKinematic = false;
 
-            Collider col = GetComponent<Collider>();
-            if (col) col.enabled = true;
+        Collider col = GetComponent<Collider>();
+        if (col) col.enabled = true;
 
-            if (bus != null)
-                bus.playerDriving = false;
+        if (bus != null)
+            bus.playerDriving = false;
 
-            playerInRange = false;
+        playerInRange = false;
 
-            isSeated = false;
-            Debug.Log("Exited seat");
+        isSeated = false;
+        Debug.Log("Exited seat");
 
-            // Play idle animation
-            SetAnimation(false, false);
-        }
+        // Play idle animation
+        SetAnimation(false, false);
+    }
 
-        void OnTriggerEnter(Collider other)
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("DriverSeat"))
         {
-            if (other.CompareTag("DriverSeat"))
-            {
-                playerInRange = true;
-            
+            playerInRange = true;
+
             if (driverSeatUI != null)
             {
                 driverSeatUI.SetActive(true);
             }
         }
-        }
+    }
 
-        void OnTriggerExit(Collider other)
+    void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("DriverSeat"))
         {
-            if (other.CompareTag("DriverSeat"))
-            {
-                playerInRange = false;
+            playerInRange = false;
             if (driverSeatUI != null)
             {
                 driverSeatUI.SetActive(false);
             }
         }
-        }
+    }
 
-        // Helper function to set animations
-        void SetAnimation(bool walking, bool sitting)
-        {
-            if (animator == null) return;
+    // Helper function to set animations
+    void SetAnimation(bool walking, bool sitting)
+    {
+        if (animator == null) return;
 
-            animator.SetBool("isWalking", walking);
-            animator.SetBool("isSitting", sitting);
-        }
+        animator.SetBool("isWalking", walking);
+        animator.SetBool("isSitting", sitting);
+    }
 }
 
