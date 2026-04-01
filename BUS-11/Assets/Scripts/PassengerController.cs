@@ -9,6 +9,9 @@ public class PassengerController : MonoBehaviour, IInteractable
     [Header("Dialogue")]
     public DialogueData passengerDialogue;
 
+    [Header("UI")]
+    public GameObject ticketUI; // Assign "Click on passenger to collect ticket"
+
     [Header("Passenger Type")]
     public bool isGhost = false; // Check this for the ghost passenger
     public bool isChild = false;
@@ -43,25 +46,31 @@ public class PassengerController : MonoBehaviour, IInteractable
         get { return currentState != PassengerState.Waiting; }
     }
 
-        public enum PassengerState
-        {
-            Waiting,        // Standing at bus stop, waiting for bus
-            WalkingToEntry,        // Walking towards bus entry point
-            AtEntry,        // Standing at entry, waiting to be clicked
-            WalkingToSeat,  // Walking to find a seat
-            Seated,          // Sitting in a seat
-            WalkingToExit,  // Walking towards bus exit point
-            Exited           // Exited the bus and walking away
+    public enum PassengerState
+    {
+        Waiting,        // Standing at bus stop, waiting for bus
+        WalkingToEntry,        // Walking towards bus entry point
+        AtEntry,        // Standing at entry, waiting to be clicked
+        WalkingToSeat,  // Walking to find a seat
+        Seated,          // Sitting in a seat
+        WalkingToExit,  // Walking towards bus exit point
+        Exited           // Exited the bus and walking away
 
-        }
+    }
 
-        private PassengerState currentState = PassengerState.Waiting;
+    private PassengerState currentState = PassengerState.Waiting;
     private Transform targetSeat;
 
     void Start()
     {
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
         agent.speed = walkSpeed;
+
+        if (ticketUI != null)
+        {
+            ticketUI.SetActive(false);
+        }
+
 
         // Get animator if not assigned
         if (animator == null)
@@ -98,6 +107,24 @@ public class PassengerController : MonoBehaviour, IInteractable
 
         // Start with idle animation
         SetAnimation(false, false);
+    }
+
+    public void ShowUI()
+    {
+        if (ticketUI != null &&
+         currentState == PassengerState.AtEntry &&
+         !DialogueManager.Instance.IsDialogueActive())
+        {
+            ticketUI.SetActive(true);
+        }
+    }
+
+    public void HideUI()
+    {
+        if (ticketUI != null)
+        {
+            ticketUI.SetActive(false);
+        }
     }
 
     void Update()
@@ -210,6 +237,7 @@ public class PassengerController : MonoBehaviour, IInteractable
     {
         if (currentState == PassengerState.AtEntry)
         {
+            HideUI();
             // Start gesture animation, then walk to seat after it finishes
             StartCoroutine(GestureThenWalkToSeat());
         }

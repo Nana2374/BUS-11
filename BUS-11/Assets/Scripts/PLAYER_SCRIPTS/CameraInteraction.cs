@@ -22,7 +22,11 @@ public class CameraInteraction : MonoBehaviour
     private Material[] originalMaterials;      // Store original materials
     private Renderer targetRenderer;
     private Texture2D whiteTexture;
+
+    //UI
     private BusButton currentBusButton;
+    private PassengerController currentPassenger;
+
 
     void Start()
     {
@@ -61,11 +65,18 @@ public class CameraInteraction : MonoBehaviour
             currentLookTarget != null ? Color.green : Color.red
         );
 
-        // Hide previous door UI first
+        // Hide previous door UI
         if (currentBusButton != null)
         {
             currentBusButton.HideUI();
             currentBusButton = null;
+        }
+
+        // Hide previous passenger UI
+        if (currentPassenger != null)
+        {
+            currentPassenger.HideUI();
+            currentPassenger = null;
         }
 
         // Raycast from center of camera
@@ -79,6 +90,14 @@ public class CameraInteraction : MonoBehaviour
             {
                 busButton.ShowUI();
                 currentBusButton = busButton;
+            }
+
+            // Show Passenger UI
+            PassengerController passenger = hit.collider.GetComponentInParent<PassengerController>();
+            if (passenger != null)
+            {
+                passenger.ShowUI();
+                currentPassenger = passenger;
             }
 
             // Highlight the new target
