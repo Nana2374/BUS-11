@@ -413,7 +413,7 @@ public class BusController : MonoBehaviour
     }
 
     // ── GUI ────────────────────────────────────────────────────────────
-    void OnGUI()
+    /*void OnGUI()
     {
         if (playerDriving)
         {
@@ -425,5 +425,5 @@ public class BusController : MonoBehaviour
             GUI.Label(new Rect(10, 40, 200, 30), "Speed: " + speed.ToString("F0") + " km/h",
                 new GUIStyle() { fontSize = 20, normal = new GUIStyleState() { textColor = Color.white } });
         }
-    }
+    }*/
 }

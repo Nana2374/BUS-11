@@ -329,6 +329,26 @@ public class PassengerController : MonoBehaviour, IInteractable
         SitDown();
     }
 
+    void SnapToSeatIfBusMoving()
+    {
+        if (targetSeat == null || busRigidbody == null) return;
+
+        float busSpeed = busRigidbody.velocity.magnitude * 3.6f;
+
+        // If bus has started moving while passenger is still walking to seat, snap them immediately
+        if (busSpeed > 0.5f)
+        {
+            // Stop NavMesh
+            if (agent != null && agent.enabled)
+            {
+                agent.ResetPath();
+                agent.enabled = false;
+            }
+
+            WalkToSeatSimple();
+        }
+    }
+
     void FindAndWalkToSeat()
     {
         if (seatManager == null)
