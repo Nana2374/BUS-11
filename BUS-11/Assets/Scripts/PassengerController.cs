@@ -6,6 +6,14 @@ using Unity.AI.Navigation;
 
 public class PassengerController : MonoBehaviour, IInteractable
 {
+    //Passenger Queue System
+    private static Queue<PassengerController> boardingQueue = new Queue<PassengerController>();
+    private static PassengerController activeBoardingPassenger = null;
+
+    private bool usingSimpleMovement = false;
+
+    private bool hasJoinedQueue = false;
+
     [Header("Dialogue")]
     public DialogueData passengerDialogue;
 
@@ -177,19 +185,50 @@ public class PassengerController : MonoBehaviour, IInteractable
         float distanceToBus = Vector3.Distance(transform.position, busTransform.position);
         float busSpeed = busRigidbody.velocity.magnitude * 3.6f; // Convert to km/h
 
-        // Check if bus is close enough AND slow enough (stopped) AND in Park gear
-        if (distanceToBus <= pickupRadius &&
+        bool busReady =
+            distanceToBus <= pickupRadius &&
             busSpeed <= busStopSpeed &&
-            busController.currentGear == 0 && // Must be in Park (gear 0)
-            busDoors.isOpen == true) //Bus doors must be open
-        {
-            // Play walking animation
-            SetAnimation(true, false);
+            busController.currentGear == 0 &&
+            busDoors.isOpen == true;
 
+        if (!busReady) return;
+
+        // Join queue only once
+        if (!hasJoinedQueue)
+        {
+            boardingQueue.Enqueue(this);
+            hasJoinedQueue = true;
+            Debug.Log(name + " joined boarding queue.");
+        }
+
+        // If nobody is boarding, let next passenger go
+        if (activeBoardingPassenger == null && boardingQueue.Count > 0)
+        {
+            activeBoardingPassenger = boardingQueue.Dequeue();
+        }
+
+        // Only the active passenger may walk to the entry
+        if (activeBoardingPassenger == this && currentState == PassengerState.Waiting)
+        {
+            SetAnimation(true, false);
             currentState = PassengerState.WalkingToEntry;
             agent.SetDestination(entryPoint.position);
 
-            Debug.Log("Bus is in Park! Walking to entry point.");
+            Debug.Log(name + " is now boarding.");
+        }
+    }
+
+    void ReleaseNextPassenger()
+    {
+        if (activeBoardingPassenger == this)
+        {
+            activeBoardingPassenger = null;
+
+            if (boardingQueue.Count > 0)
+            {
+                activeBoardingPassenger = boardingQueue.Dequeue();
+                Debug.Log(activeBoardingPassenger.name + " is next to board.");
+            }
         }
     }
 
@@ -269,35 +308,31 @@ public class PassengerController : MonoBehaviour, IInteractable
 
     void CheckIfStuck()
     {
-        if (agent == null || !agent.enabled || targetSeat == null) return;
+        if (agent == null || !agent.enabled || !agent.isOnNavMesh || targetSeat == null || usingSimpleMovement)
+            return;
 
         stuckCheckTimer += Time.deltaTime;
 
         if (stuckCheckTimer >= stuckCheckInterval)
         {
-            // Check if passenger has moved
             float distanceMoved = Vector3.Distance(transform.position, lastPosition);
 
             if (distanceMoved < minMovementDistance)
             {
-                // Passenger is stuck! Switch to simple movement
                 Debug.LogWarning($"{name} got stuck! Switching to simple movement.");
 
-                // Disable NavMesh agent
-                if (agent != null && agent.enabled)
+                usingSimpleMovement = true;
+
+                if (agent.enabled)
                 {
+                    agent.ResetPath();
                     agent.enabled = false;
                 }
 
-                // Use simple walk instead of teleport
                 StartCoroutine(WalkToSeatSimple());
-
-                // Stop checking for stuck (we're now using simple movement)
-                currentState = PassengerState.WalkingToSeat; // Keep state
-                return; // Exit check
+                return;
             }
 
-            // Update last position and reset timer
             lastPosition = transform.position;
             stuckCheckTimer = 0f;
         }
@@ -305,18 +340,18 @@ public class PassengerController : MonoBehaviour, IInteractable
 
     IEnumerator WalkToSeatSimple()
     {
-        float walkSpeed = 2f;
+        usingSimpleMovement = true;
 
-        while (Vector3.Distance(transform.position, targetSeat.position) > 0.3f)
+        float simpleWalkSpeed = 2f;
+
+        while (targetSeat != null && Vector3.Distance(transform.position, targetSeat.position) > 0.3f)
         {
-            // Move toward seat
             transform.position = Vector3.MoveTowards(
                 transform.position,
                 targetSeat.position,
-                walkSpeed * Time.deltaTime
+                simpleWalkSpeed * Time.deltaTime
             );
 
-            // Face direction of movement
             Vector3 direction = (targetSeat.position - transform.position).normalized;
             if (direction != Vector3.zero)
             {
@@ -329,6 +364,8 @@ public class PassengerController : MonoBehaviour, IInteractable
 
             yield return null;
         }
+
+        usingSimpleMovement = false;
         SitDown();
     }
 
@@ -368,19 +405,42 @@ public class PassengerController : MonoBehaviour, IInteractable
             return;
         }
 
-        agent.enabled = true; // Enable NavMesh agent to walk to seat
-        agent.SetDestination(targetSeat.position);
+        usingSimpleMovement = false;
+        stuckCheckTimer = 0f;
+        lastPosition = transform.position;
 
-        // Play walking animation
+        if (agent != null)
+        {
+            if (!agent.enabled)
+                agent.enabled = true;
+
+            if (agent.isOnNavMesh)
+            {
+                agent.SetDestination(targetSeat.position);
+            }
+            else
+            {
+                Debug.LogWarning($"{name} is not on NavMesh. Switching to simple movement.");
+                usingSimpleMovement = true;
+                StartCoroutine(WalkToSeatSimple());
+                return;
+            }
+        }
+
         SetAnimation(true, false);
 
         seatManager.OccupySeat(targetSeat);
 
         currentState = PassengerState.WalkingToSeat;
+
+        ReleaseNextPassenger();
+
     }
 
     void CheckIfReachedSeat()
     {
+        if (usingSimpleMovement) return;
+        if (agent == null || !agent.enabled || !agent.isOnNavMesh) return;
         if (agent.pathPending) return;
 
         if (agent.remainingDistance <= agent.stoppingDistance + 0.1f)
@@ -392,7 +452,13 @@ public class PassengerController : MonoBehaviour, IInteractable
     void SitDown()
     {
         currentState = PassengerState.Seated;
-        agent.enabled = false;
+        usingSimpleMovement = false;
+
+        if (agent != null && agent.enabled)
+        {
+            agent.ResetPath();
+            agent.enabled = false;
+        }
 
         if (isChild)
         {

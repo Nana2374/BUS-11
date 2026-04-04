@@ -114,7 +114,7 @@ public class SnaptoSeat : MonoBehaviour
                 driverSeatUI.SetActive(false);
         }
 
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.LeftControl))
         {
             if (!isSeated && playerInRange)
             {
