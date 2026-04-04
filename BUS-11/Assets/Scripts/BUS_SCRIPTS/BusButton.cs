@@ -18,8 +18,8 @@ public class BusButton : MonoBehaviour, IInteractable
     public BusDoors doorsToControl;           // For door buttons
     public AudioSource hornSound;             // For horn button
 
-    [Header("UI")]
-    public GameObject interactUI; // assign your "Door" text here
+    //[Header("UI")]
+    //public GameObject interactUI; // assign your "Door" text here
 
 
     public void Interact()
@@ -40,19 +40,20 @@ public class BusButton : MonoBehaviour, IInteractable
         }
     }
 
-    public void ShowUI()
-    {
-        if (interactUI != null)
-            interactUI.SetActive(true);
-    }
-
-
-    public void HideUI()
-    {
-        if (interactUI != null)
-            interactUI.SetActive(false);
-    }
 }
+//    public void ShowUI()
+//    {
+//        if (interactUI != null)
+//            interactUI.SetActive(true);
+//    }
+
+
+//    public void HideUI()
+//    {
+//        if (interactUI != null)
+//            interactUI.SetActive(false);
+//    }
+//}
 
 /*void PlayHorn()
 {

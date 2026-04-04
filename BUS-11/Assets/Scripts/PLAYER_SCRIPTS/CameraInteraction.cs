@@ -68,7 +68,7 @@ public class CameraInteraction : MonoBehaviour
         // Hide previous door UI
         if (currentBusButton != null)
         {
-            currentBusButton.HideUI();
+            //currentBusButton.HideUI();
             currentBusButton = null;
         }
 
@@ -88,7 +88,7 @@ public class CameraInteraction : MonoBehaviour
             BusButton busButton = hit.collider.GetComponentInParent<BusButton>();
             if (busButton != null)
             {
-                busButton.ShowUI();
+                //busButton.ShowUI();
                 currentBusButton = busButton;
             }
 
