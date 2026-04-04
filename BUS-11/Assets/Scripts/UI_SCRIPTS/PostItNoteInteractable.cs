@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PostItNoteInteractable : MonoBehaviour
+public class PostItNoteInteractable : MonoBehaviour, IInteractable
 {
     [Header("Interaction Settings")]
     public float interactionDistance = 3f;
@@ -10,12 +10,9 @@ public class PostItNoteInteractable : MonoBehaviour
     [Header("UI")]
     public GameObject postItUI;
 
-    [Header("Optional")]
-    public GameObject interactPrompt;
 
     [Header("Other UI To Hide")]
     public GameObject driverUI;
-    public GameObject driverChoicesUI; // optional
 
     private Transform player;
     private bool playerInRange = false;
@@ -36,9 +33,6 @@ public class PostItNoteInteractable : MonoBehaviour
 
         if (postItUI != null)
             postItUI.SetActive(false);
-
-        if (interactPrompt != null)
-            interactPrompt.SetActive(false);
     }
 
     private void Update()
@@ -47,8 +41,11 @@ public class PostItNoteInteractable : MonoBehaviour
             return;
 
         CheckPlayerDistance();
-        UpdateInteractPrompt();
-        HandleInteraction();
+
+        if (isOpen && (Input.GetMouseButtonDown(0)))
+        {
+            CloseNote();
+        }
     }
 
     private void CheckPlayerDistance()
@@ -57,29 +54,6 @@ public class PostItNoteInteractable : MonoBehaviour
         playerInRange = distance <= interactionDistance;
     }
 
-    private void UpdateInteractPrompt()
-    {
-        if (interactPrompt == null)
-            return;
-
-        interactPrompt.SetActive(playerInRange && !isOpen);
-    }
-
-    private void HandleInteraction()
-    {
-        if (playerInRange && Input.GetKeyDown(KeyCode.F))
-        {
-            if (isOpen)
-                CloseNote();
-            else
-                OpenNote();
-        }
-
-        if (isOpen && Input.GetKeyDown(KeyCode.Escape))
-        {
-            CloseNote();
-        }
-    }
 
     public void Interact()
     {
@@ -97,15 +71,10 @@ public class PostItNoteInteractable : MonoBehaviour
         if (postItUI != null)
             postItUI.SetActive(true);
 
-        if (interactPrompt != null)
-            interactPrompt.SetActive(false);
-
         // Hide driver UI
         if (driverUI != null)
             driverUI.SetActive(false);
 
-        if (driverChoicesUI != null)
-            driverChoicesUI.SetActive(false);
 
         isOpen = true;
         Cursor.lockState = CursorLockMode.None;
@@ -121,26 +90,8 @@ public class PostItNoteInteractable : MonoBehaviour
         if (driverUI != null)
             driverUI.SetActive(true);
 
-        if (driverChoicesUI != null)
-            driverChoicesUI.SetActive(true);
-
         isOpen = false;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-
-        if (interactPrompt != null && playerInRange)
-            interactPrompt.SetActive(true);
-    }
-
-    public void ShowPrompt()
-    {
-        if (interactPrompt != null && !isOpen && playerInRange)
-            interactPrompt.SetActive(true);
-    }
-
-    public void HidePrompt()
-    {
-        if (interactPrompt != null)
-            interactPrompt.SetActive(false);
     }
 }
