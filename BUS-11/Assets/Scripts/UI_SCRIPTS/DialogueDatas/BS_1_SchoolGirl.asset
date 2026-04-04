@@ -14,13 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodes:
   - nodeID: 0
-    branchType: 1
+    branchType: 0
     dialogueLine: Hi! Uncle Tan-- !
     speaker: 3
     nextNodeIndex: 1
     choices: []
   - nodeID: 1
-    branchType: 1
+    branchType: 0
     dialogueLine: Eh? Where is Uncle Tan?
     speaker: 0
     nextNodeIndex: -1
@@ -30,67 +30,67 @@ MonoBehaviour:
     - choiceText: He's busy. (Lie)
       nextNodeIndex: 7
   - nodeID: 2
-    branchType: 4
+    branchType: 1
     dialogueLine: Read the news, kid. Uncle Tan disappeared yesterday.
     speaker: 0
     nextNodeIndex: 3
     choices: []
   - nodeID: 3
-    branchType: 4
+    branchType: 1
     dialogueLine: Eh?! Where did he go?
     speaker: 3
     nextNodeIndex: 4
     choices: []
   - nodeID: 4
-    branchType: 4
+    branchType: 1
     dialogueLine: No one knows. He hasn't been found yet.
     speaker: 0
     nextNodeIndex: 5
     choices: []
   - nodeID: 5
-    branchType: 4
+    branchType: 1
     dialogueLine: I hope he's okay...
     speaker: 3
     nextNodeIndex: 6
     choices: []
   - nodeID: 6
-    branchType: 4
+    branchType: 1
     dialogueLine: ...Yeah.
     speaker: 0
     nextNodeIndex: 11
     choices: []
   - nodeID: 7
-    branchType: 3
+    branchType: 2
     dialogueLine: Sorry, girl. Uncle Tan uh... took leave today.
     speaker: 0
     nextNodeIndex: 8
     choices: []
   - nodeID: 8
-    branchType: 3
+    branchType: 2
     dialogueLine: Eh?! Where did he go?
     speaker: 3
     nextNodeIndex: 9
     choices: []
   - nodeID: 9
-    branchType: 3
+    branchType: 2
     dialogueLine: Not sure. But don't worry, I'll help him with his work today!
     speaker: 0
     nextNodeIndex: 10
     choices: []
   - nodeID: 10
-    branchType: 3
+    branchType: 2
     dialogueLine: Yay, okay!
     speaker: 3
     nextNodeIndex: 11
     choices: []
   - nodeID: 11
-    branchType: 4
+    branchType: 3
     dialogueLine: Anyways, a ride to stop 3 please!
     speaker: 3
     nextNodeIndex: 12
     choices: []
   - nodeID: 12
-    branchType: 4
+    branchType: 3
     dialogueLine: Right on it.
     speaker: 0
     nextNodeIndex: 13

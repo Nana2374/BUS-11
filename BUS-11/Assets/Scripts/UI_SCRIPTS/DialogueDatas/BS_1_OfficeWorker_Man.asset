@@ -14,43 +14,51 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodes:
   - nodeID: 0
-    branchType: 1
+    branchType: 0
     dialogueLine: Is this the same bus Uncle Tan drove?
     speaker: 6
+    nextNodeIndex: 1
     choices: []
   - nodeID: 1
-    branchType: 1
+    branchType: 0
     dialogueLine: Nope, his bus was too damaged when it was found.
     speaker: 0
+    nextNodeIndex: 2
     choices: []
   - nodeID: 2
-    branchType: 1
+    branchType: 0
     dialogueLine: I see... That bus always gave me the creeps.
     speaker: 6
+    nextNodeIndex: 3
     choices: []
   - nodeID: 3
     branchType: 1
-    dialogueLine: I'd occasionally hear strange noises while I sat in the back.
-    speaker: 6
+    dialogueLine: What noises did you hear?
+    speaker: 0
+    nextNodeIndex: 4
     choices: []
   - nodeID: 4
-    branchType: 1
-    dialogueLine: What kinds?
-    speaker: 0
+    branchType: 0
+    dialogueLine: I'd occasionally hear strange noises while I sat in the back.
+    speaker: 6
+    nextNodeIndex: 5
     choices: []
   - nodeID: 5
     branchType: 4
     dialogueLine: Sometimes screeching, sometimes...
     speaker: 6
+    nextNodeIndex: 6
     choices: []
   - nodeID: 6
     branchType: 4
     dialogueLine: Thinking about it makes me queasy...
     speaker: 6
+    nextNodeIndex: 7
     choices: []
   - nodeID: 7
     branchType: 4
     dialogueLine: Anyways, hopefully Uncle Tan is found soon. He was such a sweet
       man.
     speaker: 6
+    nextNodeIndex: 8
     choices: []

@@ -14,12 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodes:
   - nodeID: 0
-    branchType: 1
+    branchType: 0
     dialogueLine: Oh new uncle, HELLO!
     speaker: 4
-    choices: []
-  - nodeID: 1
-    branchType: 2
-    dialogueLine: Hello
-    speaker: 0
+    nextNodeIndex: 1
     choices: []
