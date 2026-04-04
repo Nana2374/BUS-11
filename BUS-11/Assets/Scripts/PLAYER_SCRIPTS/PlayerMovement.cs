@@ -11,6 +11,10 @@ public class PlayerMovement : MonoBehaviour
     public float gravity = -9.81f;
     public float jumpHeight = 3f;
 
+    [Header("Sprint Settings")]
+    public float sprintMultiplier = 1.8f;
+    private bool isSprinting;
+
     public Transform groundCheck;
     public float groundDistance = 0.4f;
     public LayerMask groundMask;
@@ -64,7 +68,13 @@ public class PlayerMovement : MonoBehaviour
 
         Vector3 move = transform.right * x + transform.forward * z;
 
-        controller.Move(move * speed * Time.deltaTime);
+        // Sprint input
+        isSprinting = Input.GetKey(KeyCode.LeftShift);
+
+        // Calculate final speed
+        float currentSpeed = isSprinting ? speed * sprintMultiplier : speed;
+
+        controller.Move(move * currentSpeed * Time.deltaTime);
 
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
@@ -107,8 +117,17 @@ public class PlayerMovement : MonoBehaviour
             {
                 footstepSource.clip = footstepLoop;
                 footstepSource.loop = true;
-                footstepSource.pitch = UnityEngine.Random.Range(0.95f, 1.05f); // slight variation
                 footstepSource.Play();
+            }
+
+            // Update pitch continuously while moving
+            if (isSprinting)
+            {
+                footstepSource.pitch = 1.6f;
+            }
+            else
+            {
+                footstepSource.pitch = 1.0f;
             }
         }
         else
