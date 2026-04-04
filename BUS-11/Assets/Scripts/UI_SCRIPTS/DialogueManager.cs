@@ -198,16 +198,24 @@ public class DialogueManager : MonoBehaviour
 
     void GoToNextLinearNode()
     {
-        int nextIndex = currentNodeIndex + 1;
-
-        if (nextIndex >= currentDialogue.nodes.Count)
+        if (currentDialogue == null || currentNodeIndex < 0 || currentNodeIndex >= currentDialogue.nodes.Count)
         {
             EndDialogue();
             return;
         }
 
-        currentNodeIndex = nextIndex;
-        ShowCurrentNode();
+        DialogueNode currentNode = currentDialogue.nodes[currentNodeIndex];
+
+        // First priority: use explicitly assigned next node
+        if (currentNode.nextNodeIndex >= 0 && currentNode.nextNodeIndex < currentDialogue.nodes.Count)
+        {
+            currentNodeIndex = currentNode.nextNodeIndex;
+            ShowCurrentNode();
+            return;
+        }
+
+        // If no next node is assigned, end dialogue
+        EndDialogue();
     }
 
     void ShowChoices(List<DialogueChoice> choices)

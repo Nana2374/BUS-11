@@ -15,28 +15,18 @@ MonoBehaviour:
   nodes:
   - nodeID: 0
     branchType: 3
-    dialogueLine: (Strange route...)
-    speaker: 0
-    choices: []
-  - nodeID: 1
-    branchType: 3
     dialogueLine: (Thirty years driving buses, I'd expect to be assigned a nicer
       route.)
     speaker: 0
     choices: []
+  - nodeID: 1
+    branchType: 3
+    dialogueLine: (But no choice...)
+    speaker: 0
+    choices: []
   - nodeID: 2
     branchType: 3
-    dialogueLine: (But no choice, I guess...)
-    speaker: 0
-    choices: []
-  - nodeID: 3
-    branchType: 3
-    dialogueLine: (I couldn't say no...)
-    speaker: 0
-    choices: []
-  - nodeID: 4
-    branchType: 3
-    dialogueLine: (They needed a replacement as soon as possible, after the previous
-      driver disappeared yesterday.)
+    dialogueLine: (They needed a replacement, after the previous driver disappeared
+      yesterday...)
     speaker: 0
     choices: []

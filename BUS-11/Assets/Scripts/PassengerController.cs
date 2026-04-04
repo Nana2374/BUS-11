@@ -7,12 +7,14 @@ using Unity.AI.Navigation;
 public class PassengerController : MonoBehaviour, IInteractable
 {
     //Passenger Queue System
-    private static Queue<PassengerController> boardingQueue = new Queue<PassengerController>();
+    private static List<PassengerController> waitingPassengers = new List<PassengerController>();
     private static PassengerController activeBoardingPassenger = null;
 
     private bool usingSimpleMovement = false;
-
     private bool hasJoinedQueue = false;
+
+    [Header("Priority")]
+    public int boardingPriority = 0; // Lower = boards first
 
     [Header("Dialogue")]
     public DialogueData passengerDialogue;
@@ -143,6 +145,32 @@ public class PassengerController : MonoBehaviour, IInteractable
         }
     }
 
+    private static PassengerController GetNextPassengerByPriority()
+    {
+        if (waitingPassengers.Count == 0)
+            return null;
+
+        PassengerController bestPassenger = null;
+        int bestPriority = int.MaxValue;
+
+        foreach (PassengerController passenger in waitingPassengers)
+        {
+            if (passenger == null)
+                continue;
+
+            if (passenger.currentState != PassengerState.Waiting)
+                continue;
+
+            if (passenger.boardingPriority < bestPriority)
+            {
+                bestPriority = passenger.boardingPriority;
+                bestPassenger = passenger;
+            }
+        }
+
+        return bestPassenger;
+    }
+
     void Update()
     {
         switch (currentState)
@@ -183,7 +211,7 @@ public class PassengerController : MonoBehaviour, IInteractable
         if (busTransform == null || busRigidbody == null) return;
 
         float distanceToBus = Vector3.Distance(transform.position, busTransform.position);
-        float busSpeed = busRigidbody.velocity.magnitude * 3.6f; // Convert to km/h
+        float busSpeed = busRigidbody.velocity.magnitude * 3.6f;
 
         bool busReady =
             distanceToBus <= pickupRadius &&
@@ -193,26 +221,36 @@ public class PassengerController : MonoBehaviour, IInteractable
 
         if (!busReady) return;
 
-        // Join queue only once
+        // Add passenger to waiting list only once
         if (!hasJoinedQueue)
         {
-            boardingQueue.Enqueue(this);
+            waitingPassengers.Add(this);
             hasJoinedQueue = true;
-            Debug.Log(name + " joined boarding queue.");
+            Debug.Log(name + " joined waiting list.");
         }
 
-        // If nobody is boarding, let next passenger go
-        if (activeBoardingPassenger == null && boardingQueue.Count > 0)
+        // If nobody is boarding, pick the closest waiting passenger to the door
+        if (activeBoardingPassenger == null)
         {
-            activeBoardingPassenger = boardingQueue.Dequeue();
+            activeBoardingPassenger = GetNextPassengerByPriority();
+
+            if (activeBoardingPassenger != null)
+            {
+                waitingPassengers.Remove(activeBoardingPassenger);
+                Debug.Log(activeBoardingPassenger.name + " chosen as closest to board.");
+            }
         }
 
-        // Only the active passenger may walk to the entry
+        // Only chosen passenger may board
         if (activeBoardingPassenger == this && currentState == PassengerState.Waiting)
         {
             SetAnimation(true, false);
             currentState = PassengerState.WalkingToEntry;
-            agent.SetDestination(entryPoint.position);
+
+            if (agent != null && agent.enabled && agent.isOnNavMesh)
+            {
+                agent.SetDestination(entryPoint.position);
+            }
 
             Debug.Log(name + " is now boarding.");
         }
@@ -222,13 +260,23 @@ public class PassengerController : MonoBehaviour, IInteractable
     {
         if (activeBoardingPassenger == this)
         {
-            activeBoardingPassenger = null;
+            activeBoardingPassenger = GetNextPassengerByPriority();
 
-            if (boardingQueue.Count > 0)
+            if (activeBoardingPassenger != null)
             {
-                activeBoardingPassenger = boardingQueue.Dequeue();
-                Debug.Log(activeBoardingPassenger.name + " is next to board.");
+                waitingPassengers.Remove(activeBoardingPassenger);
+                Debug.Log(activeBoardingPassenger.name + " is next to board (closest to door).");
             }
+        }
+    }
+
+    void OnDisable()
+    {
+        waitingPassengers.Remove(this);
+
+        if (activeBoardingPassenger == this)
+        {
+            activeBoardingPassenger = null;
         }
     }
 
@@ -519,9 +567,9 @@ public class PassengerController : MonoBehaviour, IInteractable
 
     void CheckIfReachedExit()
     {
+        if (agent == null || !agent.enabled || !agent.isOnNavMesh) return;
         if (agent.pathPending) return;
 
-        // Check if reached the entry point
         if (agent.remainingDistance <= agent.stoppingDistance + 0.1f)
         {
             ReachExit();

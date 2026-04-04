@@ -5,11 +5,9 @@ using UnityEngine;
 
 public enum DialogueBranchType
 {
-    None,
-    Friendly,
-    Rude,
-    Neutral,
-    HorrorEscalation,
+    Linear,
+    Choice1,
+    Choice2,
     Ending
 }
 
@@ -44,6 +42,8 @@ public class DialogueNode
     public string dialogueLine;
 
     public SpeakerType speaker;
+
+    public int nextNodeIndex = -1;
 
     public List<DialogueChoice> choices;
 }
