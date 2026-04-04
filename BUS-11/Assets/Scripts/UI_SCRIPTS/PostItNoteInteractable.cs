@@ -13,6 +13,10 @@ public class PostItNoteInteractable : MonoBehaviour
     [Header("Optional")]
     public GameObject interactPrompt;
 
+    [Header("Other UI To Hide")]
+    public GameObject driverUI;
+    public GameObject driverChoicesUI; // optional
+
     private Transform player;
     private bool playerInRange = false;
     private bool isOpen = false;
@@ -58,13 +62,11 @@ public class PostItNoteInteractable : MonoBehaviour
         if (interactPrompt == null)
             return;
 
-        // Show prompt only when close enough and note is not open
         interactPrompt.SetActive(playerInRange && !isOpen);
     }
 
     private void HandleInteraction()
     {
-        // Press F  toggle open/close ONLY if player is in range
         if (playerInRange && Input.GetKeyDown(KeyCode.F))
         {
             if (isOpen)
@@ -73,7 +75,6 @@ public class PostItNoteInteractable : MonoBehaviour
                 OpenNote();
         }
 
-        // Allow ESC to close anytime when open
         if (isOpen && Input.GetKeyDown(KeyCode.Escape))
         {
             CloseNote();
@@ -82,7 +83,6 @@ public class PostItNoteInteractable : MonoBehaviour
 
     public void Interact()
     {
-        // Optional: still works if another interaction system calls this
         if (!playerInRange && !isOpen)
             return;
 
@@ -100,6 +100,13 @@ public class PostItNoteInteractable : MonoBehaviour
         if (interactPrompt != null)
             interactPrompt.SetActive(false);
 
+        // Hide driver UI
+        if (driverUI != null)
+            driverUI.SetActive(false);
+
+        if (driverChoicesUI != null)
+            driverChoicesUI.SetActive(false);
+
         isOpen = true;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
@@ -110,11 +117,17 @@ public class PostItNoteInteractable : MonoBehaviour
         if (postItUI != null)
             postItUI.SetActive(false);
 
+        // Bring driver UI back
+        if (driverUI != null)
+            driverUI.SetActive(true);
+
+        if (driverChoicesUI != null)
+            driverChoicesUI.SetActive(true);
+
         isOpen = false;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
-        // Show prompt again if player is still nearby
         if (interactPrompt != null && playerInRange)
             interactPrompt.SetActive(true);
     }
