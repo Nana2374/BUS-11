@@ -17,19 +17,23 @@ MonoBehaviour:
     branchType: 3
     dialogueLine: Wow you are early. Where are you off to?
     speaker: 0
+    nextNodeIndex: 1
     choices: []
   - nodeID: 1
     branchType: 3
     dialogueLine: ....
     speaker: 2
+    nextNodeIndex: 2
     choices: []
   - nodeID: 2
     branchType: 3
     dialogueLine: (So unfriendly...)
     speaker: 0
+    nextNodeIndex: 3
     choices: []
   - nodeID: 3
     branchType: 3
     dialogueLine: Ok...
     speaker: 0
+    nextNodeIndex: 4
     choices: []
