@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
     public GameObject dialogueUI;
     public GameObject choicesUI;
     public GameObject monologueUI;
+    public GameObject postitUI;
 
     [Header("Player Controls")]
     public PlayerMovement playerMovement;
@@ -38,7 +39,7 @@ public class GameManager : MonoBehaviour
     private bool wasDialogueUIActive = false;
     private bool wasChoicesUIActive = false;
     private bool wasMonologueUIActive = false;
-
+    private bool wasPostitUIActive = false;
     private bool wasDialogueActive = false;
 
     [Header("SFX")]
@@ -158,6 +159,7 @@ public class GameManager : MonoBehaviour
         if (dialogueUI != null) dialogueUI.SetActive(false);
         if (choicesUI != null) choicesUI.SetActive(false);
         if (monologueUI != null) monologueUI.SetActive(false);
+        if (postitUI != null) postitUI.SetActive(false);
 
         AudioManager.Instance.PlayMenuMusic();
 
@@ -182,6 +184,7 @@ public class GameManager : MonoBehaviour
         if (dialogueUI != null) dialogueUI.SetActive(false);
         if (choicesUI != null) choicesUI.SetActive(false);
         if (monologueUI != null) monologueUI.SetActive(false);
+        if (postitUI != null) postitUI.SetActive(false);
 
         AudioManager.Instance.PlayGameMusic();
         AudioManager.Instance.ResumeSFX();
@@ -207,6 +210,7 @@ public class GameManager : MonoBehaviour
         wasDialogueUIActive = dialogueUI != null && dialogueUI.activeSelf;
         wasChoicesUIActive = choicesUI != null && choicesUI.activeSelf;
         wasMonologueUIActive = monologueUI != null && monologueUI.activeSelf;
+        wasPostitUIActive = postitUI != null && postitUI.activeSelf;
 
         if (startScreen != null) startScreen.SetActive(false);
         if (pauseScreen != null) pauseScreen.SetActive(true);
@@ -216,6 +220,7 @@ public class GameManager : MonoBehaviour
         if (dialogueUI != null) dialogueUI.SetActive(false);
         if (choicesUI != null) choicesUI.SetActive(false);
         if (monologueUI != null) monologueUI.SetActive(false);
+        if (postitUI != null) postitUI.SetActive(false);
 
         // Freeze time and show cursor
         Time.timeScale = 0f;
@@ -249,6 +254,7 @@ public class GameManager : MonoBehaviour
         if (dialogueUI != null) dialogueUI.SetActive(wasDialogueUIActive);
         if (choicesUI != null) choicesUI.SetActive(wasChoicesUIActive);
         if (monologueUI != null) monologueUI.SetActive(wasMonologueUIActive);
+        if (postitUI != null) postitUI.SetActive(wasPostitUIActive);
 
         // Unfreeze time and lock cursor
         Time.timeScale = 1f;
@@ -280,6 +286,7 @@ public class GameManager : MonoBehaviour
         if (dialogueUI != null) dialogueUI.SetActive(false);
         if (choicesUI != null) choicesUI.SetActive(false);
         if (monologueUI != null) monologueUI.SetActive(false);
+        if (postitUI != null) postitUI.SetActive(false);
 
         AudioManager.Instance.StopSFX();
         AudioManager.Instance.PlayMenuMusic();
