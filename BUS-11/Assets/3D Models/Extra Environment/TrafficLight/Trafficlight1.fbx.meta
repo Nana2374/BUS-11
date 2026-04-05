@@ -3,7 +3,17 @@ guid: e44f56bff562d6f46b88817335c4e91e
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: trafficbulbMAT
+    second: {fileID: 2100000, guid: 9bffefdf37427f245a41a9d676b0e848, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: trafficmetalMAT
+    second: {fileID: 2100000, guid: 9b0e634b073633343837d018765f5294, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
