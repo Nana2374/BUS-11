@@ -53,5 +53,5 @@ MonoBehaviour:
     dialogueLine: You still have the whole road ahead of you. I wouldn't want to
       frighten you!
     speaker: 10
-    nextNodeIndex: 5
+    nextNodeIndex: 6
     choices: []
