@@ -33,14 +33,14 @@ MonoBehaviour:
     choices: []
   - nodeID: 3
     branchType: 0
-    dialogueLine: What noises did you hear?
-    speaker: 0
+    dialogueLine: I'd occasionally hear strange noises while I sat in the back.
+    speaker: 8
     nextNodeIndex: 4
     choices: []
   - nodeID: 4
     branchType: 0
-    dialogueLine: I'd occasionally hear strange noises while I sat in the back.
-    speaker: 8
+    dialogueLine: What noises did you hear?
+    speaker: 0
     nextNodeIndex: 5
     choices: []
   - nodeID: 5
