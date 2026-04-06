@@ -5,6 +5,7 @@ using UnityEngine;
 public class LadyinWhite : MonoBehaviour
 {
     [Header("References")]
+    public GameManager gameManager;
     public PassengerController passengerController;
     public BusController busController;
     public GameObject[] handprintPlanes; // Drag all 20 handprint planes here
@@ -95,6 +96,8 @@ public class LadyinWhite : MonoBehaviour
 
         Debug.Log("Ghost is pulling the wheel!");
 
+        gameManager.DialogueActive();
+
         if (enableRedLights)
         {
             SetAllLightColors(redColor);
@@ -103,14 +106,17 @@ public class LadyinWhite : MonoBehaviour
         }
 
         Coroutine flickerCoroutine = StartCoroutine(FlickerLights(flickerDuration));
-        StartCoroutine(ActivateHandprints()); 
-
+        Coroutine handprintCoroutine = StartCoroutine(ActivateHandprints()); 
 
         // Duration, steer force, acceleration force
-        busController.TriggerGhostEvent(6f, 10f, 10f);
+        busController.TriggerGhostEvent(4f, 15f, 50f);
 
         // Wait for flickering to finish
         yield return flickerCoroutine;
+
+        gameManager.EnablePlayerControls();
+
+        yield return handprintCoroutine; // ✅ Wait for fade to complete too
 
         Debug.Log("Ghost sequence complete!");
 
@@ -156,8 +162,6 @@ public class LadyinWhite : MonoBehaviour
 
         StopRedLightSound();
         yield return StartCoroutine(FadeOutHandprints(2f));
-
-        Destroy(gameObject);
     }
 
     IEnumerator FlickerLights(float duration)
@@ -199,39 +203,49 @@ public class LadyinWhite : MonoBehaviour
     {
         Debug.Log("Fading out handprints...");
 
-        float elapsed = 0f;
-
-        Renderer[] renderers = new Renderer[handprintPlanes.Length];
         Material[] materials = new Material[handprintPlanes.Length];
 
         for (int i = 0; i < handprintPlanes.Length; i++)
         {
-            if (handprintPlanes[i] != null)
+            if (handprintPlanes[i] == null)
             {
-                renderers[i] = handprintPlanes[i].GetComponent<Renderer>();
-                materials[i] = renderers[i].material;
+                Debug.LogWarning($"[{i}] handprintPlane is NULL");
+                continue;
             }
+
+            // ✅ Fallback: try parent first, then children
+            Renderer r = handprintPlanes[i].GetComponent<Renderer>();
+            if (r == null)
+                r = handprintPlanes[i].GetComponentInChildren<Renderer>();
+
+            if (r == null)
+            {
+                Debug.LogWarning($"No Renderer found on {handprintPlanes[i].name}");
+                continue;
+            }
+
+            materials[i] = r.material; // Auto-instances the material
+
+            // Log exactly what shader is being used
+            Debug.Log($"[{i}] {handprintPlanes[i].name} | Shader: {materials[i].shader.name} | " +
+                      $"Has _BaseColor: {materials[i].HasProperty("_BaseColor")} | " +
+                      $"Has _Color: {materials[i].HasProperty("_Color")} | " +
+                      $"RenderQueue: {materials[i].renderQueue}");
+
+            // ✅ Force URP transparent mode so alpha actually works
+            materials[i].SetFloat("_Surface", 1f);
+            materials[i].SetFloat("_ZWrite", 0f);
+            materials[i].SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
+            materials[i].SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
+            materials[i].EnableKeyword("_SURFACE_TYPE_TRANSPARENT");
+            materials[i].renderQueue = 3000;
+
+            // Set starting alpha to 1
+            SetMaterialAlpha(materials[i], 1f);
         }
+        yield return null;
 
-        // Reset alpha to 1
-        foreach (Material mat in materials)
-        {
-            if (mat == null) continue;
-
-            if (mat.HasProperty("_BaseColor"))
-            {
-                Color c = mat.GetColor("_BaseColor");
-                c.a = 1f;
-                mat.SetColor("_BaseColor", c);
-            }
-            else
-            {
-                Color c = mat.color;
-                c.a = 1f;
-                mat.color = c;
-            }
-        }
-
+        float elapsed = 0f;
         while (elapsed < duration)
         {
             elapsed += Time.deltaTime;
@@ -239,20 +253,8 @@ public class LadyinWhite : MonoBehaviour
 
             foreach (Material mat in materials)
             {
-                if (mat == null) continue;
-
-                if (mat.HasProperty("_BaseColor"))
-                {
-                    Color c = mat.GetColor("_BaseColor");
-                    c.a = alpha;
-                    mat.SetColor("_BaseColor", c);
-                }
-                else
-                {
-                    Color c = mat.color;
-                    c.a = alpha;
-                    mat.color = c;
-                }
+                if (mat != null)
+                    SetMaterialAlpha(mat, alpha);
             }
 
             yield return null;
@@ -262,6 +264,23 @@ public class LadyinWhite : MonoBehaviour
         {
             if (handprint != null)
                 handprint.SetActive(false);
+        }
+        Debug.Log("=== FadeOutHandprints END ===");
+    }
+
+    void SetMaterialAlpha(Material mat, float alpha)
+    {
+        if (mat.HasProperty("_BaseColor"))
+        {
+            Color c = mat.GetColor("_BaseColor");
+            c.a = alpha;
+            mat.SetColor("_BaseColor", c);
+        }
+        else if (mat.HasProperty("_Color"))
+        {
+            Color c = mat.GetColor("_Color");
+            c.a = alpha;
+            mat.SetColor("_Color", c);
         }
     }
 

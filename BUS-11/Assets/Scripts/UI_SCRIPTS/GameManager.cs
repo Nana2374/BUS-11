@@ -321,7 +321,7 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
-    void EnablePlayerControls()
+    public void EnablePlayerControls()
     {
         if (playerMovement != null)
         {
@@ -349,7 +349,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void DisablePlayerControls()
+    public void DisablePlayerControls()
     {
         // Only disable movement if NOT seated (sitting animations stay active)
         if (playerMovement != null)
@@ -385,7 +385,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void DialogueActive()
+    public void DialogueActive()
     {
         // Only disable movement if NOT seated (sitting animations stay active)
         if (playerMovement != null)
