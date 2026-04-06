@@ -48,6 +48,10 @@ public class BusController : MonoBehaviour
     private float ghostSteerTimer = 0f;
     private bool ghostActive = false;
 
+    private float ghostSteerDirection = 1f;  // 1 = right, -1 = left
+    private float ghostDirectionTimer = 0f;  // countdown to next direction flip
+    private float ghostDirectionInterval = 0.5f; // how often it switches
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -122,15 +126,34 @@ public class BusController : MonoBehaviour
         {
             ghostSteerTimer -= Time.fixedDeltaTime;
 
+            ghostDirectionTimer -= Time.fixedDeltaTime;
+
             // Remove brakes so ghost can accelerate freely
             rearLeft.brakeTorque = 0f;
             rearRight.brakeTorque = 0f;
             frontLeft.brakeTorque = 0f;
             frontRight.brakeTorque = 0f;
 
+            if (ghostDirectionTimer <= 0f)
+            {
+                // Flip to opposite direction, with a small random interval
+                ghostSteerDirection *= -1f;
+                ghostDirectionInterval = Random.Range(0.3f, 0.8f); // randomize interval
+                ghostDirectionTimer = ghostDirectionInterval;
+            }
+
+            // Apply steering force in current direction
+            float steer = ghostSteerDirection * ghostSteerForce;
+            rb.AddTorque(Vector3.up * steer, ForceMode.Acceleration);
+
+            // Optional: also push the bus forward
+            rb.AddForce(transform.forward * ghostAccelerationForce, ForceMode.Acceleration);
+
             if (ghostSteerTimer <= 0f)
             {
                 ghostActive = false;
+                ghostSteerDirection = 1f;
+                ghostDirectionTimer = 0f;
             }
         }
 
@@ -387,6 +410,10 @@ public class BusController : MonoBehaviour
         ghostSteerTimer = duration;
         ghostSteerForce = force;
         ghostAccelerationForce = accelForce;
+
+        // Start with a random direction
+        ghostSteerDirection = Random.value > 0.5f ? 1f : -1f;
+        ghostDirectionTimer = Random.Range(0.3f, 0.8f); // first flip time
     }
 
     // ── Tilt Clamp ────────────────────────────────────────────────────────────
