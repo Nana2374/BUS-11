@@ -84,7 +84,11 @@ public class BusController : MonoBehaviour
     {
         if (!playerDriving)
         {
-            currentGear = 0; // Ensure we're in Park when not driving
+            if (!ghostActive)
+            {
+                currentGear = 0; // Ensure we're in Park when not driving
+            }
+            
             return;
         }
 
@@ -95,14 +99,6 @@ public class BusController : MonoBehaviour
         if (motorInput > 0.1f && currentGear == 0)
         {
             DriveGear();
-        }
-
-        // Apply ghost influence (adds to player input)
-        if (ghostActive)
-        {
-            // Ghost presses "W"
-            motorInput = Mathf.Max(motorInput, ghostAccelerationForce);
-            steerInput += ghostSteerForce * Mathf.Clamp01(1f - (ghostSteerTimer / 5f));
         }
 
         // Gear shifting
@@ -138,7 +134,7 @@ public class BusController : MonoBehaviour
             {
                 // Flip to opposite direction, with a small random interval
                 ghostSteerDirection *= -1f;
-                ghostDirectionInterval = Random.Range(0.1f, 0.3f); // randomize interval
+                ghostDirectionInterval = Random.Range(0.3f, 0.8f); // randomize interval
                 ghostDirectionTimer = ghostDirectionInterval;
             }
 
@@ -149,9 +145,6 @@ public class BusController : MonoBehaviour
             // Push forward
             rearLeft.motorTorque = ghostAccelerationForce;
             rearRight.motorTorque = ghostAccelerationForce;
-
-            // Optional: also push the bus forward
-            rb.AddForce(transform.forward * ghostAccelerationForce, ForceMode.Acceleration);
 
             if (ghostSteerTimer <= 0f)
             {
@@ -176,13 +169,13 @@ public class BusController : MonoBehaviour
         // Apply Park constraints even when player isn't driving
         if (!playerDriving || currentGear == 0)
         {
-            if (currentGear == 0)
+            if (currentGear == 0 && !ghostActive)
             {
                 ApplyParkBrakes();
                 rb.constraints = RigidbodyConstraints.FreezeAll;
             }
 
-            if (!playerDriving) return; // Return AFTER applying Park
+            if (!playerDriving && !ghostActive) return; // Return AFTER applying Park
         }
         else
         {
@@ -429,7 +422,28 @@ public class BusController : MonoBehaviour
 
         // Start with a random direction
         ghostSteerDirection = Random.value > 0.5f ? 1f : -1f;
-        ghostDirectionTimer = Random.Range(0.1f, 0.3f); // first flip time
+        ghostDirectionTimer = Random.Range(0.3f, 0.8f); // first flip time
+    }
+
+    public void ResetInputs()
+    {
+        motorInput = 0f;
+        steerInput = 0f;
+        currentTorqueRamp = 0f;
+
+        // Immediately zero out wheels too
+        rearLeft.motorTorque = 0f;
+        rearRight.motorTorque = 0f;
+        frontLeft.motorTorque = 0f;
+        frontRight.motorTorque = 0f;
+
+        frontLeft.steerAngle = 0f;
+        frontRight.steerAngle = 0f;
+
+        rearLeft.brakeTorque = 0f;
+        rearRight.brakeTorque = 0f;
+        frontLeft.brakeTorque = 0f;
+        frontRight.brakeTorque = 0f;
     }
 
     // ── Tilt Clamp ────────────────────────────────────────────────────────────

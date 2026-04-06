@@ -415,4 +415,17 @@ public class GameManager : MonoBehaviour
             busController.enabled = false;
         }
     }
+
+    public void GhostActive()
+    {
+        if (playerMovement != null)
+        {
+            playerMovement.enabled = false;
+        }
+
+        if (snaptoSeat != null)
+        {
+            snaptoSeat.enabled = false;
+        }
+    }
 }

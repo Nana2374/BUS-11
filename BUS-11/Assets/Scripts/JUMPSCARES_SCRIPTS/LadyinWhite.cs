@@ -96,7 +96,9 @@ public class LadyinWhite : MonoBehaviour
 
         Debug.Log("Ghost is pulling the wheel!");
 
-        gameManager.DialogueActive();
+        gameManager.GhostActive();
+        busController.playerDriving = false;
+        busController.ResetInputs();
 
         if (enableRedLights)
         {
@@ -109,14 +111,15 @@ public class LadyinWhite : MonoBehaviour
         Coroutine handprintCoroutine = StartCoroutine(ActivateHandprints()); 
 
         // Duration, steer force, acceleration force
-        busController.TriggerGhostEvent(4f, 15f, 50f);
+        busController.TriggerGhostEvent(5f, 25f, 50000f);
 
         // Wait for flickering to finish
         yield return flickerCoroutine;
 
         gameManager.EnablePlayerControls();
+        busController.playerDriving = true; 
 
-        yield return handprintCoroutine; // ✅ Wait for fade to complete too
+        yield return handprintCoroutine; // Wait for fade to complete too
 
         Debug.Log("Ghost sequence complete!");
 
@@ -225,12 +228,6 @@ public class LadyinWhite : MonoBehaviour
             }
 
             materials[i] = r.material; // Auto-instances the material
-
-            // Log exactly what shader is being used
-            Debug.Log($"[{i}] {handprintPlanes[i].name} | Shader: {materials[i].shader.name} | " +
-                      $"Has _BaseColor: {materials[i].HasProperty("_BaseColor")} | " +
-                      $"Has _Color: {materials[i].HasProperty("_Color")} | " +
-                      $"RenderQueue: {materials[i].renderQueue}");
 
             // ✅ Force URP transparent mode so alpha actually works
             materials[i].SetFloat("_Surface", 1f);
