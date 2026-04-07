@@ -23,5 +23,5 @@ MonoBehaviour:
     branchType: 0
     dialogueLine: Argh! Ew! You're such a terrible driver!
     speaker: 11
-    nextNodeIndex: 1
+    nextNodeIndex: 2
     choices: []
