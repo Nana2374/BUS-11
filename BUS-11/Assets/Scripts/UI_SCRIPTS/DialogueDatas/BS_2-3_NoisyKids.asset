@@ -15,27 +15,26 @@ MonoBehaviour:
   nodes:
   - nodeID: 0
     branchType: 0
-    dialogueLine: "HEYY\u2026 have you heard about that old road the bus takes sometimes?"
+    dialogueLine: "HEYY\u2026 you know that dark road the bus takes?"
     speaker: 4
     nextNodeIndex: 0
     choices: []
   - nodeID: 1
     branchType: 0
-    dialogueLine: HUH? WHAT road are you talking about?
+    dialogueLine: HUH? What about it?
     speaker: 5
     nextNodeIndex: 0
     choices: []
   - nodeID: 2
     branchType: 0
-    dialogueLine: "The one with hanging cloth on trees\u2026 my cousin said people
-      avoid it at night."
+    dialogueLine: "Trees with hanging cloth\u2026"
     speaker: 4
     nextNodeIndex: 0
     choices: []
   - nodeID: 3
     branchType: 0
-    dialogueLine: "YEAH YEAH! I heard something about that too. Like\u2026 a woman
-      appears there?"
+    dialogueLine: "YEAH!  I heard something about that too! Like\u2026 a woman appears
+      there?"
     speaker: 6
     nextNodeIndex: 0
     choices: []
@@ -47,8 +46,7 @@ MonoBehaviour:
     choices: []
   - nodeID: 5
     branchType: 0
-    dialogueLine: "Yeah. They say she just stands by the side of the road\u2026 not
-      moving."
+    dialogueLine: "Yeah\u2026 she just stands there."
     speaker: 4
     nextNodeIndex: 0
     choices: []
@@ -60,7 +58,7 @@ MonoBehaviour:
     choices: []
   - nodeID: 7
     branchType: 0
-    dialogueLine: "No way\u2026 that\u2019s fake."
+    dialogueLine: "NAHH\u2026 that\u2019s fake."
     speaker: 5
     nextNodeIndex: 0
     choices: []

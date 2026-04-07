@@ -85,7 +85,7 @@ MonoBehaviour:
     choices: []
   - nodeID: 11
     branchType: 3
-    dialogueLine: Anyways, a ride to stop 3 please!
+    dialogueLine: Anyways, a ride to stop 2 please!
     speaker: 3
     nextNodeIndex: 12
     choices: []
