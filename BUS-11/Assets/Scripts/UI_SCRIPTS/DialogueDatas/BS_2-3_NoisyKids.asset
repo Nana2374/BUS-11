@@ -1,0 +1,90 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05e9573c6467e754e97a0e7e8baf0ff4, type: 3}
+  m_Name: BS_2-3_NoisyKids
+  m_EditorClassIdentifier: 
+  nodes:
+  - nodeID: 0
+    branchType: 0
+    dialogueLine: "HEYY\u2026 have you heard about that old road the bus takes sometimes?"
+    speaker: 4
+    nextNodeIndex: 0
+    choices: []
+  - nodeID: 1
+    branchType: 0
+    dialogueLine: HUH? WHAT road are you talking about?
+    speaker: 5
+    nextNodeIndex: 0
+    choices: []
+  - nodeID: 2
+    branchType: 0
+    dialogueLine: "The one with hanging cloth on trees\u2026 my cousin said people
+      avoid it at night."
+    speaker: 4
+    nextNodeIndex: 0
+    choices: []
+  - nodeID: 3
+    branchType: 0
+    dialogueLine: "YEAH YEAH! I heard something about that too. Like\u2026 a woman
+      appears there?"
+    speaker: 6
+    nextNodeIndex: 0
+    choices: []
+  - nodeID: 4
+    branchType: 0
+    dialogueLine: The one with the long black hair?
+    speaker: 6
+    nextNodeIndex: 0
+    choices: []
+  - nodeID: 5
+    branchType: 0
+    dialogueLine: "Yeah. They say she just stands by the side of the road\u2026 not
+      moving."
+    speaker: 4
+    nextNodeIndex: 0
+    choices: []
+  - nodeID: 6
+    branchType: 0
+    dialogueLine: "And if the driver stops for her\u2026 she disappears."
+    speaker: 6
+    nextNodeIndex: 0
+    choices: []
+  - nodeID: 7
+    branchType: 0
+    dialogueLine: "No way\u2026 that\u2019s fake."
+    speaker: 5
+    nextNodeIndex: 0
+    choices: []
+  - nodeID: 8
+    branchType: 0
+    dialogueLine: 'BOOOOO! '
+    speaker: 7
+    nextNodeIndex: 0
+    choices: []
+  - nodeID: 9
+    branchType: 0
+    dialogueLine: AHHHHHHH!!!
+    speaker: 5
+    nextNodeIndex: 0
+    choices: []
+  - nodeID: 10
+    branchType: 0
+    dialogueLine: HAHAHAHAH GOT YOU!!
+    speaker: 7
+    nextNodeIndex: 0
+    choices: []
+  - nodeID: 11
+    branchType: 0
+    dialogueLine: WHAT THE HELL GUYS!
+    speaker: 5
+    nextNodeIndex: 0
+    choices: []

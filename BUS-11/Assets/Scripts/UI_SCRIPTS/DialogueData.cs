@@ -20,6 +20,7 @@ public enum SpeakerType
     SchoolBoyA,
     SchoolBoyB,
     SchoolBoyC,
+    SchoolBoyAandC,
     Nurse,
     OfficeWorker,
     ElderlyMan,

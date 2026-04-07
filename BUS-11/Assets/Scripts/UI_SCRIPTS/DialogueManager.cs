@@ -150,6 +150,11 @@ public class DialogueManager : MonoBehaviour
                 speakerNameText.color = Color.yellow;
                 break;
 
+            case SpeakerType.SchoolBoyAandC:
+                speakerNameText.text = "SCHOOL BOY A & C";
+                speakerNameText.color = Color.yellow;
+                break;
+
             case SpeakerType.Nurse:
                 speakerNameText.text = "NURSE";
                 speakerNameText.color = Color.yellow;
