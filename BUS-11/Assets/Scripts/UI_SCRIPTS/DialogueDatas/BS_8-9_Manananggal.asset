@@ -15,7 +15,7 @@ MonoBehaviour:
   nodes:
   - nodeID: 0
     branchType: 0
-    dialogueLine: "Turn...back...\LTurn...back..."
+    dialogueLine: I see you...
     speaker: 2
     nextNodeIndex: 1
     choices: []

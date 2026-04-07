@@ -31,7 +31,7 @@ public class GhostOldMan : MonoBehaviour
 
             PlayWetFootstepsAudio();
 
-            Debug.Log("Wet footsteps.");
+            //Debug.Log("Wet footsteps.");
         }
         else
         {
@@ -48,7 +48,7 @@ public class GhostOldMan : MonoBehaviour
         {
             PlayLaughAudio();
             hasTriggered = true;
-            Debug.Log("Laughing audio.");
+            //Debug.Log("Laughing audio.");
         }
     }
 
