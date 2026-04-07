@@ -1,0 +1,51 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05e9573c6467e754e97a0e7e8baf0ff4, type: 3}
+  m_Name: BS_4-5_Chicken
+  m_EditorClassIdentifier: 
+  nodes:
+  - nodeID: 0
+    branchType: 0
+    dialogueLine: (Oh shit oh shit oh shit...)
+    speaker: 0
+    nextNodeIndex: 1
+    choices: []
+  - nodeID: 1
+    branchType: 0
+    dialogueLine: NOSE UNCLE KILLED A CHICKEN!
+    speaker: 4
+    nextNodeIndex: 2
+    choices: []
+  - nodeID: 2
+    branchType: 0
+    dialogueLine: Ooooo that's sick!
+    speaker: 5
+    nextNodeIndex: 3
+    choices: []
+  - nodeID: 3
+    branchType: 0
+    dialogueLine: HAHAH It's guts are SPILLING!
+    speaker: 6
+    nextNodeIndex: 4
+    choices: []
+  - nodeID: 4
+    branchType: 0
+    dialogueLine: (I didn't mean to...)
+    speaker: 0
+    nextNodeIndex: 5
+    choices: []
+  - nodeID: 5
+    branchType: 0
+    dialogueLine: (I need to be more careful...)
+    speaker: 0
+    nextNodeIndex: 6
+    choices: []
