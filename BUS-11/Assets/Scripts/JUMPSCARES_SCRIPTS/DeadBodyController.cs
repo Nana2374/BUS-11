@@ -21,6 +21,7 @@ public class DeadBodyController : MonoBehaviour
     public float destroyDelay = 2f;          // Seconds after landing to destroy
 
     [Header("Audio")]
+    public AudioSource deadbodyAudioSource;
     public AudioClip bodyFallClip;
     public AudioClip bodyRunOverClip;
 
@@ -151,7 +152,7 @@ public class DeadBodyController : MonoBehaviour
         currentState = BodyState.Landed;
 
         Debug.Log("Dead body landed!");
-        AudioManager.Instance.PlaySFX(bodyFallClip);
+        PlayDropAudio();
 
         bodyRigidbody.isKinematic = true;
 
@@ -160,9 +161,15 @@ public class DeadBodyController : MonoBehaviour
             Destroy(gameObject, destroyDelay);
             Debug.Log("Dead body will be destroyed in " + destroyDelay + " seconds.");
         }
+    }
+
+    void PlayDropAudio()
+    {
+        if (deadbodyAudioSource != null && bodyFallClip != null)
         {
-            Destroy(gameObject, destroyDelay);
-            Debug.Log("Dead body will be destroyed in " + destroyDelay + " seconds.");
+            deadbodyAudioSource.volume = 1f;
+
+            deadbodyAudioSource.PlayOneShot(bodyFallClip);
         }
     }
 

@@ -29,9 +29,13 @@ public class LadyinWhite : MonoBehaviour
     public Color redColor = new Color(1f, 0f, 0f); // Pure red
     public bool enableRedLights = true;
 
-    [Header("Red Light Sound")]
+    [Header("Audio")]
     public AudioSource audioSource;     // Drag your AudioSource here
+    public AudioSource ghostSource;
     public AudioClip redLightSFX;       // Drag your sound clip here
+    public AudioClip ghostWhispersSFX;
+    public AudioClip ghostSFX;
+    public AudioClip busScreechSFX;
     public AudioClip[] handSlapSounds;
     public AudioSource handprintAudioSource;
     public float minPitch = 0.8f;
@@ -112,6 +116,7 @@ public class LadyinWhite : MonoBehaviour
 
         // Duration, steer force, acceleration force
         busController.TriggerGhostEvent(5f, 25f, 50000f);
+        PlayGhostLaughing();
 
         // Wait for flickering to finish
         yield return flickerCoroutine;
@@ -344,5 +349,20 @@ public class LadyinWhite : MonoBehaviour
             handprintAudioSource.PlayOneShot(clip);
         }
     }
+    void PlayGhostLaughing()
+    {
+        if (ghostSource != null)
+        {
+            ghostSource.volume = 1f;
 
+            ghostSource.PlayOneShot(ghostWhispersSFX);
+            ghostSource.PlayOneShot(ghostSFX);
+
+        }
+        if (audioSource != null)
+        {
+            audioSource.volume = 1f;
+            audioSource.PlayOneShot(busScreechSFX);
+        }
+    }
 }

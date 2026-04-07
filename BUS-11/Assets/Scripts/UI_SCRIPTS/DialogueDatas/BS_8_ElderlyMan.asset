@@ -16,7 +16,7 @@ MonoBehaviour:
   - nodeID: 0
     branchType: 0
     dialogueLine: You okay there?
-    speaker: 9
+    speaker: 10
     nextNodeIndex: 0
     choices:
     - choiceText: Aren't you...
@@ -38,7 +38,7 @@ MonoBehaviour:
   - nodeID: 3
     branchType: 3
     dialogueLine: What! You're so rude. Are you cursing me to death!?
-    speaker: 9
+    speaker: 10
     nextNodeIndex: 4
     choices: []
   - nodeID: 4
@@ -49,7 +49,7 @@ MonoBehaviour:
     choices: []
   - nodeID: 5
     branchType: 3
-    dialogueLine: Speak carefully or you'll end up like that driver too
-    speaker: 9
+    dialogueLine: Speak carefully or you'll end up like that driver too.
+    speaker: 10
     nextNodeIndex: 6
     choices: []

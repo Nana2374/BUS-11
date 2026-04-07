@@ -16,6 +16,6 @@ MonoBehaviour:
   - nodeID: 0
     branchType: 0
     dialogueLine: Wow, smells like a dead patient in here.
-    speaker: 7
+    speaker: 8
     nextNodeIndex: 1
     choices: []

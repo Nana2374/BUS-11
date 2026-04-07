@@ -29,7 +29,7 @@ public class ChickenController : MonoBehaviour
 
     [Header("Audio")]
     public AudioSource chickenSource;
-
+    public AudioClip chickenCluckClip;
     public AudioClip chickenDeadClip;
     public AudioClip chickenEscapeClip;
 
@@ -188,6 +188,8 @@ public class ChickenController : MonoBehaviour
 
     void CrossRoad()
     {
+        AudioManager.Instance.PlaySFX(chickenCluckClip);
+
         // Move towards target position
         transform.position = Vector3.MoveTowards(
         transform.position,

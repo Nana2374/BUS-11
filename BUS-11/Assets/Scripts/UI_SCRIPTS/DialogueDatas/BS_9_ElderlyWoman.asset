@@ -16,26 +16,26 @@ MonoBehaviour:
   - nodeID: 0
     branchType: 0
     dialogueLine: Oh good, you stopped. I thought you were going to drive past.
-    speaker: 10
+    speaker: 11
     nextNodeIndex: 1
     choices: []
   - nodeID: 1
     branchType: 0
     dialogueLine: The driver before you always did that, like he's afraid of letting
       people board.
-    speaker: 10
+    speaker: 11
     nextNodeIndex: 2
     choices: []
   - nodeID: 2
     branchType: 0
     dialogueLine: But I don't blame him... I wouldn't dare let some things in either.
-    speaker: 10
+    speaker: 11
     nextNodeIndex: 3
     choices: []
   - nodeID: 3
     branchType: 0
     dialogueLine: Sorry, did I frighten you? You look rather pale.
-    speaker: 10
+    speaker: 11
     nextNodeIndex: -1
     choices:
     - choiceText: Am I tripping?
@@ -58,7 +58,7 @@ MonoBehaviour:
   - nodeID: 6
     branchType: 0
     dialogueLine: What? I don't understand you.
-    speaker: 10
+    speaker: 11
     nextNodeIndex: 6
     choices:
     - choiceText: Sorry.
@@ -79,7 +79,7 @@ MonoBehaviour:
     choices: []
   - nodeID: 9
     branchType: 2
-    dialogueLine: You dont seem right. I hope you dont end up like the last one
-    speaker: 10
+    dialogueLine: You dont seem right. I hope you dont end up like the last one.
+    speaker: 11
     nextNodeIndex: 10
     choices: []
