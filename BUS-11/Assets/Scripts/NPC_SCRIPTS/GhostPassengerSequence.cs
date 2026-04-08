@@ -11,6 +11,7 @@ public class GhostPassengerSequence : MonoBehaviour
     [Header("Rotation Settings")]
     public float rotationDuration = 1f; // faster rotation
     public Transform cameraTargetRotation;
+    public Transform cameraTransform;
 
     [Header("Monologue")]
     public DialogueData monologueData;
@@ -94,22 +95,35 @@ public class GhostPassengerSequence : MonoBehaviour
         if (horrorSFX != null)
             horrorSFX.Play();
 
-        Quaternion startRot = playerTransform.rotation;
-        Quaternion targetRot = cameraTargetRotation.rotation;
+        // Player body handles Y (yaw)
+        Quaternion startBodyRot = playerTransform.rotation;
+        Quaternion targetBodyRot = Quaternion.Euler(0f, cameraTargetRotation.eulerAngles.y, 0f);
+
+        // Camera handles X (pitch)
+        Quaternion startCamRot = cameraTransform.localRotation;
+        float targetPitch = cameraTargetRotation.eulerAngles.x;
+        // Convert to -90/90 range so it matches MouseLook's xRotation
+        if (targetPitch > 180f) targetPitch -= 360f;
+        Quaternion targetCamRot = Quaternion.Euler(targetPitch, 0f, 0f);
 
         float time = 0f;
-
         while (time < rotationDuration)
         {
             time += Time.deltaTime;
-            float t = time / rotationDuration;
+            float t = Mathf.SmoothStep(0f, 1f, time / rotationDuration);
 
-            // Smooth interpolation
-            playerTransform.rotation = Quaternion.Slerp(startRot, targetRot, t);
+            playerTransform.rotation = Quaternion.Slerp(startBodyRot, targetBodyRot, t);
+            cameraTransform.localRotation = Quaternion.Slerp(startCamRot, targetCamRot, t);
+
             yield return null;
         }
 
-        playerTransform.rotation = targetRot;
+        playerTransform.rotation = targetBodyRot;
+        cameraTransform.localRotation = targetCamRot;
+
+        // Sync MouseLook so it doesn't snap back when canLook is re-enabled
+        if (mouseLook != null)
+            mouseLook.SetRotation(targetPitch, cameraTargetRotation.eulerAngles.y);
 
         yield return new WaitForSeconds(0.5f);
 

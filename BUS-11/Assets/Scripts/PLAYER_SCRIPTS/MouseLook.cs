@@ -63,4 +63,11 @@ public class MouseLook : MonoBehaviour
     {
         return mouseSensitivity;
     }
+
+    public void SetRotation(float xRot, float yRot)
+    {
+        xRotation = xRot;
+        transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
+        playerBody.rotation = Quaternion.Euler(0f, yRot, 0f);
+    }
 }
