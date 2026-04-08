@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GhostPassengerSequence : MonoBehaviour
 {
@@ -82,20 +83,30 @@ public class GhostPassengerSequence : MonoBehaviour
             float t = time / duration;
 
             playerTransform.rotation = Quaternion.Slerp(startRot, targetRot, t);
-
             yield return null;
         }
 
-        // Ensure exact final rotation
         playerTransform.rotation = targetRot;
 
-        //  WAIT a bit for dramatic pause (optional)
         yield return new WaitForSeconds(0.5f);
 
-        //  PLAY MONOLOGUE HERE
+        // PLAY MONOLOGUE
         if (MonologueManager.Instance != null && monologueData != null)
         {
             MonologueManager.Instance.PlayMonologue(monologueData);
+
+            // WAIT for monologue to finish
+            float totalTime = monologueData.nodes.Count * MonologueManager.Instance.lineDuration;
+            yield return new WaitUntil(() => !MonologueManager.Instance.IsPlaying);
         }
+
+        // FADE TO BLACK
+        if (ScreenFader.Instance != null)
+        {
+            yield return StartCoroutine(ScreenFader.Instance.FadeOut());
+        }
+
+        // LOAD CREDITS SCENE
+        SceneManager.LoadScene("CreditsScene"); //  put your actual scene name here
     }
 }

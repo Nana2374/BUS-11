@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class MonologueManager : MonoBehaviour
 {
+    public bool IsPlaying { get; private set; }
+
     public static MonologueManager Instance;
 
     [Header("UI")]
@@ -38,6 +40,7 @@ public class MonologueManager : MonoBehaviour
 
     IEnumerator PlayMonologueRoutine(DialogueData monologueData)
     {
+        IsPlaying = true;
         monologuePanel.SetActive(true);
 
         for (int i = 0; i < monologueData.nodes.Count; i++)
@@ -109,6 +112,8 @@ public class MonologueManager : MonoBehaviour
         monologueText.text = "";
         speakerNameText.text = ""; // CLEAR AFTER
         monologuePanel.SetActive(false);
+
+        IsPlaying = false;
         monologueCoroutine = null;
     }
 }
