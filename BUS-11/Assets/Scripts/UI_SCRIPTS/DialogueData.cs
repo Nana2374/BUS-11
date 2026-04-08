@@ -24,7 +24,8 @@ public enum SpeakerType
     Nurse,
     OfficeWorker,
     ElderlyMan,
-    ElderlyWoman
+    ElderlyWoman,
+    Everyone
 }
 
 [System.Serializable]

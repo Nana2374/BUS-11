@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class GhostPassengerSequence : MonoBehaviour
 {
+    [Header("Monologue")]
+    public DialogueData monologueData;
+
     [Header("Player Control")]
     public PlayerMovement playerMovement;
     public MouseLook mouseLook;
@@ -70,7 +73,7 @@ public class GhostPassengerSequence : MonoBehaviour
         Quaternion startRot = playerTransform.rotation;
         Quaternion targetRot = Quaternion.LookRotation(Vector3.forward);
 
-        float duration = 2f; //  control speed (bigger = slower)
+        float duration = 2f;
         float time = 0f;
 
         while (time < duration)
@@ -85,5 +88,14 @@ public class GhostPassengerSequence : MonoBehaviour
 
         // Ensure exact final rotation
         playerTransform.rotation = targetRot;
+
+        //  WAIT a bit for dramatic pause (optional)
+        yield return new WaitForSeconds(0.5f);
+
+        //  PLAY MONOLOGUE HERE
+        if (MonologueManager.Instance != null && monologueData != null)
+        {
+            MonologueManager.Instance.PlayMonologue(monologueData);
+        }
     }
 }
