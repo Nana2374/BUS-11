@@ -18,6 +18,9 @@ public class BusButton : MonoBehaviour, IInteractable
     public BusDoors doorsToControl;           // For door buttons
     public AudioSource hornSound;             // For horn button
 
+    public static bool doorDisabled = false;
+
+
     //[Header("UI")]
     //public GameObject interactUI; // assign your "Door" text here
 
@@ -27,6 +30,13 @@ public class BusButton : MonoBehaviour, IInteractable
         switch (buttonType)
         {
             case ButtonType.DoorToggle:
+
+                if (doorDisabled)
+                {
+                    Debug.Log("Door button is disabled!");
+                    return;
+                }
+
                 if (doorsToControl != null)
                 {
                     doorsToControl.ToggleDoor();

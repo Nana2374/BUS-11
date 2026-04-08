@@ -8,6 +8,11 @@ public class GhostPassenger : MonoBehaviour
     [Header("Dialogue")]
     public DialogueData passengerDialogue;
 
+    //Ending Dialogue
+    public DialogueData newDialogueAfterZone;
+
+    private bool useNewDialogue = false;
+
     [Header("UI")]
     public GameObject interactPrompt;
 
@@ -81,12 +86,21 @@ public class GhostPassenger : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F))
         {
             hasInteracted = true; // NEW
-            DialogueManager.Instance.StartDialogue(passengerDialogue);
+            DialogueData dialogueToUse = useNewDialogue ? newDialogueAfterZone : passengerDialogue;
+            DialogueManager.Instance.StartDialogue(dialogueToUse);
 
             if (interactPrompt != null)
             {
                 interactPrompt.SetActive(false);
             }
         }
+    }
+
+    public void SwitchDialogue()
+    {
+        useNewDialogue = true;
+
+        // OPTIONAL: allow interaction again if you want new dialogue to trigger
+        hasInteracted = false;
     }
 }
