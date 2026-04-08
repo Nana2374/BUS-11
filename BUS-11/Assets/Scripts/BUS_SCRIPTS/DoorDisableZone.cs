@@ -4,6 +4,15 @@ using UnityEngine;
 
 public class DoorDisableZone : MonoBehaviour
 {
+    public static DoorDisableZone Instance;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
+
+    [Header("Horror Music")]
+    public AudioSource horrorMusic; // Assign in inspector
 
     [Header("Objects to Destroy")]
     public List<GameObject> objectsToDestroy;
@@ -92,6 +101,13 @@ public class DoorDisableZone : MonoBehaviour
         if (flickerSFX != null && flickerSFX.isPlaying)
         {
             flickerSFX.Stop();
+        }
+
+        // Play horror music continuously
+        if (horrorMusic != null && !horrorMusic.isPlaying)
+        {
+            horrorMusic.loop = true;
+            horrorMusic.Play();
         }
     }
 }

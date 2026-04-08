@@ -7,6 +7,7 @@ public class GhostPassengerSequence : MonoBehaviour
 {
     [Header("Horror SFX")]
     public AudioSource horrorSFX;  // Assign in inspector
+
     [Header("Rotation Settings")]
     public float rotationDuration = 1f; // faster rotation
 
@@ -38,6 +39,13 @@ public class GhostPassengerSequence : MonoBehaviour
             ghostPassenger.HasInteracted())
         {
             sequenceTriggered = true;
+
+            // Stop horror music
+            if (DoorDisableZone.Instance != null && DoorDisableZone.Instance.horrorMusic != null)
+            {
+                DoorDisableZone.Instance.horrorMusic.Stop();
+            }
+
             StartCoroutine(HandleSequence());
         }
     }
