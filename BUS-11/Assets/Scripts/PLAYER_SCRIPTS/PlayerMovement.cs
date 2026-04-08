@@ -32,7 +32,11 @@ public class PlayerMovement : MonoBehaviour
     public AudioSource footstepSource;
     public AudioClip footstepLoop;
 
+
+    public bool canMove = true;
+
     void Start()
+
     {
         // Register this AudioSource with AudioManager
         /*AudioSource myAudio = GetComponent<footstepSource>();
@@ -50,6 +54,9 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        if (!canMove) return;
+
         // Stop player movement during dialogue
         if (DialogueManager.Instance != null && DialogueManager.Instance.IsDialogueActive())
         {
