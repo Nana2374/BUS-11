@@ -16,7 +16,7 @@ MonoBehaviour:
   - nodeID: 0
     branchType: 0
     dialogueLine: Good evening.
-    speaker: 8
+    speaker: 9
     nextNodeIndex: 1
     choices:
     - choiceText: Evening.

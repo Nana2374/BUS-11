@@ -16,7 +16,7 @@ MonoBehaviour:
   - nodeID: 0
     branchType: 0
     dialogueLine: Is this the same bus Uncle Tan drove?
-    speaker: 8
+    speaker: 9
     nextNodeIndex: 1
     choices: []
   - nodeID: 1
@@ -28,13 +28,13 @@ MonoBehaviour:
   - nodeID: 2
     branchType: 0
     dialogueLine: I see... That bus always gave me the creeps.
-    speaker: 8
+    speaker: 9
     nextNodeIndex: 3
     choices: []
   - nodeID: 3
     branchType: 0
     dialogueLine: I'd occasionally hear strange noises while I sat in the back.
-    speaker: 8
+    speaker: 9
     nextNodeIndex: 4
     choices: []
   - nodeID: 4
@@ -46,19 +46,19 @@ MonoBehaviour:
   - nodeID: 5
     branchType: 0
     dialogueLine: Sometimes screeching, sometimes...
-    speaker: 8
+    speaker: 9
     nextNodeIndex: 6
     choices: []
   - nodeID: 6
     branchType: 0
     dialogueLine: Thinking about it makes me queasy...
-    speaker: 8
+    speaker: 9
     nextNodeIndex: 7
     choices: []
   - nodeID: 7
     branchType: 3
     dialogueLine: Anyways, hopefully Uncle Tan is found soon. He was such a sweet
       man.
-    speaker: 8
+    speaker: 9
     nextNodeIndex: 8
     choices: []
