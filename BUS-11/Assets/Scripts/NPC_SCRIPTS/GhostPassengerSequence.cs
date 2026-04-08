@@ -10,6 +10,7 @@ public class GhostPassengerSequence : MonoBehaviour
 
     [Header("Rotation Settings")]
     public float rotationDuration = 1f; // faster rotation
+    public Transform cameraTargetRotation;
 
     [Header("Monologue")]
     public DialogueData monologueData;
@@ -94,7 +95,7 @@ public class GhostPassengerSequence : MonoBehaviour
             horrorSFX.Play();
 
         Quaternion startRot = playerTransform.rotation;
-        Quaternion targetRot = Quaternion.LookRotation(Vector3.forward);
+        Quaternion targetRot = cameraTargetRotation.rotation;
 
         float time = 0f;
 
@@ -124,7 +125,5 @@ public class GhostPassengerSequence : MonoBehaviour
             yield return StartCoroutine(ScreenFader.Instance.FadeOut());
 
         gameManager.ShowEndCredits();
-
-        //SceneManager.LoadScene("CreditsScene");
     }
 }
