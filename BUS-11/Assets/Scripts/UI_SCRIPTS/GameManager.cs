@@ -19,6 +19,9 @@ public class GameManager : MonoBehaviour
     public GameObject choicesUI;
     public GameObject monologueUI;
     public GameObject postitUI;
+    public GameObject blackScreen;
+    public GameObject endCredits;
+    public Animator endCreditsAnim;
 
     [Header("Player Controls")]
     public PlayerMovement playerMovement;
@@ -276,6 +279,38 @@ public class GameManager : MonoBehaviour
         Debug.Log("Game resumed!");
     }
 
+    public void ShowEndCredits()
+    {
+        if (startScreen != null) startScreen.SetActive(false);
+        if (pauseScreen != null) pauseScreen.SetActive(false);
+        if (drivingUI != null) drivingUI.SetActive(false);
+        if (driverSeatUI != null) driverSeatUI.SetActive(false);
+        if (endDemoUI != null) endDemoUI.SetActive(true);
+        if (dialogueUI != null) dialogueUI.SetActive(false);
+        if (choicesUI != null) choicesUI.SetActive(false);
+        if (monologueUI != null) monologueUI.SetActive(false);
+        if (postitUI != null) postitUI.SetActive(false);
+        if (blackScreen != null) blackScreen.SetActive(false);
+
+        if (endCredits != null) endCredits.SetActive(true);
+
+        AudioManager.Instance.StopSFX();
+        AudioManager.Instance.StopMusic();
+        AudioManager.Instance.PlayCreditsMusic();
+
+        endCreditsAnim.Play("Credits roll");
+
+        // Freeze time and hide cursor
+        Time.timeScale = 0f;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        cameraInteraction.showCrosshair = false;
+
+        DisablePlayerControls();
+
+        Debug.Log("End of game reached!");
+    }
+
     public void EndofDemo()
     {
         if (startScreen != null) startScreen.SetActive(false);
@@ -291,7 +326,7 @@ public class GameManager : MonoBehaviour
         AudioManager.Instance.StopSFX();
         AudioManager.Instance.PlayMenuMusic();
 
-        // Freeze time and show cursor
+        // Freeze time and hide cursor
         Time.timeScale = 0f;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;

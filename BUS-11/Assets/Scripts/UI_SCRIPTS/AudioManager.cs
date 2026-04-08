@@ -11,6 +11,7 @@ public class AudioManager : MonoBehaviour
 
     public AudioClip menuMusic;
     public AudioClip gameMusic;
+    public AudioClip creditsMusic;
 
     public float fadeDuration = 1.5f;
 
@@ -44,6 +45,11 @@ public class AudioManager : MonoBehaviour
         StartFade(gameMusic);
     }
 
+    public void PlayCreditsMusic()
+    {
+        StartFade(creditsMusic);
+    }
+
     void StartFade(AudioClip newClip)
     {
         if (musicSource.clip == newClip) return;
@@ -61,7 +67,7 @@ public class AudioManager : MonoBehaviour
         // Fade OUT
         while (musicSource.volume > 0)
         {
-            musicSource.volume -= startVolume * Time.deltaTime / fadeDuration;
+            musicSource.volume -= startVolume * Time.unscaledDeltaTime / fadeDuration; // changed
             yield return null;
         }
 
@@ -72,11 +78,20 @@ public class AudioManager : MonoBehaviour
         // Fade IN
         while (musicSource.volume < startVolume)
         {
-            musicSource.volume += startVolume * Time.deltaTime / fadeDuration;
+            musicSource.volume += startVolume * Time.unscaledDeltaTime / fadeDuration; // changed
             yield return null;
         }
 
         musicSource.volume = startVolume;
+    }
+
+    public void StopMusic()
+    {
+        if (currentFade != null)
+            StopCoroutine(currentFade);
+
+        musicSource.Stop();
+        musicSource.clip = null;
     }
 
     public void PlaySFX(AudioClip clip)

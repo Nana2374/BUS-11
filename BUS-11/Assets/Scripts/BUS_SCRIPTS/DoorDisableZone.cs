@@ -29,6 +29,9 @@ public class DoorDisableZone : MonoBehaviour
     public float flickerDuration = 3f;       // Total flicker duration
     public float flickerInterval = 0.1f;     // Time between on/off toggles
 
+    [Header("Off Lights")]
+    public List<Light> offLights;
+
     private bool zoneTriggered = false;
 
     private void OnTriggerEnter(Collider other)
@@ -58,6 +61,8 @@ public class DoorDisableZone : MonoBehaviour
             {
                 StartCoroutine(FlickerLightsRoutine());
             }
+
+            OffLights();
 
             // Play SFX with loop enabled
             if (flickerSFX != null)
@@ -117,6 +122,17 @@ public class DoorDisableZone : MonoBehaviour
         {
             additionalMusic.loop = true;
             additionalMusic.Play();
+        }
+    }
+
+    private void OffLights()
+    {
+        foreach (Light light in offLights)
+        {
+            if (light != null)
+            {
+                light.intensity = 0f;
+            }
         }
     }
 }

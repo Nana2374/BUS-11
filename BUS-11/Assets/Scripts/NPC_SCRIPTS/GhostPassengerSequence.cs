@@ -21,6 +21,7 @@ public class GhostPassengerSequence : MonoBehaviour
 
     [Header("References")]
     public GhostPassenger ghostPassenger;
+    public GameManager gameManager;
 
     [Header("Objects to Destroy")]
     public List<GameObject> objectsToDestroy;
@@ -122,6 +123,8 @@ public class GhostPassengerSequence : MonoBehaviour
         if (ScreenFader.Instance != null)
             yield return StartCoroutine(ScreenFader.Instance.FadeOut());
 
-        SceneManager.LoadScene("CreditsScene");
+        gameManager.ShowEndCredits();
+
+        //SceneManager.LoadScene("CreditsScene");
     }
 }
