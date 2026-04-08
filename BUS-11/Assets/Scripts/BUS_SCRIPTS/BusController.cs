@@ -10,14 +10,15 @@ public class BusController : MonoBehaviour
     public float motorForce = 80000f;
     public float steerAngle = 60f;
     public float brakeForce = 50000f;
-    public float maxSpeed = 50f; // Adjust to your top speed
+    //public float maxSpeed = 50f; // Adjust to your top speed
+    public float maxForwardSpeed = 50f;
+    public float maxReverseSpeed = 15f;
     public float accelerationTime = 8f;   // Seconds to reach full torque from 0
 
     public bool playerDriving;
 
-    // Gear System: -1 = Reverse, 0 = Park, 1 = Drive
-    public int currentGear = 0; // -1 = Reverse, 0 = Park, 1-3 = Gears
-    public float driveSpeedLimit = 50f;
+    public int currentGear = 0; // 0 = Park, 
+    public float driveSpeedLimit = 40f;
     public float reverseRatio = 0.4f;
     public float reverseSpeedLimit = 15f;
 
@@ -120,10 +121,6 @@ public class BusController : MonoBehaviour
         {
             ParkGear();
         }
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            ReverseGear();
-        }
     }
 
     void FixedUpdate()
@@ -198,25 +195,33 @@ public class BusController : MonoBehaviour
         float signedSpeed = Vector3.Dot(rb.velocity, transform.forward) * 3.6f;
         float currentSpeed = Mathf.Abs(signedSpeed);
 
+        bool isForward = motorInput > 0.1f;
+        bool isReverse = motorInput < -0.1f;
+        // Braking = pressing opposite direction to travel
+        bool isBraking = (isForward && signedSpeed < -1f) || (isReverse && signedSpeed > 1f);
+
+        float rampTarget = (isForward || isReverse) ? 1f : 0f;
+        currentTorqueRamp = Mathf.MoveTowards(currentTorqueRamp, rampTarget, (1f / accelerationTime) * Time.fixedDeltaTime);
+
         // Boost torque during turns
         float turnBoost = 1f + (Mathf.Abs(steerInput) * 5f);
 
         // Boost torque during turns - MORE boost at higher speeds
-        float baseTurnBoost = 1f + (Mathf.Abs(steerInput) * 5f);
+        //float baseTurnBoost = 1f + (Mathf.Abs(steerInput) * 5f);
 
         // Extra boost if speed is dropping during turn
-        float speedBoost = 1f;
+        /*float speedBoost = 1f;
         if (Mathf.Abs(steerInput) > 0.3f && currentSpeed < 30f)
         {
             speedBoost = 3f; // 50% extra power when turning slowly
-        }
+        }*/
 
         // Braking detection (S key)
-        bool isBraking = motorInput < -0.1f;
+        /*bool isBraking = motorInput < -0.1f;
         float brakeSmoothing = 1f;
         float targetBrakeAmount = isBraking ? 1f : 0f;
         currentBrakeAmount = Mathf.MoveTowards(currentBrakeAmount, targetBrakeAmount, brakeSmoothing * Time.fixedDeltaTime);
-        float currentBrakeTorque = brakeForce * currentBrakeAmount;
+        float currentBrakeTorque = brakeForce * currentBrakeAmount;*/
 
         // Reset engine brake when pressing W or S
         if (Mathf.Abs(motorInput) > 0.1f)
@@ -225,107 +230,68 @@ public class BusController : MonoBehaviour
         }
 
         // Torque ramp: smoothly builds up from 0 when player presses accelerator
-        bool isAccelerating = motorInput > 0.1f;
-        float rampTarget = isAccelerating ? 1f : 0f;
-        currentTorqueRamp = Mathf.MoveTowards(currentTorqueRamp, rampTarget, (1f / accelerationTime) * Time.fixedDeltaTime);
+        //bool isAccelerating = motorInput > 0.1f;
+        //float rampTarget = isAccelerating ? 1f : 0f;
+        //currentTorqueRamp = Mathf.MoveTowards(currentTorqueRamp, rampTarget, (1f / accelerationTime) * Time.fixedDeltaTime);
 
-        if (currentGear == -1) // ── REVERSE ──────────────────────────────────
+        if (isBraking)
         {
-            if (isBraking)
+            rearLeft.motorTorque = 0f;
+            rearRight.motorTorque = 0f;
+            frontLeft.brakeTorque = brakeForce * 0.004f;
+            frontRight.brakeTorque = brakeForce * 0.004f;
+            rearLeft.brakeTorque = 0f;
+            rearRight.brakeTorque = 0f;
+        }
+        else if (isForward)
+        {
+            if (signedSpeed >= maxForwardSpeed)
             {
                 rearLeft.motorTorque = 0f;
                 rearRight.motorTorque = 0f;
-                frontLeft.brakeTorque = currentBrakeTorque * 0.004f;
-                frontRight.brakeTorque = currentBrakeTorque * 0.004f;
-                rearLeft.brakeTorque = 0f;
-                rearRight.brakeTorque = 0f;
-            }
-            else if (isAccelerating)
-            {
-                if (currentSpeed >= reverseSpeedLimit)
-                {
-                    // At limit: hold with gentle brake
-                    rearLeft.motorTorque = 0f;
-                    rearRight.motorTorque = 0f;
-                    rearLeft.brakeTorque = brakeForce * 0.1f;
-                    rearRight.brakeTorque = brakeForce * 0.1f;
-                    frontLeft.brakeTorque = brakeForce * 0.1f;
-                    frontRight.brakeTorque = brakeForce * 0.1f;
-                }
-                else
-                {
-                    // Negative torque = reverse movement
-                    float reverseTorque = -motorInput * motorForce * reverseRatio * currentTorqueRamp * turnBoost;
-                    rearLeft.motorTorque = reverseTorque;
-                    rearRight.motorTorque = reverseTorque;
-                    rearLeft.brakeTorque = 0f;
-                    rearRight.brakeTorque = 0f;
-                    frontLeft.brakeTorque = 0f;
-                    frontRight.brakeTorque = 0f;
-                }
+                float capBrake = brakeForce * 0.1f;
+                rearLeft.brakeTorque = capBrake;
+                rearRight.brakeTorque = capBrake;
+                frontLeft.brakeTorque = capBrake * 0.5f;
+                frontRight.brakeTorque = capBrake * 0.5f;
             }
             else
             {
-                // No input: coast (engine brake commented out for smoothness)
-                rearLeft.motorTorque = 0f;
-                rearRight.motorTorque = 0f;
-                rearLeft.brakeTorque = 0f;
-                rearRight.brakeTorque = 0f;
-                frontLeft.brakeTorque = 0f;
-                frontRight.brakeTorque = 0f;
+                float proximityFactor = Mathf.Clamp01(signedSpeed / maxForwardSpeed);
+                float powerScale = 1f - (proximityFactor * proximityFactor * 0.6f);
+                float torque = motorInput * motorForce * currentTorqueRamp * turnBoost * powerScale;
+                rearLeft.motorTorque = torque;
+                rearRight.motorTorque = torque;
+                ClearBrakes();
             }
         }
-        else // ── DRIVE ────────────────────────────────────────────────────────
+        else if (isReverse)
         {
-            if (isBraking)
+            if (-signedSpeed >= maxReverseSpeed)
             {
                 rearLeft.motorTorque = 0f;
                 rearRight.motorTorque = 0f;
-                frontLeft.brakeTorque = currentBrakeTorque * 0.004f;
-                frontRight.brakeTorque = currentBrakeTorque * 0.004f;
-                rearLeft.brakeTorque = 0f;
-                rearRight.brakeTorque = 0f;
-            }
-            else if (isAccelerating)
-            {
-                if (currentSpeed >= driveSpeedLimit)
-                {
-                    // Speed cap: cut motor and apply soft brake
-                    rearLeft.motorTorque = 0f;
-                    rearRight.motorTorque = 0f;
-                    float overspeed = currentSpeed - driveSpeedLimit;
-                    float capBrake = brakeForce * Mathf.Clamp(overspeed / 10f, 0.1f, 0.5f);
-                    rearLeft.brakeTorque = capBrake;
-                    rearRight.brakeTorque = capBrake;
-                    frontLeft.brakeTorque = capBrake * 0.5f;
-                    frontRight.brakeTorque = capBrake * 0.5f;
-                }
-                else
-                {
-                    // Soft torque taper as speed approaches limit
-                    float proximityFactor = Mathf.Clamp01(currentSpeed / driveSpeedLimit);
-                    float powerScale = 1f - (proximityFactor * proximityFactor * 0.6f); // quadratic taper
-
-                    float torque = motorInput * motorForce * currentTorqueRamp * turnBoost * powerScale;
-                    rearLeft.motorTorque = torque;
-                    rearRight.motorTorque = torque;
-                    rearLeft.brakeTorque = 0f;
-                    rearRight.brakeTorque = 0f;
-                    frontLeft.brakeTorque = 0f;
-                    frontRight.brakeTorque = 0f;
-                }
+                float capBrake = brakeForce * 0.1f;
+                rearLeft.brakeTorque = capBrake;
+                rearRight.brakeTorque = capBrake;
+                frontLeft.brakeTorque = capBrake * 0.5f;
+                frontRight.brakeTorque = capBrake * 0.5f;
             }
             else
             {
-                // No input: coast
-                rearLeft.motorTorque = 0f;
-                rearRight.motorTorque = 0f;
-                rearLeft.brakeTorque = 0f;
-                rearRight.brakeTorque = 0f;
-                frontLeft.brakeTorque = 0f;
-                frontRight.brakeTorque = 0f;
+                float torque = motorInput * motorForce * currentTorqueRamp * turnBoost;
+                rearLeft.motorTorque = torque;
+                rearRight.motorTorque = torque;
+                ClearBrakes();
             }
         }
+        else
+        {
+            rearLeft.motorTorque = 0f;
+            rearRight.motorTorque = 0f;
+            ClearBrakes();
+        }
+        
 
         // At low speeds: full steering (60 degrees)
         // At high speeds: reduced steering (30 degrees)
@@ -338,7 +304,7 @@ public class BusController : MonoBehaviour
         frontRight.steerAngle = currentSteerAngle;
 
         // Adjust pitch based on speed
-        float speedPercent = Mathf.Clamp01(rb.velocity.magnitude / maxSpeed);
+        float speedPercent = Mathf.Clamp01(rb.velocity.magnitude / maxForwardSpeed);
         engineSource.pitch = Mathf.Lerp(minPitch, maxPitch, speedPercent);
 
         // Switch between idle and driving sound
@@ -413,12 +379,12 @@ public class BusController : MonoBehaviour
         Debug.Log("Shifted to PARK");
     }
 
-    void ReverseGear()
+    void ClearBrakes()
     {
-        currentGear = -1;
-        currentTorqueRamp = 0f;
-        CloseDoorsIfLeavingPark();
-        Debug.Log("Shifted to REVERSE (Max: 15 km/h)");
+        rearLeft.brakeTorque = 0f;
+        rearRight.brakeTorque = 0f;
+        frontLeft.brakeTorque = 0f;
+        frontRight.brakeTorque = 0f;
     }
 
     // ── Ghost Event ───────────────────────────────────────────────────────────
