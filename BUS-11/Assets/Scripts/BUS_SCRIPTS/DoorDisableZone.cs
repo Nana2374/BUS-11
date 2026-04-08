@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class DoorDisableZone : MonoBehaviour
 {
+
     [Header("Objects to Destroy")]
     public List<GameObject> objectsToDestroy;
 

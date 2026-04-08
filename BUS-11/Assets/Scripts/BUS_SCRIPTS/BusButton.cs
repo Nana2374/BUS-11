@@ -7,6 +7,9 @@ public class BusButton : MonoBehaviour, IInteractable
     [Header("Button Type")]
     public ButtonType buttonType;
 
+    [Header("Button Audio")]
+    public AudioSource buttonSFX;
+
     public enum ButtonType
     {
         DoorToggle,
@@ -27,6 +30,12 @@ public class BusButton : MonoBehaviour, IInteractable
 
     public void Interact()
     {
+
+        if (buttonSFX != null)
+        {
+            buttonSFX.Play();
+        }
+
         switch (buttonType)
         {
             case ButtonType.DoorToggle:
