@@ -41,9 +41,13 @@ public class GhostPassengerSequence : MonoBehaviour
             sequenceTriggered = true;
 
             // Stop horror music
-            if (DoorDisableZone.Instance != null && DoorDisableZone.Instance.horrorMusic != null)
+            if (DoorDisableZone.Instance != null)
             {
-                DoorDisableZone.Instance.horrorMusic.Stop();
+                if (DoorDisableZone.Instance.horrorMusic != null)
+                    DoorDisableZone.Instance.horrorMusic.Stop();
+
+                if (DoorDisableZone.Instance.additionalMusic != null)
+                    DoorDisableZone.Instance.additionalMusic.Stop();
             }
 
             StartCoroutine(HandleSequence());

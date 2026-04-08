@@ -14,6 +14,9 @@ public class DoorDisableZone : MonoBehaviour
     [Header("Horror Music")]
     public AudioSource horrorMusic; // Assign in inspector
 
+    [Header("Additional Music")]
+    public AudioSource additionalMusic;
+
     [Header("Objects to Destroy")]
     public List<GameObject> objectsToDestroy;
 
@@ -108,6 +111,12 @@ public class DoorDisableZone : MonoBehaviour
         {
             horrorMusic.loop = true;
             horrorMusic.Play();
+        }
+        // Play additional music at the same time
+        if (additionalMusic != null && !additionalMusic.isPlaying)
+        {
+            additionalMusic.loop = true;
+            additionalMusic.Play();
         }
     }
 }
