@@ -34,6 +34,8 @@ public class BusController : MonoBehaviour
     [Header("Audio")]
     public AudioSource engineSource;
     public AudioSource brakeSource;
+    public AudioSource crashAudioSource;
+    public AudioClip crashClip;
 
     public AudioClip engineIdleClip;
     public AudioClip engineDriveClip;
@@ -41,6 +43,9 @@ public class BusController : MonoBehaviour
 
     public float minPitch = 0.8f;
     public float maxPitch = 2.0f;
+
+    [Header("Settings")]
+    public float minCrashSpeed = 5f;
 
     [Header("Ghost Control")]
     public float ghostSteerForce = 10f; // how strong the pull is
@@ -72,6 +77,11 @@ public class BusController : MonoBehaviour
         if (brakeSource != null)
         {
             AudioManager.Instance.RegisterSFXSource(brakeSource);
+        }
+
+        if (crashAudioSource != null)
+        {
+            AudioManager.Instance.RegisterSFXSource(crashAudioSource);
         }
 
         engineSource.clip = engineIdleClip;
@@ -467,6 +477,27 @@ public class BusController : MonoBehaviour
     {
         if (angle > 180f) angle -= 360f;
         return angle;
+    }
+
+    // ── Bus Crash Audio ────────────────────────────────────────────────────────────
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.collider.CompareTag("Tree") || collision.transform.root.CompareTag("Tree"))
+        {
+            float speed = rb.velocity.magnitude * 3.6f;
+            if (speed >= minCrashSpeed)
+                PlayCrashAudio();
+            Debug.Log("Collided with tree at " + speed.ToString("F1") + " km/h");
+        }
+    }
+
+    void PlayCrashAudio()
+    {
+        if (crashAudioSource != null && crashClip != null)
+        {
+            crashAudioSource.PlayOneShot(crashClip);
+        }
     }
 
     // ── GUI ────────────────────────────────────────────────────────────

@@ -9,6 +9,7 @@ TagManager:
   - Passenger
   - BusSeat
   - NoButtonZone
+  - Tree
   layers:
   - Default
   - TransparentFX

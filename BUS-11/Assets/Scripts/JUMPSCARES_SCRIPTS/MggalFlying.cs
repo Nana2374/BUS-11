@@ -50,7 +50,10 @@ public class MggalFlying : MonoBehaviour
             // Walk up to the root to get the Rigidbody on the bus
             busRigidbody = other.transform.root.GetComponent<Rigidbody>();
 
-            LaunchGhost();
+            if (!hasLaunched)
+            {
+                LaunchGhost();
+            }
 
             Debug.Log("Bus entered ghost trigger.");
         }
