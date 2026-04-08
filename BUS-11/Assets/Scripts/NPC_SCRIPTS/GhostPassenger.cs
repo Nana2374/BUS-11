@@ -92,4 +92,9 @@ public class GhostPassenger : MonoBehaviour
         }
     }
 
+    public bool HasInteracted()
+    {
+        return hasInteracted;
+    }
+
 }
