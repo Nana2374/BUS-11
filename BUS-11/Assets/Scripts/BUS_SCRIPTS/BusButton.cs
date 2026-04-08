@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class BusButton : MonoBehaviour, IInteractable
 {
+    [Header("Disabled Button Monologue")]
+    public DialogueData disabledMonologue;
+
     [Header("Button Type")]
     public ButtonType buttonType;
 
@@ -43,6 +46,12 @@ public class BusButton : MonoBehaviour, IInteractable
                 if (doorDisabled)
                 {
                     Debug.Log("Door button is disabled!");
+
+                    if (disabledMonologue != null && MonologueManager.Instance != null)
+                    {
+                        MonologueManager.Instance.PlayMonologue(disabledMonologue);
+                    }
+
                     return;
                 }
 

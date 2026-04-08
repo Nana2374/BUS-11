@@ -5,6 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class GhostPassengerSequence : MonoBehaviour
 {
+    [Header("Horror SFX")]
+    public AudioSource horrorSFX;  // Assign in inspector
+    [Header("Rotation Settings")]
+    public float rotationDuration = 1f; // faster rotation
+
     [Header("Monologue")]
     public DialogueData monologueData;
 
@@ -71,17 +76,21 @@ public class GhostPassengerSequence : MonoBehaviour
 
     IEnumerator RotatePlayerToZ()
     {
+        // Play horror SFX at start
+        if (horrorSFX != null)
+            horrorSFX.Play();
+
         Quaternion startRot = playerTransform.rotation;
         Quaternion targetRot = Quaternion.LookRotation(Vector3.forward);
 
-        float duration = 2f;
         float time = 0f;
 
-        while (time < duration)
+        while (time < rotationDuration)
         {
             time += Time.deltaTime;
-            float t = time / duration;
+            float t = time / rotationDuration;
 
+            // Smooth interpolation
             playerTransform.rotation = Quaternion.Slerp(startRot, targetRot, t);
             yield return null;
         }
@@ -90,23 +99,17 @@ public class GhostPassengerSequence : MonoBehaviour
 
         yield return new WaitForSeconds(0.5f);
 
-        // PLAY MONOLOGUE
+        // Continue with monologue
         if (MonologueManager.Instance != null && monologueData != null)
         {
             MonologueManager.Instance.PlayMonologue(monologueData);
-
-            // WAIT for monologue to finish
-            float totalTime = monologueData.nodes.Count * MonologueManager.Instance.lineDuration;
             yield return new WaitUntil(() => !MonologueManager.Instance.IsPlaying);
         }
 
-        // FADE TO BLACK
+        // Fade out and load credits
         if (ScreenFader.Instance != null)
-        {
             yield return StartCoroutine(ScreenFader.Instance.FadeOut());
-        }
 
-        // LOAD CREDITS SCENE
-        SceneManager.LoadScene("CreditsScene"); //  put your actual scene name here
+        SceneManager.LoadScene("CreditsScene");
     }
 }
