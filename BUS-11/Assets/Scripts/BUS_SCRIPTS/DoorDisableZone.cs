@@ -4,10 +4,6 @@ using UnityEngine;
 
 public class DoorDisableZone : MonoBehaviour
 {
-
-    public GhostPassenger ghostPassenger;
-
-
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Bus"))
@@ -15,11 +11,6 @@ public class DoorDisableZone : MonoBehaviour
             Debug.Log("ENTERED ZONE");
 
             BusButton.doorDisabled = true;
-
-            if (ghostPassenger != null)
-            {
-                ghostPassenger.SwitchDialogue();
-            }
         }
     }
 
