@@ -8,16 +8,17 @@ public class MggalFlying : MonoBehaviour
     public Transform mggal;
     public Rigidbody mggalRigidbody;
     public Transform windscreenTarget;      // Assign the windscreen transform in Inspector
-    public float activationSpeed = 10f;     // Min bus speed (km/h) to trigger
+    public DialogueData monologueData;
 
     [Header("Flight Settings")]
-    public float launchAngle = 30f;         // Lower = flatter arc toward windscreen
     public float disappearDelay = 0.2f;     // How long after impact before disappearing
 
     [Header("Audio")]
     public AudioSource mggalAudioSource;
+    public AudioSource jumpscareAudioSource;
     public AudioClip wingsClip;
     public AudioClip thudClip;
+    public AudioClip buzzClip;
 
     private enum GhostState { Waiting, Flying, Impacted }
     private GhostState currentState = GhostState.Waiting;
@@ -37,8 +38,8 @@ public class MggalFlying : MonoBehaviour
     {
         if (hasLaunched || !busInTrigger) return;
 
-        if (currentState == GhostState.Waiting)
-            CheckBusSpeed();
+        //if (currentState == GhostState.Waiting)
+            //CheckBusSpeed();
     }
 
     void OnTriggerEnter(Collider other)
@@ -48,6 +49,9 @@ public class MggalFlying : MonoBehaviour
             busInTrigger = true;
             // Walk up to the root to get the Rigidbody on the bus
             busRigidbody = other.transform.root.GetComponent<Rigidbody>();
+
+            LaunchGhost();
+
             Debug.Log("Bus entered ghost trigger.");
         }
     }
@@ -61,77 +65,75 @@ public class MggalFlying : MonoBehaviour
         }
     }
 
-    void CheckBusSpeed()
+    /*void CheckBusSpeed()
     {
         if (busRigidbody == null) return;
 
         float busSpeed = busRigidbody.velocity.magnitude * 3.6f; // m/s → km/h
         if (busSpeed >= activationSpeed)
             LaunchGhost();
-    }
+    }*/
 
     void LaunchGhost()
     {
         hasLaunched = true;
-        currentState = GhostState.Flying;
+        mggalRigidbody.isKinematic = true;  // Keep kinematic, no physics needed
+        mggalRigidbody.useGravity = false;
 
+        StartCoroutine(FlyToWindscreen());
+    }
+
+    IEnumerator FlyToWindscreen()
+    {
         mggal.gameObject.SetActive(true);
-
-        // Enable physics
-        mggalRigidbody.isKinematic = false;
-        mggalRigidbody.useGravity = true;
+        currentState = GhostState.Flying;
 
         // Play wings audio
         if (mggalAudioSource != null && wingsClip != null)
         {
-            mggalAudioSource.volume = 1f;
-            mggalAudioSource.PlayOneShot(wingsClip);
+            mggalAudioSource.clip = wingsClip;
+            mggalAudioSource.loop = true;
+            mggalAudioSource.Play();
         }
 
-        // Calculate ballistic velocity toward windscreen
-        Vector3 target = windscreenTarget != null
-            ? windscreenTarget.position
-            : busRigidbody.transform.position;
+        if (buzzClip != null)
+            jumpscareAudioSource.PlayOneShot(buzzClip);
 
-        Vector3 direction = (target - mggal.position).normalized;
-        float distance = Vector3.Distance(mggal.position, target);
-        float angleRad = launchAngle * Mathf.Deg2Rad;
-        float gravity = Mathf.Abs(Physics.gravity.y);
-        float speed = Mathf.Sqrt(distance * gravity / Mathf.Sin(2 * angleRad));
+        Vector3 startPos = mggal.position;
+        Vector3 endPos = windscreenTarget.position;
+        float duration = 0.5f; // Tune this
+        float time = 0f;
 
-        Vector3 launchVelocity = direction * speed * Mathf.Cos(angleRad);
-        launchVelocity.y = speed * Mathf.Sin(angleRad);
-
-        mggalRigidbody.velocity = launchVelocity;
-
-        // Face the direction of travel
-        mggal.rotation = Quaternion.LookRotation(direction);
-
-        Debug.Log("Ghost launched toward windscreen!");
-    }
-
-    void OnCollisionEnter(Collision collision)
-    {
-        if (currentState != GhostState.Flying) return;
-
-        if (collision.collider.CompareTag("Bus") || collision.transform.root.CompareTag("Bus"))
+        while (time < duration)
         {
-            currentState = GhostState.Impacted;
+            time += Time.deltaTime;
+            float t = Mathf.SmoothStep(0f, 1f, time / duration); // Smooth ease in/out
 
-            // Stop movement
-            mggalRigidbody.velocity = Vector3.zero;
-            mggalRigidbody.isKinematic = true;
+            // Read windscreenTarget.position live every frame so it tracks the moving bus
+            mggal.position = Vector3.Lerp(startPos, windscreenTarget.position, t);
+            Quaternion lookRot = Quaternion.LookRotation((windscreenTarget.position - mggal.position).normalized);
+            mggal.rotation = lookRot * Quaternion.Euler(20f, 0f, 0f);
 
-            // Play thud
-            if (mggalAudioSource != null && thudClip != null)
-            {
-                mggalAudioSource.volume = 1f;
-                mggalAudioSource.PlayOneShot(thudClip);
-            }
-
-            Debug.Log("Ghost hit windscreen!");
-            Invoke(nameof(DisappearGhost), disappearDelay);
+            yield return null;
         }
+
+        mggal.position = endPos;
+
+        // Stop wings, play thud
+        mggalAudioSource.loop = false;
+        mggalAudioSource.Stop();
+
+        if (thudClip != null)
+            mggalAudioSource.PlayOneShot(thudClip);
+
+        currentState = GhostState.Impacted;
+
+        yield return new WaitForSeconds(disappearDelay);
+        DisappearGhost();
+
+        yield return new WaitForSeconds(0.5f);
+
+        MonologueManager.Instance.PlayMonologue(monologueData);
     }
 
     void DisappearGhost()

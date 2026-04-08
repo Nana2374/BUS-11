@@ -9,6 +9,7 @@ public class LadyinWhite : MonoBehaviour
     public PassengerController passengerController;
     public BusController busController;
     public GameObject[] handprintPlanes; // Drag all 20 handprint planes here
+    public DialogueData monologueData;
 
     [Header("Light Flicker")]
     public Light[] lightsToFlicker; // Assign bus interior lights, headlights, etc.
@@ -129,6 +130,10 @@ public class LadyinWhite : MonoBehaviour
         Debug.Log("Ghost sequence complete!");
 
         RestoreOriginalColors();
+
+        yield return new WaitForSeconds(0.5f);
+
+        MonologueManager.Instance.PlayMonologue(monologueData);
 
         yield return new WaitForSeconds(destroyDelay);
 

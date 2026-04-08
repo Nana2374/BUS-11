@@ -5,6 +5,7 @@ using UnityEngine;
 public class GhostOldMan : MonoBehaviour
 {
     public PassengerController passengerController;
+    public DialogueData monologueData;
 
     [Header("Audio")]
     public AudioSource oldmanAudioSource;
@@ -46,19 +47,23 @@ public class GhostOldMan : MonoBehaviour
         // Check if the collider OR its parent has the "Bus" tag
         if (other.CompareTag("Bus") || other.transform.root.CompareTag("Bus"))
         {
-            PlayLaughAudio();
+            StartCoroutine(PlayLaughAudio());
             hasTriggered = true;
             //Debug.Log("Laughing audio.");
         }
     }
 
-    void PlayLaughAudio()
+    IEnumerator PlayLaughAudio()
     {
         if (oldmanAudioSource != null && laughClip != null && !hasTriggered)
         {
             oldmanAudioSource.volume = 1f;
 
             oldmanAudioSource.PlayOneShot(laughClip);
+
+            yield return new WaitForSeconds(0.5f);
+
+            MonologueManager.Instance.PlayMonologue(monologueData);
         }
     }
 

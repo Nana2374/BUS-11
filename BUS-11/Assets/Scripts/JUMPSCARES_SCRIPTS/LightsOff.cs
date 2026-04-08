@@ -15,6 +15,8 @@ public class LightsOff : MonoBehaviour
     public AudioClip lightOnClip;
     public AudioSource lightAudioSource;
 
+    public DialogueData monologueData;
+
     private bool hasTriggered = false;
 
     // Start is called before the first frame update
@@ -64,6 +66,10 @@ public class LightsOff : MonoBehaviour
         }
 
         PlayLightOff();
+
+        yield return new WaitForSeconds(0.5f);
+
+        MonologueManager.Instance.PlayMonologue(monologueData);
 
         // Wait 1 second
         yield return new WaitForSeconds(4f);

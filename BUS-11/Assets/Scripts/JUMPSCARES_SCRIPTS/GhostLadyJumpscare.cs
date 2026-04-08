@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class GhostLadyJumpscare : MonoBehaviour
 {
+    public DialogueData monologueData;
+
     [Header("References")]
     public PassengerController ghostLady; // Drag the ghost lady passenger here
     public GameObject jumpscareCanvas;   // The Canvas GameObject
@@ -108,6 +110,10 @@ public class GhostLadyJumpscare : MonoBehaviour
         // 6. Hide canvas
         jumpscareCanvas.SetActive(false);
         isPlaying = false;
+
+        yield return new WaitForSeconds(0.5f);
+
+        MonologueManager.Instance.PlayMonologue(monologueData);
     }
 
     IEnumerator OffLights()
