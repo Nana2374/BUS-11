@@ -25,7 +25,8 @@ public class PassengerController : MonoBehaviour, IInteractable
     [Header("Passenger Type")]
     public bool isGhost = false; // Check this for the ghost passenger
     public bool isChild = false;
-    public bool isElderly = false;
+    public bool isElderlyWoman = false;
+    public bool isElderlyMan = false;
 
     //private Vector3 seatPositionOffset = ;
 
@@ -549,13 +550,21 @@ public class PassengerController : MonoBehaviour, IInteractable
             transform.rotation = targetSeat.rotation;
             Debug.Log("Child Offset applied.");
         }
-        else if (isElderly)
+        else if (isElderlyWoman)
         {
             // Apply elderly seat offset
             Vector3 localOffset = new Vector3(0f, 0.15f, -0.25f);
             transform.position = targetSeat.TransformPoint(localOffset);
             transform.rotation = targetSeat.rotation;
-            Debug.Log("Elderly Offset applied.");
+            Debug.Log("Elderly Woman Offset applied.");
+        }
+        else if (isElderlyMan)
+        {
+            // Apply elderly seat offset
+            Vector3 localOffset = new Vector3(0f, 0.15f, 0.1f);
+            transform.position = targetSeat.TransformPoint(localOffset);
+            transform.rotation = targetSeat.rotation;
+            Debug.Log("Elderly Man Offset applied.");
         }
         else
         {
