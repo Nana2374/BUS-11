@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class ChickenController : MonoBehaviour
 {
+    public DialogueData monologueData;
+
     [Header("Movement Settings")]
     public float walkSpeed = 2f;
     public float runSpeed = 5f;
@@ -254,6 +256,8 @@ public class ChickenController : MonoBehaviour
             }
             // Optional: Tip the chicken over
             transform.rotation = Quaternion.Euler(0f, transform.rotation.eulerAngles.y, 90f);
+
+            MonologueManager.Instance.PlayMonologue(monologueData);
         }
     }
 
