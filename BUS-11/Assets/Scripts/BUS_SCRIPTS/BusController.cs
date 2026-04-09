@@ -469,6 +469,23 @@ public class BusController : MonoBehaviour
         return angle;
     }
 
+    public void StopDriving()
+    {
+        playerDriving = false;
+
+        // Force into Park
+        ParkGear();
+
+        // Reset all inputs immediately
+        ResetInputs();
+
+        // Apply full brakes + freeze
+        ApplyParkBrakes();
+        rb.constraints = RigidbodyConstraints.FreezeAll;
+
+        Debug.Log("Driving disabled by trigger zone.");
+    }
+
     // ── GUI ────────────────────────────────────────────────────────────
     /*void OnGUI()
     {
