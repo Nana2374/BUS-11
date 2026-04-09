@@ -12,4 +12,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05e9573c6467e754e97a0e7e8baf0ff4, type: 3}
   m_Name: Deadbody
   m_EditorClassIdentifier: 
-  nodes: []
+  nodes:
+  - nodeID: 0
+    branchType: 0
+    dialogueLine: (...It came from nowhere...)
+    speaker: 0
+    nextNodeIndex: -1
+    choices:
+    - choiceText: Take a closer look
+      nextNodeIndex: 1
+    - choiceText: Poke it
+      nextNodeIndex: 0
+  - nodeID: 1
+    branchType: 1
+    dialogueLine: "\u2026It\u2019s moving\u2026?"
+    speaker: 0
+    nextNodeIndex: 3
+    choices: []
+  - nodeID: 2
+    branchType: 2
+    dialogueLine: "\u2026Just checking\u2026"
+    speaker: 0
+    nextNodeIndex: 4
+    choices: []
+  - nodeID: 3
+    branchType: 2
+    dialogueLine: "\u2026It\u2019s\u2026 soft\u2014"
+    speaker: 0
+    nextNodeIndex: 4
+    choices: []
+  - nodeID: 4
+    branchType: 2
+    dialogueLine: "\u2014What the\u2014?!"
+    speaker: 0
+    nextNodeIndex: 5
+    choices: []
