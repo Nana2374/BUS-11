@@ -36,6 +36,7 @@ public class ChickenController : MonoBehaviour
     public AudioClip chickenEscapeClip;
 
     private Renderer chickenRenderer;
+    private bool isTriggered = false;
 
     private enum ChickenState
     {
@@ -234,30 +235,34 @@ public class ChickenController : MonoBehaviour
         // Check if hit by bus
         if (collision.gameObject.CompareTag("Bus"))
         {
-            AudioManager.Instance.PlaySFX(chickenDeadClip);
-            Debug.Log("Chicken got hit!");
-
-            // Freeze chicken at current position
-
-            currentState = ChickenState.Dead;
-
-            // Stop all animations
-            /*if (animator != null)
+            if (!isTriggered)
             {
-                animator.SetBool("isWalking", false);
-                animator.SetBool("isRunning", false);
-                animator.enabled = false; // Completely freeze animator
-            }*/
-            // Swap to dead material
-            if (chickenRenderer != null && deadMaterial != null)
-            {
-                chickenRenderer.material = deadMaterial;
-                Debug.Log("Chicken material swapped to dead");
+                AudioManager.Instance.PlaySFX(chickenDeadClip);
+                Debug.Log("Chicken got hit!");
+
+                // Freeze chicken at current position
+
+                currentState = ChickenState.Dead;
+
+                // Stop all animations
+                /*if (animator != null)
+                {
+                    animator.SetBool("isWalking", false);
+                    animator.SetBool("isRunning", false);
+                    animator.enabled = false; // Completely freeze animator
+                }*/
+                // Swap to dead material
+                if (chickenRenderer != null && deadMaterial != null)
+                {
+                    chickenRenderer.material = deadMaterial;
+                    Debug.Log("Chicken material swapped to dead");
+                }
+                // Optional: Tip the chicken over
+                transform.rotation = Quaternion.Euler(0f, transform.rotation.eulerAngles.y, 90f);
+
+                MonologueManager.Instance.PlayMonologue(monologueData);
             }
-            // Optional: Tip the chicken over
-            transform.rotation = Quaternion.Euler(0f, transform.rotation.eulerAngles.y, 90f);
-
-            MonologueManager.Instance.PlayMonologue(monologueData);
+            isTriggered = true;
         }
     }
 
