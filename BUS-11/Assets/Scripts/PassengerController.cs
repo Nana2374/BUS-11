@@ -589,6 +589,8 @@ public class PassengerController : MonoBehaviour, IInteractable
         SetAnimation(false, false);
 
         Debug.Log("Passenger alighted the bus!");
+        // Destroy after short delay
+        Destroy(gameObject, 1.5f);
     }
 
     // Helper function to set animations
