@@ -22,7 +22,7 @@ MonoBehaviour:
     - choiceText: Take a closer look
       nextNodeIndex: 1
     - choiceText: Poke it
-      nextNodeIndex: 0
+      nextNodeIndex: 2
   - nodeID: 1
     branchType: 1
     dialogueLine: "\u2026It\u2019s moving\u2026?"

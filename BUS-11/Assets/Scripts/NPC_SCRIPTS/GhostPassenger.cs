@@ -1,4 +1,6 @@
+using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class GhostPassenger : MonoBehaviour
 {
@@ -8,6 +10,9 @@ public class GhostPassenger : MonoBehaviour
     [Header("Dialogue")]
     public DialogueData passengerDialogue;
 
+    [Header("Post Dialogue Event (Optional)")]
+    public bool triggerPostDialogueEvent = false;
+    public UnityEvent onDialogueFinished;
 
 
     [Header("UI")]
@@ -15,7 +20,8 @@ public class GhostPassenger : MonoBehaviour
 
     private Transform player;
     private bool playerInRange = false;
-    private bool hasInteracted = false; // NEW
+    private bool hasInteracted = false;
+    private bool waitingForDialogueEnd = false;
 
     void Start()
     {
@@ -71,7 +77,7 @@ public class GhostPassenger : MonoBehaviour
         if (!playerInRange)
             return;
 
-        if (hasInteracted) // NEW
+        if (hasInteracted)
             return;
 
         if (DialogueManager.Instance == null)
@@ -82,19 +88,46 @@ public class GhostPassenger : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.F))
         {
-            hasInteracted = true; // NEW
+            hasInteracted = true;
             DialogueManager.Instance.StartDialogue(passengerDialogue);
 
             if (interactPrompt != null)
             {
                 interactPrompt.SetActive(false);
             }
+
+            if (triggerPostDialogueEvent && !waitingForDialogueEnd)
+            {
+                StartCoroutine(WaitForDialogueToFinish());
+            }
         }
+    }
+
+    private IEnumerator WaitForDialogueToFinish()
+    {
+        waitingForDialogueEnd = true;
+
+        // Wait one frame so dialogue has time to open properly
+        yield return null;
+
+        // Wait until dialogue actually starts
+        while (DialogueManager.Instance != null && !DialogueManager.Instance.IsDialogueActive())
+        {
+            yield return null;
+        }
+
+        // Then wait until it fully closes
+        while (DialogueManager.Instance != null && DialogueManager.Instance.IsDialogueActive())
+        {
+            yield return null;
+        }
+
+        onDialogueFinished?.Invoke();
+        waitingForDialogueEnd = false;
     }
 
     public bool HasInteracted()
     {
         return hasInteracted;
     }
-
 }
