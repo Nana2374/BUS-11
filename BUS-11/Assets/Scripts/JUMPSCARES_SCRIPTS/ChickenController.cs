@@ -149,6 +149,9 @@ public class ChickenController : MonoBehaviour
         {
             currentState = ChickenState.Walking;
             currentSpeed = walkSpeed;
+            // Loop the cluck while walking
+            chickenSource.clip = chickenCluckClip;
+            chickenSource.loop = true;
             chickenSource.Play();
 
             // Face the end position
@@ -191,8 +194,6 @@ public class ChickenController : MonoBehaviour
 
     void CrossRoad()
     {
-        AudioManager.Instance.PlaySFX(chickenCluckClip);
-
         // Move towards target position
         transform.position = Vector3.MoveTowards(
         transform.position,
@@ -217,6 +218,9 @@ public class ChickenController : MonoBehaviour
         {
             currentState = ChickenState.CrossedRoad;
 
+            // Stop clucking, play escape
+            chickenSource.loop = false;
+            chickenSource.Stop();
             AudioManager.Instance.PlaySFX(chickenEscapeClip);
             Debug.Log("Chicken safely crossed the road!");
 
@@ -237,6 +241,8 @@ public class ChickenController : MonoBehaviour
         {
             if (!isTriggered)
             {
+                chickenSource.loop = false;
+                chickenSource.Stop();
                 AudioManager.Instance.PlaySFX(chickenDeadClip);
                 Debug.Log("Chicken got hit!");
 

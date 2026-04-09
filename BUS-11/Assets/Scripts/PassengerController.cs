@@ -465,6 +465,9 @@ public class PassengerController : MonoBehaviour, IInteractable
             if (agent.isOnNavMesh)
             {
                 agent.SetDestination(targetSeat.position);
+
+                // Check if path is valid after a short delay
+                StartCoroutine(ValidatePathAfterDelay());
             }
             else
             {
@@ -485,11 +488,41 @@ public class PassengerController : MonoBehaviour, IInteractable
 
     }
 
+    IEnumerator ValidatePathAfterDelay()
+    {
+        yield return new WaitForSeconds(0.3f); // Wait for path to calculate
+
+        if (agent == null || !agent.enabled) yield break;
+
+        // Path failed or is partial — fall back to simple movement
+        if (agent.pathStatus == UnityEngine.AI.NavMeshPathStatus.PathInvalid ||
+            agent.pathStatus == UnityEngine.AI.NavMeshPathStatus.PathPartial ||
+            float.IsInfinity(agent.remainingDistance))
+        {
+            Debug.LogWarning($"{name} path invalid. Switching to simple movement.");
+            agent.ResetPath();
+            agent.enabled = false;
+            usingSimpleMovement = true;
+            StartCoroutine(WalkToSeatSimple());
+        }
+    }
+
     void CheckIfReachedSeat()
     {
         if (usingSimpleMovement) return;
         if (agent == null || !agent.enabled || !agent.isOnNavMesh) return;
         if (agent.pathPending) return;
+
+        // Path completely failed
+        if (float.IsInfinity(agent.remainingDistance) ||
+            agent.pathStatus == UnityEngine.AI.NavMeshPathStatus.PathInvalid)
+        {
+            Debug.LogWarning($"{name} path invalid in CheckIfReachedSeat. Switching to simple movement.");
+            agent.enabled = false;
+            usingSimpleMovement = true;
+            StartCoroutine(WalkToSeatSimple());
+            return;
+        }
 
         if (agent.remainingDistance <= agent.stoppingDistance + 0.1f)
         {
