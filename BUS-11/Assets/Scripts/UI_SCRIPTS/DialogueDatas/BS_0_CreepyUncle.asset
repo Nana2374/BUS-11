@@ -38,13 +38,13 @@ MonoBehaviour:
   - nodeID: 3
     branchType: 3
     dialogueLine: HAH!?
-    speaker: 9
+    speaker: 10
     nextNodeIndex: 4
     choices: []
   - nodeID: 4
     branchType: 3
     dialogueLine: Huh hah HUH?!
-    speaker: 9
+    speaker: 10
     nextNodeIndex: 5
     choices: []
   - nodeID: 5
