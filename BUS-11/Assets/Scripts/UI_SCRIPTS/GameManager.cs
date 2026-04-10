@@ -127,10 +127,12 @@ public class GameManager : MonoBehaviour
             // Save UI state
             wasDrivingUIActive = drivingUI != null && drivingUI.activeSelf;
             wasDriverSeatUIActive = driverSeatUI != null && driverSeatUI.activeSelf;
+            wasMonologueUIActive = monologueUI != null && monologueUI.activeSelf;
 
             // Hide driving UI
             if (drivingUI != null) drivingUI.SetActive(false);
             if (driverSeatUI != null) driverSeatUI.SetActive(false);
+            if (monologueUI != null) monologueUI.SetActive(false);
 
             DialogueActive();
 

@@ -29,19 +29,18 @@ public class DeadbodyAudio : MonoBehaviour
         // Check if the collider OR its parent has the "Bus" tag
         if (other.CompareTag("Bus") || other.transform.root.CompareTag("Bus"))
         {
-            PlayDropAudio();
+            PlayScreamAudio();
             hasTriggered = true;
             Debug.Log("Bus rolled over body.");
         }
     }
 
-    void PlayDropAudio()
+    void PlayScreamAudio()
     {
         if (deadbodyAudioSource != null && bodyRunOverClip != null && !hasTriggered)
         {
             deadbodyAudioSource.volume = 1f;
 
-            deadbodyAudioSource.PlayOneShot(bodyRunOverClip);
             deadbodyAudioSource.PlayOneShot(bodyScreamClip);
         }
     }

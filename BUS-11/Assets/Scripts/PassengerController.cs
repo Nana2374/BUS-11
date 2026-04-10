@@ -594,6 +594,8 @@ public class PassengerController : MonoBehaviour, IInteractable
         {
             currentState = PassengerState.WalkingToExit;
 
+            seatManager.FreeSeat(targetSeat);
+
             // Unparent from bus so they can walk away
             transform.SetParent(null);
             agent.enabled = true;
