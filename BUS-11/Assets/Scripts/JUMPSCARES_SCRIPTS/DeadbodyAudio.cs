@@ -24,10 +24,10 @@ public class DeadbodyAudio : MonoBehaviour
         
     }
 
-    void OnTriggerEnter(Collider other)
+    void OnCollisionEnter(Collision collision)
     {
         // Check if the collider OR its parent has the "Bus" tag
-        if (other.CompareTag("Bus") || other.transform.root.CompareTag("Bus"))
+        if (collision.collider.CompareTag("Bus") || collision.collider.transform.root.CompareTag("Bus"))
         {
             PlayScreamAudio();
             hasTriggered = true;
