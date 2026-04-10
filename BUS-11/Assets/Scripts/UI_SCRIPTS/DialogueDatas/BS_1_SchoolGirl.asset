@@ -22,7 +22,7 @@ MonoBehaviour:
   - nodeID: 1
     branchType: 0
     dialogueLine: Eh? Where is Uncle Tan?
-    speaker: 0
+    speaker: 3
     nextNodeIndex: -1
     choices:
     - choiceText: He disappeared. (Truth)

@@ -125,7 +125,7 @@ public class DeadBodyController : MonoBehaviour
 
         // Start landing timer
 
-        Invoke("MarkAsLanded", 3f); // Call MarkAsLanded after 1 second
+        Invoke("MarkAsLanded", 2f); // Call MarkAsLanded after 1 second
 
         // Calculate launch direction
         /*Vector3 directionToEnd = (endPosition.position - deadBody.position).normalized;

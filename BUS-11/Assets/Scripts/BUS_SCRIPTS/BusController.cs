@@ -34,6 +34,8 @@ public class BusController : MonoBehaviour
     [Header("Audio")]
     public AudioSource engineSource;
     public AudioSource brakeSource;
+    public AudioSource crashAudioSource;
+    public AudioClip crashClip;
 
     public AudioClip engineIdleClip;
     public AudioClip engineDriveClip;
@@ -41,6 +43,8 @@ public class BusController : MonoBehaviour
 
     public float minPitch = 0.8f;
     public float maxPitch = 2.0f;
+
+    public float minCrashSpeed = 5f;
 
     [Header("Ghost Control")]
     public float ghostSteerForce = 10f; // how strong the pull is
@@ -484,6 +488,27 @@ public class BusController : MonoBehaviour
         rb.constraints = RigidbodyConstraints.FreezeAll;
 
         Debug.Log("Driving disabled by trigger zone.");
+    }
+
+    // ── Bus Crash ────────────────────────────────────────────────────────────
+
+    // Attach this to the Bus GameObject instead
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.collider.CompareTag("Tree") || collision.transform.root.CompareTag("Tree"))
+        {
+            float speed = rb.velocity.magnitude * 3.6f;
+            if (speed >= minCrashSpeed)
+                PlayCrashAudio();
+        }
+    }
+
+    void PlayCrashAudio()
+    {
+        if (crashAudioSource != null && crashClip != null)
+        {
+            crashAudioSource.PlayOneShot(crashClip);
+        }
     }
 
     // ── GUI ────────────────────────────────────────────────────────────

@@ -41,9 +41,3 @@ MonoBehaviour:
     speaker: 0
     nextNodeIndex: 4
     choices: []
-  - nodeID: 4
-    branchType: 2
-    dialogueLine: "\u2014What the\u2014?!"
-    speaker: 0
-    nextNodeIndex: 5
-    choices: []
